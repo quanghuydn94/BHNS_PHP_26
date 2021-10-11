@@ -8,7 +8,17 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
     </div>
-
+    @if (session()->get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span>{{session()->get('success')}}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+    <div class="p-2">
+        <a href="{{ route('employees.create') }}"><button class="btn btn-primary">Thêm Nhân Viên</button></a>
+    </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -16,8 +26,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>Phone</th>
+                        <th>Identity Num</th>
+                        <th>Address</th>
                         <th>Tools</th>
                     </tr>
                 </thead>
@@ -25,24 +36,29 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>Phone</th>
+                        <th>Identity Num</th>
+                        <th>Address</th>
                         <th>Tools</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($list as $item)
-                    @if ($item->active == 1)
+                    @foreach ($nhanvien as $em)
+                    @if ($em->active == 1)
 
                     <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->email }}</td>
-                        <td>{{ $item->rolename }}</td>
+                        <td>{{ $em->id }}</td>
+                        <td>{{ $em->nhanvien_ten }}</td>
+                        <td>{{ $em->nhanvien_sdt }}</td>
+                        <td>{{ $em->nhanvien_cmnd }}</td>
+                        <td>{{ $em->nhanvien_diachi }}</td>
                         <td>
-                            {{-- <a href="{{ route('users.edit', ['user' => $item->id]) }}"><button class="btn btn-primary">Edit</button></a> --}}
-                            <a href="{{route('users.show',['user'=>$item->id])}} "><button class="btn btn-primary">Details</button></a>
-                            <form method="POST" action="{{ route('users.destroy', ['user' => $item->id]) }}" class="d-inline-block">
+                            <a href="{{ route('employees.edit', $em->id) }}"><button
+                                    class="btn btn-primary">Edit</button></a>
+                            <a href="{{route('employees.show',$em->id)}}"><button
+                                    class="btn btn-primary">Details</button></a>
+                            <form method="POST" action="{{ route('employees.destroy', ['employee' => $em->id]) }}"
+                                class="d-inline-block">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-primary">Delete</button>

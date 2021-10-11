@@ -1,0 +1,71 @@
+@extends('layouts.panel')
+@section('styles')
+<link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@endsection
+@section('content')
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    @if (session()->get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span>{{session()->get('success')}}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+    <div class="p-2">
+        <a href="{{ route('employees.index') }}"class="badge badge-primary"> Back </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Identity Num</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ $nhanvien->id }}</td>
+                        <td>{{ $nhanvien->nhanvien_ten }}</td>
+                        <td>{{ $nhanvien->nhanvien_sdt }}</td>
+                        <td>{{ $nhanvien->nhanvien_cmnd }}</td>
+                        <td>{{ $nhanvien->nhanvien_diachi }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Avatar</th>
+                        <th>Rolename</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ $user->email }}</td>
+                        <td><img src="{{url('img/users',$user->avatar)}}" width="50px" alt=""></td>
+                        <td>{{ $user->rolename }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
+{{-- @section('scripts')
+<!-- Page level plugins -->
+<script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+@endsection --}}

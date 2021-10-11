@@ -14,7 +14,7 @@ class AdminAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->rolename == 'admin') {
+        if ($request->user()->rolename == 'admin' ) {
             return $next($request);
         }
 

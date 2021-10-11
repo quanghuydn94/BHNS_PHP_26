@@ -44,12 +44,13 @@
             <input name="password" type="password" class="form-control" placeholder="********">
         </div>
     </div>
+
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Rolename</label>
         <div class="col-sm-10">
             <select name="rolename" type="text" class="form-control"  >
                 <option value="employee" selected>Employee</option>
-                <option value="client">Client</option>
+                <option value="client">Admin</option>
             </select>
         </div>
     </div>

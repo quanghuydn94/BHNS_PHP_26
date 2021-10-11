@@ -41,6 +41,8 @@ Route::get('suppliers/index', function () {
 
 
     Route::resource('users', \App\Http\Controllers\Panel\UserController::class);
+Route::resource('employees', \App\Http\Controllers\Panel\EmployeeController::class);
+
     Route::resource('categories', \App\Http\Controllers\Panel\CategoryController::class);
     Route::resource('products', \App\Http\Controllers\Panel\ProductController::class);
 });

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'rolename' => 'admin',
+            'active' => 1,
         ]);
     }
 }

@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\nhanvien;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Password;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class UserController extends Controller
 {
@@ -19,18 +24,7 @@ class UserController extends Controller
 
         return view('panel.users.index', compact('list'));
     }
-    public function employee()
-    {
-        $list = User::all();
 
-        return view('panel.users.employee', compact('list'));
-    }
-     public function client()
-    {
-        $list = User::all();
-
-        return view('panel.users.client', compact('list'));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -53,7 +47,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'phone' => 'required|string',
             'address' => 'required|string',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|string',
             'avatar' => 'required|string',
             'rolename' => 'required|string',
@@ -69,6 +63,15 @@ class UserController extends Controller
             'avatar' => $request->avatar,
             'rolename' => $request->rolename,
         ]);
+        $id = User::select('id')->where('email', $request->email)->first();
+        $userid = $id;
+        nhanvien::create([
+            'nhanvien_ten'=>$request->name,
+            'nhanvien_sdt'=>$request->phone,
+            'nhanvien_diachi'=>$request->address,
+            'nhanvien_cmnd'=>$request->rolename,
+            'user_id'=>(int)$userid->id,
+        ]);
 
         return redirect(route('users.index'));
     }
@@ -80,12 +83,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        // $detail = User::findOrFail($id);
-
-    // return view('panel.users.profile-details');
-
+        $user = User::find($id);
+        return response()->view('panel.users.profile-details',['user' => $user]);
     }
 
     /**
@@ -97,9 +98,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data = User::findOrFail($id);
+    //     $data = User::findOrFail($id);
 
-        return view('panel.users.edit', compact('data'));
+    //     return view('panel.users.edit', compact('data'));
     }
 
     /**
@@ -111,20 +112,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'name' => 'required|string',
-            'phone' => 'required|string',
-            'address' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'nullable|string',
-            'avatar' => 'required|string',
-        ];
-        $request->validate($rules);
+        // $rules = [
+        //     'name' => 'required|string',
+        //     'phone' => 'required|string',
+        //     'address' => 'required|string',
+        //     'email' => 'required|email',
+        //     'password' => 'nullable|string',
+        //     'avatar' => 'required|string',
+        // ];
+        // $request->validate($rules);
 
-        $data = User::findOrFail($id);
-        $data->update($request->all());
+        // $data = User::findOrFail($id);
+        // $data->update($request->all());
 
-        return redirect(route('users.index'));
+        // return redirect(route('users.index'));
     }
 
     /**
@@ -136,8 +137,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $data = User::findOrFail($id);
-        $data->delete();
+        $data = User::find($id);
+        $data->update(['active'=>0]);
 
         return redirect()->back();
     }

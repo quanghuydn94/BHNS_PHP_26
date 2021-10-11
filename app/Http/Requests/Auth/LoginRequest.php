@@ -2,12 +2,13 @@
 
 namespace App\Http\Requests\Auth;
 
-use Illuminate\Support\Str;
 use Illuminate\Auth\Events\Lockout;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Request;
 
 class LoginRequest extends FormRequest
 {
@@ -39,12 +40,15 @@ class LoginRequest extends FormRequest
      *
      * @return void
      * @throws \Illuminate\Validation\ValidationException
+     * @param  \Illuminate\Http\Request  $request
      */
     public function authenticate()
     {
         $this->ensureIsNotRateLimited();
+        $credentials = $this->only('email', 'password');
+        $credentials['active'] = 1;
 
-        if (!Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (!Auth::attempt($credentials, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -53,6 +57,7 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+
     }
 
     /**
