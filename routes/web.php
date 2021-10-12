@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Panel\CustomerController;
+use App\Http\Controllers\Panel\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,10 +40,15 @@ Route::group(['prefix' => 'panel','middleware'=>'auth'], function () {
 Route::get('suppliers/index', function () {
     return view('panel.suppliers.index');
 })->name('panel.suppliers.index');
-
+        Route::get('profile', function () {
+            return response()->view('panel.users.profile-details');
+        })->name('users.profile');
 
     Route::resource('users', \App\Http\Controllers\Panel\UserController::class);
-Route::resource('employees', \App\Http\Controllers\Panel\EmployeeController::class);
+    Route::resource('employees', \App\Http\Controllers\Panel\EmployeeController::class);
+
+    Route::resource('customers', CustomerController::class);
+    // Route::get('customers/detail/{id}', \App\Http\Controllers\Panel\CustomerController::class, 'show')->name('customers.detail');
 
     Route::resource('categories', \App\Http\Controllers\Panel\CategoryController::class);
     Route::resource('products', \App\Http\Controllers\Panel\ProductController::class);

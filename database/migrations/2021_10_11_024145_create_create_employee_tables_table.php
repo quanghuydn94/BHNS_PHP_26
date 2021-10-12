@@ -13,15 +13,15 @@ class CreateCreateEmployeeTablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('nhanviens', function (Blueprint $table) {
-            $table->increments('id')->primary();
-            $table->string('nhanvien_ten')->nullable();
-            $table->string('nhanvien_cmnd', 15)->nullable();
-            $table->string('nhanvien_sdt', 12)->nullable();
-            $table->string('nhanvien_diachi')->nullable();
-            $table->unsignedBigInteger('user_id');
+        Schema::create('employees', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('employee_name')->nullable();
+            $table->string('employee_identity', 15)->nullable();
+            $table->string('employee_phone', 12)->nullable();
+            $table->string('employee_address')->nullable();
             $table->boolean('active');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +33,7 @@ class CreateCreateEmployeeTablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nhanviens');
+        Schema::dropIfExists('employees');
+
     }
 }

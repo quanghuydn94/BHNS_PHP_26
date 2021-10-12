@@ -14,10 +14,6 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!--Link Bootstrap v5.0  -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -61,7 +57,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            @if (Auth::user()->rolename == 'admin' )
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
                     aria-expanded="true" aria-controls="collapseUsers">
@@ -70,16 +66,20 @@
                 </a>
                 <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        @if (Auth::user()->rolename == 'admin' )
                         <h6 class="collapse-header">Quản ly người dùng</h6>
 
                         <a class="collapse-item" href="{{ route('users.index') }}">Tài khoản người dùng</a>
+                        @endif
+                        @if (Auth::user()->rolename == 'admin' || Auth::user()->rolename == 'employee')
                         <a class="collapse-item" href="{{ route('employees.index') }}">Danh sách nhân viên</a>
-                        {{-- <a class="collapse-item" href="{{ route('users.index') }}">Danh sách khách hàng</a> --}}
+
+                        <a class="collapse-item" href="{{ route('customers.index') }}">Danh sách khách hàng</a>
+                        @endif
 
                     </div>
                 </div>
             </li>
-            @endif
 
             <!-- Nav Item - Collapse Menu -->
             <li class="nav-item">
@@ -346,12 +346,12 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
-                            <img class="img-profile rounded-circle" src="{{ asset(auth()->user()->avatar) }}">
+                            <img class="img-profile rounded-circle" src="{{ url('img/users',Auth::user()->avatar) }}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{route('users.profile')}}">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
@@ -438,6 +438,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>

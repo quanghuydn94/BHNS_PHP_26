@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\nhanvien;
+use App\Models\Customer;
 use DateTimeInterface;
 
 class User extends Authenticatable
@@ -37,6 +38,10 @@ class User extends Authenticatable
 
     public function employee(){
         return $this->hasOne(nhanvien::class);
+    }
+
+    public function customer(){
+        return $this->hasOne(Customer::class);
     }
 
     /**

@@ -46,15 +46,17 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
         $credentials = $this->only('email', 'password');
-        $credentials['active'] = 1;
+        $credentials['active'] = 1;  // additional to access admin page
 
-        if (!Auth::attempt($credentials, $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
 
-            throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
-            ]);
-        }
+
+            if (!Auth::attempt($credentials, $this->boolean('remember'))) {
+                RateLimiter::hit($this->throttleKey());
+
+                throw ValidationException::withMessages([
+                    'email' => __('auth.failed'),
+                ]);
+            }
 
         RateLimiter::clear($this->throttleKey());
 

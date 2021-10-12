@@ -16,11 +16,9 @@
         </button>
     </div>
     @endif
-    @if (Auth::user()->rolename == 'admin')
-        <div class="p-2">
-            <a href="{{ route('employees.create') }}"><button class="btn btn-primary">Thêm Nhân Viên</button></a>
-        </div>
-    @endif
+    <div class="p-2">
+        <a href="{{ route('panel.index') }}"><button class="btn btn-primary">Home</button></a>
+    </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -45,28 +43,29 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($employees as $em)
-                    @if ($em->active == 1)
+                    @foreach ($customers as $cus)
+                    @if ($cus->active == 1)
 
                     <tr>
-                        <td>{{ $em->id }}</td>
-                        <td>{{ $em->employee_name }}</td>
-                        <td>{{ $em->employee_phone }}</td>
-                        <td>{{ $em->employee_identity }}</td>
-                        <td>{{ $em->employee_address }}</td>
+                        <td>{{ $cus->id }}</td>
+                        <td>{{ $cus->customer_name }}</td>
+                        <td>{{ $cus->customer_phone }}</td>
+                        <td>{{ $cus->customer_address }}</td>
+                        <td>{{ $cus->customer_email }}</td>
                         <td>
-                            <a href="{{ route('employees.edit', $em->id) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
-                            <a href="{{route('employees.show',$em->id)}}"><button
+                            {{-- <a href="{{ route('cusployees.edit', $cus->id) }}"><button
+                                    class="btn btn-primary">Edit</button></a> --}}
+                            <a href="{{route('customers.show',$cus->id)}}"><button
                                     class="btn btn-primary">Details</button></a>
-                        @if (Auth::user()->rolename == 'admin')
-                            <form method="POST" action="{{ route('employees.destroy',$em->id) }}"
-                                class="d-inline-block">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-primary">Delete</button>
-                            </form>
-                        @endif
+                            @if (Auth::user()->rolename == 'admin')
+
+                                <form method="POST" action="{{ route('customers.destroy', ['customer' => $cus->id]) }}"
+                                    class="d-inline-block">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-primary">Delete</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                     @endif
@@ -83,5 +82,5 @@
 <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+<script src="{{ asset('js/dcuso/datatables-dcuso.js') }}"></script>
 @endsection
