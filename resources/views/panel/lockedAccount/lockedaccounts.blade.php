@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Information Accounts</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Accounts Locked</h6>
     </div>
 
     <div class="card-body">
@@ -31,24 +31,23 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($list as $item)
-                    @if ($item->active == 1)
+                    @foreach ($users as $user)
+                    @if ($user->active == 0)
 
                     <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->email }}</td>
-                        <td>{{ $item->rolename }}</td>
+                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->rolename }}</td>
                         <td>
-                            {{-- <a href="{{ route('users.edit', ['user' => $item->id]) }}"><button
-                                class="btn btn-primary">Edit</button></a> --}}
-                            <a href="{{route('users.show',['user'=>$item->id])}} "><button
+
+                            <a href="{{route('accounts-locked.show', $user->id)}} "><button
                                     class="btn btn-primary">Details</button></a>
-                            <form method="POST" action="{{ route('users.destroy', ['user' => $item->id]) }}"
+                            <form method="POST" action="{{ route('accounts-locked.destroy', $user->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Active</button>
                             </form>
                         </td>
                     </tr>

@@ -80,14 +80,14 @@ class UserController extends Controller
                 'avatar' => $request->avatar,
                 'rolename' => $request->rolename,
             ]);
-            $id = User::select('id')->where('email', $request->email)->first();
-            $userid = $id;
+            $user = User::select('id')->where('email', $request->email)->first();
+
             Employee::create([
                 'nhanvien_ten' => $request->name,
                 'nhanvien_sdt' => $request->phone,
                 'nhanvien_diachi' => $request->address,
                 'nhanvien_cmnd' => $request->rolename,
-                'user_id' => (int) $userid->id,
+                'user_id' => (int) $user->id,
             ]);
 
             return redirect(route('users.index'));
@@ -109,7 +109,7 @@ class UserController extends Controller
         if (Auth::user()->rolename == 'admin') {
 
             $user = User::find($id);
-            return response()->view('panel.users.profile-details', ['user' => $user]);
+            return response()->view('panel.users.showUser', ['user' => $user]);
         } else {
             Auth::logout();
             return redirect('/')->withErrors('These credential does not match our records.');

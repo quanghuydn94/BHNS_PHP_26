@@ -9,6 +9,7 @@ use App\Models\User;
 class Employee extends Model
 {
     use HasFactory;
+    protected $table = 'employees';
     protected $fillable = ['employee_name', 'employee_phone', 'employee_address', 'employee_identity', 'user_id', 'active'];
 
     public function getUserEmployee(){

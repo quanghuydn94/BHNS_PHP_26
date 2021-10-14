@@ -17,9 +17,9 @@
     </div>
     @endif
     @if (Auth::user()->rolename == 'admin')
-        <div class="p-2">
-            <a href="{{ route('employees.create') }}"><button class="btn btn-primary">Thêm Nhân Viên</button></a>
-        </div>
+    <div class="p-2">
+        <a href="{{ route('employees.create') }}"><button class="btn btn-primary">Thêm Nhân Viên</button></a>
+    </div>
     @endif
     <div class="card-body">
         <div class="table-responsive">
@@ -55,18 +55,18 @@
                         <td>{{ $em->employee_identity }}</td>
                         <td>{{ $em->employee_address }}</td>
                         <td>
+                            @if (Auth::user()->rolename == 'admin')
                             <a href="{{ route('employees.edit', $em->id) }}"><button
                                     class="btn btn-primary">Edit</button></a>
-                            <a href="{{route('employees.show',$em->id)}}"><button
-                                    class="btn btn-primary">Details</button></a>
-                        @if (Auth::user()->rolename == 'admin')
                             <form method="POST" action="{{ route('employees.destroy',$em->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-primary">Delete</button>
                             </form>
-                        @endif
+                            @endif
+                            <a href="{{route('employees.show',$em->id)}}"><button
+                                    class="btn btn-primary">Details</button></a>
                         </td>
                     </tr>
                     @endif

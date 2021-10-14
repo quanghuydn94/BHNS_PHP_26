@@ -36,7 +36,7 @@
   border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
 
   .nav-link {
-    margin-bottom: -$nav-tabs-border-width;
+    // margin-bottom: -$nav-tabs-border-width;
     border: $nav-tabs-border-width solid transparent;
     @include border-top-radius($nav-tabs-border-radius);
 

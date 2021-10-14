@@ -5,39 +5,11 @@
 <link rel="stylesheet" href="{{asset('css/admin/detail.css')}}">
 @endsection
 @section('content')
+<!-- Infor Employee -->
 
-<!-- Modal Customer -->
-<div class="modal fade" id="historyCustomerModal" tabindex="-1" role="dialog"
-    aria-labelledby="historyCustomerModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="historyCustomerModalLabel">History Sales</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="col-sm-6">
-                    <p class="m-b-10 f-w-600">Email</p>
-                    <h6 class="text-muted f-w-400">{{$user->email}}</h6>
-                </div>
-                <div class="col-sm-6">
-                    <p class="m-b-10 f-w-600">Phone</p>
-                    <h6 class="text-muted f-w-400">{{$customer->customer_phone}}</h6>
-                </div>
-                <div class="col-sm-6">
-                    <p class="m-b-10 f-w-600">Address</p>
-                    <h6 class="text-muted f-w-400">{{$customer->customer_address}}</h6>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Infor Customer -->
 
 <div class="page-content page-container" id="page-content">
+
     <div class="padding">
         <div class="row container d-flex justify-content-center">
             <div class="col-xl-6 col-md-12">
@@ -45,9 +17,9 @@
                     <div class="row m-l-0 m-r-0">
                         <div class="col-sm-4 bg-c-lite-green user-profile">
                             <div class="card-block text-center text-white">
-                                <div class="m-b-25"> <img src="{{url('img/users/client.jpg')}}" width="100px"
+                                <div class="m-b-25"> <img src="{{url('img/users',$user->avatar)}}" width="100px"
                                         class="img-radius" alt="User-Profile-Image"> </div>
-                                <h6 class="f-w-600">{{$customer->customer_name}}</h6>
+                                <h6 class="f-w-600">{{$user->name}}</h6>
                                 <p>{{$user->rolename}}</p> <i
                                     class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                             </div>
@@ -62,11 +34,11 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Phone</p>
-                                        <h6 class="text-muted f-w-400">{{$customer->customer_phone}}</h6>
+                                        <h6 class="text-muted f-w-400">{{$user->phone}}</h6>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Address</p>
-                                        <h6 class="text-muted f-w-400">{{$customer->customer_address}}</h6>
+                                        <h6 class="text-muted f-w-400">{{$user->address}}</h6>
                                     </div>
 
                                 </div>
@@ -84,13 +56,9 @@
                                         <p class="m-b-10 f-w-600">Date Join</p>
                                         <h6 class="text-muted f-w-400">{{$user->created_at}}</h6>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <a href="" class="badge badge-primary" data-toggle="modal"
-                                            data-target="#historyCustomerModal">Buyer History </a>
-                                    </div>
                                 </div>
                                 <div class="p-2 text-right">
-                                    <a href="{{ route('customers.index') }}" class="badge badge-primary"> Back </a>
+                                    <a href="{{ route('users.index') }}" class="badge badge-primary"> Back </a>
                                 </div>
                             </div>
                         </div>
@@ -101,9 +69,9 @@
     </div>
 </div>
 @endsection
-@section('scripts')
+{{-- @section('scripts')
 <!-- Page level plugins -->
-{{-- <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
 <!-- Page level custom scripts -->

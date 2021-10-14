@@ -52,12 +52,12 @@ class EmployeeController extends Controller
             $request->all(),
             [
                 'name' => 'required|string', //set validate for input of form
-                'phone' => 'required|max:15',
+                'phone' => 'required|max:15|unique:employees,employee_phone',
                 'address' => 'required|string',
                 'email' => 'required|string|email|unique:users',
-                'password' => 'required|string|confirmed|min:8',
-                'password_confirmation' => 'required|string',
-                'identity' => 'required|string',
+                // 'password' => 'required|string|confirmed|min:8',
+                // 'password_confirmation' => 'required|string',
+                'identity' => 'required|string|unique:employees,employee_identity',
                 'rolename' => 'required|string',
                 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
@@ -86,7 +86,7 @@ class EmployeeController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make(123456789), //password default
             'avatar' => $filename,
             'address' => $request->address,
             'rolename' => $request->rolename,

@@ -20,9 +20,10 @@ class CreateCustomersTable extends Migration
             $table->string('customer_address');
             $table->string('customer_email');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('active');
             $table->timestamps();
+
         });
     }
 

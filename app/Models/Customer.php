@@ -9,6 +9,7 @@ use App\Models\User;
 class Customer extends Model
 {
     use HasFactory;
+    protected $table = 'customers';
     protected $fillable = ['customer_name', 'customer_phone','customer_email','customer_address','user_id', 'active'];
 
     public function getUserCustomer(){

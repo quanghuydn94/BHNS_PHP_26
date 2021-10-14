@@ -8,6 +8,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+
     <!-- Custom fonts for this template -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -70,9 +71,9 @@
                         <h6 class="collapse-header">Quản ly người dùng</h6>
 
                         <a class="collapse-item" href="{{ route('users.index') }}">Tài khoản người dùng</a>
+                        <a class="collapse-item" href="{{ route('employees.index') }}">Danh sách nhân viên</a>
                         @endif
                         @if (Auth::user()->rolename == 'admin' || Auth::user()->rolename == 'employee')
-                        <a class="collapse-item" href="{{ route('employees.index') }}">Danh sách nhân viên</a>
 
                         <a class="collapse-item" href="{{ route('customers.index') }}">Danh sách khách hàng</a>
                         @endif
@@ -81,39 +82,90 @@
                 </div>
             </li>
 
+
+
             <!-- Nav Item - Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories"
-                    aria-expanded="true" aria-controls="collapseCategories">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Kho hàng</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
+                    aria-expanded="true" aria-controls="collapseProducts">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Quản lý sản phẩm</span>
                 </a>
-                <div id="collapseCategories" class="collapse" aria-labelledby="headingCategories"
+                <div id="collapseProducts" class="collapse" aria-labelledby="headingProducts"
                     data-parent="#accordionSidebar">
-                    <div class="bg-info  py-2 collapse-inner rounded">
-                        <h6 class="collapse-header text-white">Nhóm sản phẩm</h6>
-                        @if (auth()->user()->rolename == 'admin')
-                        <a class="collapse-item" href="{{ route('categories.create') }}">Thêm</a>
-                        @endif
-                        <a class="collapse-item" href="{{ route('categories.index') }}">Danh sách</a>
+                    <div class=" collapse-inner rounded card">
+                        <div class="dropright mb-2">
+                            <button class="btn btn-outline-primary dropdown-toggle w-100" type="button" id="droprightGroupGoods"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <span class="collapse-header">Nhóm hàng</span>
+                            </button>
+                            <div class="dropdown-menu collapsed" aria-labelledby="droprightGroupGoods">
+                                @if (auth()->user()->rolename == 'admin')
+                                {{-- <a class="collapse-item" href="{{ route('products.create') }}">Create</a> --}}
+                                @endif
+                                <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
+                            </div>
+                        </div>
+                        <div class="dropright mb-2">
+                            <button class="btn btn-outline-success dropdown-toggle  w-100" type="button" id="droprightGroupProducts"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <span class="collapse-header  ">Nhóm sản phẩm</span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="droprightGroupProducts">
+                                @if (auth()->user()->rolename == 'admin')
+                                {{-- <a class="collapse-item" href="{{ route('products.create') }}">Create</a> --}}
+                                @endif
+                                <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
+                            </div>
+                        </div>
+                        <div class="dropright">
+                            <button class="btn btn-outline-warning dropdown-toggle  w-100" type="button" id="droprightProducts"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <span class="collapse-header  ">  Sản phẩm</span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="droprightProducts">
+                                @if (auth()->user()->rolename == 'admin')
+                                {{-- <a class="collapse-item" href="{{ route('products.create') }}">Create</a> --}}
+                                @endif
+                                <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div id="collapseCategories" class="collapse" aria-labelledby="headingCategories"
-                    data-parent="#accordionSidebar">
+            </li>
 
-                    <div class="bg-info py-2 collapse-inner rounded">
-                        <h6 class="collapse-header text-white">Loại sản phẩm</h6>
+            <!-- Nav Item - Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders"
+                    aria-expanded="true" aria-controls="collapseOrders">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Quản lý đơn hàng</span>
+                </a>
+                <div id="collapseOrders" class="collapse" aria-labelledby="headingOrders"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        {{-- <h6 class="collapse-header">Quản lý đơn hàng</h6> --}}
                         @if (auth()->user()->rolename == 'admin')
-                        <a class="collapse-item" href="{{ route('categories.create') }}">Thêm</a>
+                        <a class="collapse-item" href="{{ route('products.create') }}">Thêm</a>
                         @endif
-                        <a class="collapse-item" href="{{ route('categories.index') }}">Danh sách</a>
+                        <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
                     </div>
                 </div>
-                <div id="collapseCategories" class="collapse" aria-labelledby="headingCategories"
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStores"
+                    aria-expanded="true" aria-controls="collapseStores">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Quản lý kho hàng</span>
+                </a>
+                <div id="collapseStores" class="collapse" aria-labelledby="headingStores"
                     data-parent="#accordionSidebar">
-
-                    <div class="bg-info py-2 collapse-inner rounded">
-                        <h6 class="collapse-header text-white">Sản phẩm</h6>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        {{-- <h6 class="collapse-header">Quản lý đơn hàng</h6> --}}
                         @if (auth()->user()->rolename == 'admin')
                         <a class="collapse-item" href="{{ route('products.create') }}">Thêm</a>
                         @endif
@@ -123,115 +175,83 @@
             </li>
 
             <!-- Nav Item - Collapse Menu -->
-            {{-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts" aria-expanded="true" aria-controls="collapseProducts">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSuppliers"
+                    aria-expanded="true" aria-controls="collapseProducts">
                     <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>Product Management</span>
+                    <span>Nhà cung cấp</span>
                 </a>
-                <div id="collapseProducts" class="collapse" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Product Management</h6>
+                <div id="collapseSuppliers" class="collapse" aria-labelledby="headingSuppliers"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-info py-2 collapse-inner rounded">
+                        {{-- <h6 class="collapse-header">Nhà cung cấp</h6> --}}
                         @if (auth()->user()->rolename == 'admin')
-                        <a class="collapse-item" href="{{ route('products.create') }}">Create</a>
-            @endif
-            <a class="collapse-item" href="{{ route('products.index') }}">List</a>
-    </div>
-    </div>
-    </li> --}}
-
-    <!-- Nav Item - Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders" aria-expanded="true"
-            aria-controls="collapseProducts">
-            <i class="fas fa-fw fa-shopping-cart"></i>
-            <span>Quản lý đơn hàng</span>
-        </a>
-        <div id="collapseOrders" class="collapse" aria-labelledby="headingOrders" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                {{-- <h6 class="collapse-header">Quản lý đơn hàng</h6> --}}
-                @if (auth()->user()->rolename == 'admin')
-                <a class="collapse-item" href="{{ route('products.create') }}">Thêm</a>
-                @endif
-                <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSuppliers"
-            aria-expanded="true" aria-controls="collapseProducts">
-            <i class="fas fa-fw fa-shopping-cart"></i>
-            <span>Nhà cung cấp</span>
-        </a>
-        <div id="collapseSuppliers" class="collapse" aria-labelledby="headingSuppliers" data-parent="#accordionSidebar">
-            <div class="bg-info py-2 collapse-inner rounded">
-                {{-- <h6 class="collapse-header">Nhà cung cấp</h6> --}}
-                @if (auth()->user()->rolename == 'admin')
-                <a class="collapse-item " href="{{route('panel.suppliers.create')}} ">Thêm</a>
-                @endif
-                <a class="collapse-item" href="{{route('panel.suppliers.index')}} ">Danh sách</a>
-            </div>
-        </div>
-    </li>
-    </ul>
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-                <!-- Topbar Search -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
+                        <a class="collapse-item " href="{{route('panel.suppliers.create')}} ">Thêm</a>
+                        @endif
+                        <a class="collapse-item" href="{{route('panel.suppliers.index')}} ">Danh sách</a>
                     </div>
-                </form>
+                </div>
+            </li>
+        </ul>
+        <!-- End of Sidebar -->
 
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                            aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                        placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
                         </div>
-                    </li>
+                    </form>
 
-                    <!-- Nav Item - Alerts -->
-                    {{-- <li class="nav-item dropdown no-arrow mx-1">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        {{-- <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
@@ -279,8 +299,8 @@
                             </div>
                         </li> --}}
 
-                    <!-- Nav Item - Messages -->
-                    {{-- <li class="nav-item dropdown no-arrow mx-1">
+                        <!-- Nav Item - Messages -->
+                        {{-- <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
@@ -339,70 +359,80 @@
                             </div>
                         </li> --}}
 
-                    <div class="topbar-divider d-none d-sm-block"></div>
+                        <div class="topbar-divider d-none d-sm-block"></div>
 
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
-                            <img class="img-profile rounded-circle" src="{{ url('img/users',Auth::user()->avatar) }}">
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="{{route('users.profile')}}">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Profile
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{ url('img/users',Auth::user()->avatar) }}">
                             </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Settings
-                            </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
-                            </a>
-                        </div>
-                    </li>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{route('users.profile')}}">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
 
-                </ul>
+                    </ul>
 
-            </nav>
-            <!-- End of Topbar -->
+                </nav>
+                <!-- End of Topbar -->
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h4 mb-0 text-gray-600">
+                            <a href="{{route('panel.index')}}" class="btn btn-primary">Home</a>
+                        </h1>
+                        @if (Auth::user()->rolename == 'admin')
+
+                        <a href="{{route('accounts-locked.index')}}"
+                            class="text-right badge badge-danger shadow p-1 rounded">Blocked
+                            accounts</a>
+                        @endif
+                    </div>
+
+                    @yield('content')
                 </div>
+                <!-- /.container-fluid -->
 
-                @yield('content')
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
