@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\User;
+use App\Models\Orders;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -88,9 +90,14 @@ class CustomerController extends Controller
         $customer = Customer::find((int) $id); // display details information of customer
         $userId = (int) $customer->user_id;
         $user = User::find($userId);
+        $customer_order = Customer::find((int)$customer->id)->getOrder()->first();
+        $orderDetail = Orders::find((int)$customer_order->id)->getOrderDetail()->first();
         return response()->view('panel.customer.historyCustomer', [
             'customer' => $customer,
-            'user' => $user]);
+            'user' => $user,
+            'customer_order'=>$customer_order,
+            'orderDetail'=>$orderDetail,
+        ]);
 
     }
 

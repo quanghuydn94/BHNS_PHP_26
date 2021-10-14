@@ -1,7 +1,6 @@
 @extends('layouts.panel')
 @section('styles')
 <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{asset('css/admin/detail.css')}}">
 @endsection
 @section('content')
@@ -18,17 +17,55 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="col-sm-6">
-                    <p class="m-b-10 f-w-600">Email</p>
-                    <h6 class="text-muted f-w-400">{{$user->email}}</h6>
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <h6 class="text-muted f-w-400">Name Customer</h6>
+                        <p class="m-b-10 f-w-600">{{$customer_order->order_customer_name}}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Phone</p>
+                        <h6 class="text-muted f-w-400">{{$customer_order->order_customer_phone}}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Address</p>
+                        <h6 class="text-muted f-w-400">{{$customer_order->order_customer_address}}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600"> Email</p>
+                        <h6 class="text-muted f-w-400">{{$customer_order->order_customer_email}}</h6>
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <p class="m-b-10 f-w-600">Phone</p>
-                    <h6 class="text-muted f-w-400">{{$customer->customer_phone}}</h6>
-                </div>
-                <div class="col-sm-6">
-                    <p class="m-b-10 f-w-600">Address</p>
-                    <h6 class="text-muted f-w-400">{{$customer->customer_address}}</h6>
+                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Order Number {{$customer_order->id}}</h6>
+                {{-- <div class="col-sm-6">
+                    <h6 class="text-muted f-w-400">Order Number</h6>
+                    <p class="m-b-10 f-w-600">{{$customer_order->id}}</p>
+                </div> --}}
+                {{-- <hr class="  f-w-600"> --}}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Date</p>
+                        <h6 class="text-muted f-w-400">{{$customer_order->created_at}}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600"> Name Product</p>
+                        <h6 class="text-muted f-w-400">{{$orderDetail->product_name}}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600"> Image</p>
+                        <img class="text-muted f-w-400" src="{{url('img/products',$orderDetail->product_image)}}" width="100px" alt="{{$orderDetail->product_image}}">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600"> Quantity</p>
+                        <h6 class="text-muted f-w-400">{{$orderDetail->orderdetail_quantity}}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600"> Status</p>
+                        <h6 class="text-muted f-w-400">{{$customer_order->order_status}}</h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600"> Total price</p>
+                        <h6 class="text-muted f-w-400">{{$orderDetail->orderdetail_totalprice}} vnđ</h6>
+                    </div>
                 </div>
             </div>
         </div>

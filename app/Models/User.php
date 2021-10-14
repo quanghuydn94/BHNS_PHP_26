@@ -37,11 +37,11 @@ class User extends Authenticatable
         'active',
     ];
 
-    public function employee(){
+    public function getEmployee(){
         return $this->hasOne(nhanvien::class);
     }
 
-    public function customer(){
+    public function getCustomer(){
         return $this->hasOne(Customer::class);
     }
 
