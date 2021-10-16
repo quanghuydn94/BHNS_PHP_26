@@ -6,20 +6,27 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Suppliers</h6>
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
     </div>
+    @if (session()->get('success'))
+     <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <span>{{session()->get('success')}}</span>
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+         </button>
+     </div>
+     @endif
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{route('suppliers.create')}} ">Add New Suppliers</a>
+            <a class="btn btn-outline-primary mb-3" href="{{ route('product-type.create') }}">New Product Types</a>
         @endif
-        <div class="table-responsive ">
+        <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
+                        <th>Description</th>
                         @if (auth()->user()->rolename == 'admin')
                         <th>Tools</th>
                         @endif
@@ -29,42 +36,32 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
+                        <th>Description</th>
                         @if (auth()->user()->rolename == 'admin')
                         <th>Tools</th>
                         @endif
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($suppliers as $item)
-                    @if ($item->active == 1)
-
-                    <tr >
+                    @foreach ($list as $item)
+                    <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->supplier_name }}</td>
-                        <td >{{ $item->supplier_address }}</td>
-                        <td>{{ $item->supplier_phone }}</td>
+                        <td>{{ $item->product_type_name }}</td>
+                        <td>{{ $item->product_type_description }}</td>
                         @if (auth()->user()->rolename == 'admin')
-                        <td class="d-flex justify-content-between">
-                            <a href="{{ route('suppliers.edit', $item->id) }}"><button
-                                    class="badge badge-primary">Edit</button></a>
-                            <a href="{{route('suppliers.show',$item->id)}} "><button  class="badge badge-primary">Details</button></a>
+                        <td>
+                            <a href="{{ route('product-type.edit', $item->id) }}"><button class="btn btn-primary">Edit</button></a>
+                            <a href=" {{route('product-type.show', $item->id)}}"><button class="btn btn-primary">Details</button></a>
 
-                            @if (auth()->user()->rolename == 'admin')
-                            <form method="POST" action="{{ route('suppliers.destroy',$item->id) }}"
-                                class="d-inline-block">
+                            <form method="POST" action="{{ route('product-type.destroy',  $item->id) }}" class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button  class="badge badge-primary">Delete</button>
+                                <button class="btn btn-primary">Delete</button>
                             </form>
-                            @endif
                         </td>
                         @endif
                     </tr>
-                    @endif
                     @endforeach
-
                 </tbody>
             </table>
         </div>

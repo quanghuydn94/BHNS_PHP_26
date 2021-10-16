@@ -6,65 +6,54 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Suppliers</h6>
+        <h6 class="m-0 font-weight-bold text-primary">DataTables GroupGoods</h6>
     </div>
+
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{route('suppliers.create')}} ">Add New Suppliers</a>
+            <a class="btn btn-outline-primary mb-3" href="{{ route('groupgoods.create') }}">New GroupGoods</a>
         @endif
-        <div class="table-responsive ">
+        <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        @if (auth()->user()->rolename == 'admin')
+                        <th>Image</th>
+                        <th>Description</th>
                         <th>Tools</th>
-                        @endif
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        @if (auth()->user()->rolename == 'admin')
+                        <th>Image</th>
+                        <th>Description</th>
                         <th>Tools</th>
-                        @endif
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($suppliers as $item)
+                    @foreach ($groupGoods as $item)
                     @if ($item->active == 1)
 
-                    <tr >
+                    <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->supplier_name }}</td>
-                        <td >{{ $item->supplier_address }}</td>
-                        <td>{{ $item->supplier_phone }}</td>
-                        @if (auth()->user()->rolename == 'admin')
-                        <td class="d-flex justify-content-between">
-                            <a href="{{ route('suppliers.edit', $item->id) }}"><button
-                                    class="badge badge-primary">Edit</button></a>
-                            <a href="{{route('suppliers.show',$item->id)}} "><button  class="badge badge-primary">Details</button></a>
-
-                            @if (auth()->user()->rolename == 'admin')
-                            <form method="POST" action="{{ route('suppliers.destroy',$item->id) }}"
-                                class="d-inline-block">
+                        <td>{{ $item->group_name }}</td>
+                        <td><img width="50px" src="{{ url('img/groupgoods',$item->group_image) }}"></td>
+                        <td>{{ $item->group_description }}</td>
+                        <td>
+                            <a href="{{ route('groupgoods.edit', ['groupgood' => $item->id]) }}"><button class="btn btn-primary">Edit</button></a>
+                            <a href="{{ route('groupgoods.show', ['groupgood' => $item->id]) }}"><button class="btn btn-primary">Detail</button></a>
+                            <form method="POST" action="{{ route('groupgoods.destroy', ['groupgood' => $item->id]) }}" class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button  class="badge badge-primary">Delete</button>
+                                <button class="btn btn-primary">Delete</button>
                             </form>
-                            @endif
                         </td>
-                        @endif
                     </tr>
                     @endif
                     @endforeach
-
                 </tbody>
             </table>
         </div>

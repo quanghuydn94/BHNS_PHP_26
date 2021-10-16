@@ -91,43 +91,36 @@
                 </a>
                 <div id="collapseProducts" class="collapse" aria-labelledby="headingProducts"
                     data-parent="#accordionSidebar">
-                    <div class=" collapse-inner rounded card">
+                    <div class=" collapse-inner bg-primary rounded card">
                         <div class="dropright mb-2">
-                            <button class="btn btn-outline-primary dropdown-toggle w-100" type="button" id="droprightGroupGoods"
+                            <button class="btn btn-outline-danger dropdown-toggle w-100" type="button" id="droprightGroupGoods"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                                <span class="collapse-header">Nhóm hàng</span>
+                                <span class="collapse-header text-white">Nhóm hàng</span>
                             </button>
                             <div class="dropdown-menu collapsed" aria-labelledby="droprightGroupGoods">
-                                @if (auth()->user()->rolename == 'admin')
-                                {{-- <a class="collapse-item" href="{{ route('products.create') }}">Create</a> --}}
-                                @endif
-                                <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
+
+                                <a class="collapse-item" href="{{ route('groupgoods.index') }}">Danh sách</a>
                             </div>
                         </div>
                         <div class="dropright mb-2">
                             <button class="btn btn-outline-success dropdown-toggle  w-100" type="button" id="droprightGroupProducts"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                                <span class="collapse-header  ">Nhóm sản phẩm</span>
+                                <span class="collapse-header text-white ">Nhóm sản phẩm</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="droprightGroupProducts">
-                                @if (auth()->user()->rolename == 'admin')
-                                {{-- <a class="collapse-item" href="{{ route('products.create') }}">Create</a> --}}
-                                @endif
-                                <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
+
+                                <a class="collapse-item" href="{{ route('product-type.index') }}">Danh sách</a>
                             </div>
                         </div>
                         <div class="dropright">
                             <button class="btn btn-outline-warning dropdown-toggle  w-100" type="button" id="droprightProducts"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                                <span class="collapse-header  ">  Sản phẩm</span>
+                                <span class="collapse-header text-white ">  Sản phẩm</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="droprightProducts">
-                                @if (auth()->user()->rolename == 'admin')
-                                {{-- <a class="collapse-item" href="{{ route('products.create') }}">Create</a> --}}
-                                @endif
                                 <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
                             </div>
                         </div>
@@ -147,10 +140,10 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         {{-- <h6 class="collapse-header">Quản lý đơn hàng</h6> --}}
-                        @if (auth()->user()->rolename == 'admin')
+                        {{-- @if (auth()->user()->rolename == 'admin')
                         <a class="collapse-item" href="{{ route('products.create') }}">Thêm</a>
-                        @endif
-                        <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
+                        @endif --}}
+                        <a class="collapse-item" href="{{ route('orders.index') }}">Danh sách</a>
                     </div>
                 </div>
             </li>
@@ -163,11 +156,8 @@
                 <div id="collapseStores" class="collapse" aria-labelledby="headingStores"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        {{-- <h6 class="collapse-header">Quản lý đơn hàng</h6> --}}
-                        @if (auth()->user()->rolename == 'admin')
-                        <a class="collapse-item" href="{{ route('products.create') }}">Thêm</a>
-                        @endif
-                        <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
+
+                        <a class="collapse-item" href="{{ route('warehouses.index') }}">Danh sách</a>
                     </div>
                 </div>
             </li>
@@ -182,11 +172,7 @@
                 <div id="collapseSuppliers" class="collapse" aria-labelledby="headingSuppliers"
                     data-parent="#accordionSidebar">
                     <div class="bg-info py-2 collapse-inner rounded">
-                        {{-- <h6 class="collapse-header">Nhà cung cấp</h6> --}}
-                        @if (auth()->user()->rolename == 'admin')
-                        <a class="collapse-item " href="{{route('panel.suppliers.create')}} ">Thêm</a>
-                        @endif
-                        <a class="collapse-item" href="{{route('panel.suppliers.index')}} ">Danh sách</a>
+                        <a class="collapse-item" href="{{route('suppliers.index')}} ">Danh sách</a>
                     </div>
                 </div>
             </li>

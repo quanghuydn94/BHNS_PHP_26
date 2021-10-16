@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\Products;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,9 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $list = Product::all();
-
-        return view('panel.products.index', compact('list'));
+        $list = Products::with('productType')->get();
+        return response()->view('panel.products.index', compact('list'));
     }
 
     /**
@@ -28,9 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-
-        return view('panel.products.create', compact('categories'));
+        $productTypes = ProductType::all();
+        return response()->view('panel.products.create', compact('productTypes'));
     }
 
     /**
@@ -41,21 +39,29 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|string',
-            'price' => 'required|numeric',
-            'image' => 'required|string',
-            'description' => 'required|string',
-            'category_id' => 'required|integer',
+            'product_name' => 'required|string',
+            'product_symbol' => 'required|string',
+            'product_price' => 'required|numeric',
+            'product_image' => 'required|image',
+            'product_description' => 'required|string',
+            'product_type_id' => 'required',
         ];
         $request->validate($rules);
+        if ($request->hasFile('product_image')) {
+            $file = $request->file('product_image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('img/products', $filename);
+        }
 
-        Product::create([
-            'name' => $request->name,
-            'price' => $request->price,
-            'image' => $request->image,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'user_id' => auth()->user()->id,
+        Products::create([
+            'product_name' => $request->product_name,
+            'product_symbol' => $request->product_symbol,
+            'product_price' => $request->product_price,
+            'product_image' => $filename,
+            'product_description' => $request->product_description,
+            'product_type_id' => $request->product_type_id,
+            'active' => 1,
         ]);
 
         return redirect(route('products.index'));
@@ -70,10 +76,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $categories = Category::all();
-$data = Product::findOrFail($id);
+        $data = Products::findOrFail($id);
+        $productTypes = $data->productType->product_type_name;
 
-return view('panel.products.show', compact('categories', 'data'));
+        return response()->view('panel.products.showdetail', compact('productTypes', 'data'));
 
     }
 
@@ -86,10 +92,10 @@ return view('panel.products.show', compact('categories', 'data'));
      */
     public function edit($id)
     {
-        $categories = Category::all();
-        $data = Product::findOrFail($id);
+        $productTypes = ProductType::all();
+        $data = Products::findOrFail($id);
 
-        return view('panel.products.edit', compact('categories', 'data'));
+        return response()->view('panel.products.edit', compact('productTypes', 'data'));
     }
 
     /**
@@ -102,22 +108,27 @@ return view('panel.products.show', compact('categories', 'data'));
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => 'required|string',
-            'price' => 'required|numeric',
-            'image' => 'required|string',
-            'description' => 'required|string',
-            'category_id' => 'required|integer',
+            'product_name' => 'required|string',
+            'product_symbol' => 'required|string',
+            'product_price' => 'required|numeric',
+            'product_description' => 'required|string',
+            'product_type_id' => 'required',
         ];
+
         $request->validate($rules);
 
-        $data = Product::findOrFail($id);
+        $data = Products::findOrFail($id);
+        if (!$request->hasFile('product_image')) {
+            $filename = $data->product_image;
+        }
         $data->update([
-            'name' => $request->name,
-            'price' => $request->price,
-            'image' => $request->image,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'user_id' => auth()->user()->id,
+            'product_name' => $request->product_name,
+            'product_symbol' => $request->product_symbol,
+            'product_price' => $request->product_price,
+            'product_image' => $filename,
+            'product_description' => $request->product_description,
+            'product_type_id' => $request->product_type_id,
+            'active' => 1,
         ]);
 
         return redirect(route('products.index'));
@@ -132,8 +143,8 @@ return view('panel.products.show', compact('categories', 'data'));
      */
     public function destroy($id)
     {
-        $data = Product::findOrFail($id);
-        $data->delete();
+        $data = Products::findOrFail($id);
+        $data->update(['active' => 0]);
 
         return redirect()->back();
     }

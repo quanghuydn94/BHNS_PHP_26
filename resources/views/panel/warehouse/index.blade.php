@@ -6,11 +6,19 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Product</h6>
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Consignments</h6>
     </div>
+    @if (session()->get('success'))
+     <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <span>{{session()->get('success')}}</span>
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+         </button>
+     </div>
+     @endif
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{ route('products.create') }}">New Product</a>
+            <a class="btn btn-outline-primary mb-3" href="{{ route('warehouses.create') }}">New Consignment</a>
         @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -18,9 +26,11 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th>Product Types</th>
+                        <th>Symbol</th>
+                        <th>Expiry</th>
+                        <th>Quantity</th>
+                        <th>Purchase Price</th>
+                        <th>Sale Price</th>
                         @if (auth()->user()->rolename == 'admin')
                         <th>Tools</th>
                         @endif
@@ -30,9 +40,11 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th>Product Types</th>
+                        <th>Symbol</th>
+                        <th>Expiry</th>
+                        <th>Quantity</th>
+                        <th>Purchase Price</th>
+                        <th>Sale Price</th>
                         @if (auth()->user()->rolename == 'admin')
                         <th>Tools</th>
                         @endif
@@ -40,33 +52,27 @@
                 </tfoot>
                 <tbody>
                     @foreach ($list as $item)
-                    @if ($item->active == 1)
-
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td>{{ $item->product_name }}</td>
-                        <td><img src="{{url('img/products', $item->product_image )}}" width="100px" alt=""></td>
-                        <td>{{ $item->product_price }}</td>
-                        <td>{{ $item->productType->product_type_name }}</td>
+                        <td>{{ $item->consignment_name }}</td>
+                        <td>{{ $item->consignment_symbol }}</td>
+                        <td>{{ $item->consignment_expiry }}</td>
+                        <td>{{ $item->consignment_quantity }}</td>
+                        <td>{{ $item->consignment_purchase_price }}</td>
+                        <td>{{ $item->consignment_sale_price }}</td>
+                        @if (auth()->user()->rolename == 'admin')
                         <td>
-                            @if (auth()->user()->rolename == 'admin')
-                            <a href="{{ route('products.edit', ['product' => $item->id]) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
-                            <a href="{{ route('products.show', ['product' => $item->id]) }} "><button
-                                    class="btn btn-primary">Details</button></a>
+                            <a href="{{ route('product-type.edit', $item->id) }}"><button class="btn btn-primary">Edit</button></a>
+                            <a href=" {{route('product-type.show', $item->id)}}"><button class="btn btn-primary">Details</button></a>
 
-                            @if (auth()->user()->rolename == 'admin')
-                            <form method="POST" action="{{ route('products.destroy', ['product' => $item->id]) }}"
-                                class="d-inline-block">
+                            <form method="POST" action="{{ route('product-type.destroy',  $item->id) }}" class="d-inline-block">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-primary">Delete</button>
                             </form>
-                            @endif
-                            @endif
                         </td>
+                        @endif
                     </tr>
-                    @endif
                     @endforeach
                 </tbody>
             </table>

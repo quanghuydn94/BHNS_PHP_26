@@ -7,43 +7,35 @@
     @endforeach
 </div>
 @endif
-<form method="POST" action=" ">
-    <div class="mb-3 row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
-        <div class="col-sm-10">
-            <input name="name" type="text" class="form-control" placeholder="Tivi"  >
+<div class="card-header py-3">
+    <p class="m-0 font-weight-bold text-primary">
+       <a href="{{route('suppliers.index')}}" class="border border-primary rounded text-decoration-none"> DataTables Suppliers  </a>
+        <span> <i class="fas fa-chevron-right"></i>Update Information Suppliers</span>
+    </p>
+</div>
+<div class="card-body">
+    <form method="POST" action="{{route('suppliers.update',$supplier->id)}}">
+        <div class="mb-3 row">
+            <label for=" " class="col-sm-2 col-form-label">Name Supplier</label>
+            <div class="col-sm-10">
+                <input name="supplier_name" type="text" class="form-control" value="{{$supplier->supplier_name}}">
+            </div>
         </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Price</label>
-        <div class="col-sm-10">
-            <input name="price" type="text" class="form-control" placeholder="0"  >
+        <div class="mb-3 row">
+            <label for=" " class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-10">
+                <input name="supplier_address" type="text" class="form-control" value="{{$supplier->supplier_address}}">
+            </div>
         </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Image</label>
-        <div class="col-sm-10">
-            <input name="image" type="text" class="form-control" placeholder="https://laravel.com/img/logotype.min.svg"  >
+        <div class="mb-3 row">
+            <label for=" " class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-10">
+                <input name="supplier_phone" type="text" class="form-control" value="{{$supplier->supplier_phone}}">
+            </div>
         </div>
-    </div>
-    <div class="mb-3 row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Description</label>
-        <div class="col-sm-10">
-            <input name="description" type="text" class="form-control" placeholder="Description of product"  >
-        </div>
-    </div>
-    {{-- <div class="mb-3 row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Category</label>
-        <div class="col-sm-10">
-            <select name="category_id" class="form-control">
-                @foreach($categories as $category)
-                <option value="{{ $category->id }}" @if ($data->category_id == $category->id) selected @endif>{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
-    </div> --}}
-    {{-- @method('put') --}}
-    @csrf
-    <button class="btn btn-primary">Submit</button>
-</form>
+        @method('put')
+        @csrf
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>
 @endsection

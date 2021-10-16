@@ -1,10 +1,18 @@
 <?php
 
 use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Panel\BlockedAccountController;
+use App\Http\Controllers\Panel\AccountBlockedController;
 use App\Http\Controllers\Panel\CustomerController;
+use App\Http\Controllers\Panel\EmployeeController;
+use App\Http\Controllers\Panel\GroupGoodsController;
+use App\Http\Controllers\Panel\OrdersController;
+use App\Http\Controllers\Panel\ProductController;
+use App\Http\Controllers\Panel\ProductTypeController;
 use App\Http\Controllers\Panel\UserController;
+use App\Http\Controllers\Panel\WareHousesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Panel\SinglePageController;
+use App\Http\Controllers\Panel\SuppliersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,11 +44,11 @@ Route::post('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionControlle
 //     return response()->view('auth.changePassword',['user'=>$user]);
 // })->name('employees.change-password');
 
-Route::resource('change-password', NewPasswordController::class );
+Route::resource('change-password', NewPasswordController::class);
 // Group panel: users, employee, customers, products, suppliers, categories
 Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     // page home when you access admin management page
-    Route::get('/', [\App\Http\Controllers\Panel\SinglePageController::class, 'index'])->name('panel.index');
+    Route::get('/', [SinglePageController::class, 'index'])->name('panel.index');
 
     // Routes Suppliers
     Route::get('suppliers/create', function () {
@@ -56,23 +64,37 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
         return response()->view('panel.users.profile-details');
     })->name('users.profile');
 
-    Route::resource('users',  UserController::class);
+    Route::resource('users', UserController::class);
 
     //Routes show blocked accounts
-    Route::resource('accounts-locked', App\Http\Controllers\Panel\AccountBlockedController::class);
+    Route::resource('accounts-locked', AccountBlockedController::class);
 
     // Route::get('unlock/{id}', [UserController::class , 'unlock'])->name('account.unlock ');
 
     //Routes Employees
-    Route::resource('employees', \App\Http\Controllers\Panel\EmployeeController::class);
+    Route::resource('employees', EmployeeController::class);
 
     //Routes customers
     Route::resource('customers', CustomerController::class);
-        Route::get('customer-history', [CustomerController::class , 'historySales'])->name('customers.historyCustomer');
+    Route::get('customer-history', [CustomerController::class, 'historySales'])->name('customers.historyCustomer');
 
-    //Routes categories
-    Route::resource('categories', \App\Http\Controllers\Panel\CategoryController::class);
+    //Routes Group Goods
+    Route::resource('groupgoods', GroupGoodsController::class);
+
+    //Routes Product Types
+    Route::resource('product-type', ProductTypeController::class);
 
     //Routes products
-    Route::resource('products', \App\Http\Controllers\Panel\ProductController::class);
+    Route::resource('products', ProductController::class);
+
+    //Routes Warehouse
+    Route::resource('warehouses', WareHousesController::class);
+
+//Routes Suppliers
+    Route::resource('suppliers', SuppliersController::class);
+
+    //Routes Orders
+Route::resource('orders', OrdersController::class);
+
+
 });
