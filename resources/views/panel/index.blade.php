@@ -10,8 +10,11 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Earnings (Monthly)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                            Tong don hang</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ $totalOrders }}
+                            <span><small><a href="{{ route('orderDetails.index')}}">(Chi tiet)</a></small></span>
+                        </div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -28,8 +31,11 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Earnings (Annual)</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            Thanh vien</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ $totalUsers }}
+                            <span><small><a href="">(Chi tiet)</a></small></span>
+                        </div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -45,17 +51,13 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tong san pham
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">20</div>
                             </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="col-auto">
@@ -73,7 +75,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Pending Requests</div>
+                            Comment</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                     </div>
                     <div class="col-auto">
@@ -94,25 +96,16 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+                <h6 class="m-0 font-weight-bold text-primary">Thu nhap hang ngay</h6>
+
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                </div>
+                <figure class="highcharts-figure">
+                    <div id="container" data-list-day="{{json_encode($listday)}}"></div>
+
+                </figure>
+
             </div>
         </div>
     </div>
@@ -122,36 +115,22 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Trang thai don hang</h6>
                 <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+
                 </div>
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                </div>
-                <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                </div>
+                <figure class="highcharts-figure">
+                    <div id="container2"></div>
+
+                </figure>
+
             </div>
         </div>
     </div>
@@ -161,124 +140,115 @@
 <div class="row">
 
     <!-- Content Column -->
-    <div class="col-lg-6 mb-4">
+    <div class="col-lg-4 mb-4">
 
         <!-- Project Card Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                <h6 class="m-0 font-weight-bold text-primary">San pham ban chay</h6>
             </div>
-            <div class="card-body">
-                <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0">
+                <ul class="products-list product-list-in-card pl-2 pr-2">
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">Rau cai
+                                <span class="badge badge-warning float-right">1800</span></a>
+                            <span class="product-description">
+                                Rau cai
+                            </span>
+                        </div>
+                    </li>
+                    <!-- /.item -->
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">Dua leo
+                                <span class="badge badge-info float-right">7000</span></a>
+                            <span class="product-description">
+                                Dua leo
+                            </span>
+                        </div>
+                    </li>
+                    <!-- /.item -->
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">
+                                Cai Bap <span class="badge badge-danger float-right">
+                                    10000
+                                </span>
+                            </a>
+                            <span class="product-description">
+                                Cai bap
+                            </span>
+                        </div>
+                    </li>
+                    <!-- /.item -->
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
+                        </div>
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">Ca chua
+                                <span class="badge badge-success float-right">10000</span></a>
+                            <span class="product-description">
+                                Ca chua
+                            </span>
+                        </div>
+                    </li>
+                    <!-- /.item -->
+                </ul>
             </div>
+            <!-- /.card-body -->
+            <div class="card-footer text-center">
+                <small><a href="" class="uppercase">View All Products</a></small>
+            </div>
+            <!-- /.card-footer -->
         </div>
-
-        <!-- Color System -->
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-primary text-white shadow">
-                    <div class="card-body">
-                        Primary
-                        <div class="text-white-50 small">#4e73df</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-success text-white shadow">
-                    <div class="card-body">
-                        Success
-                        <div class="text-white-50 small">#1cc88a</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-info text-white shadow">
-                    <div class="card-body">
-                        Info
-                        <div class="text-white-50 small">#36b9cc</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-warning text-white shadow">
-                    <div class="card-body">
-                        Warning
-                        <div class="text-white-50 small">#f6c23e</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-danger text-white shadow">
-                    <div class="card-body">
-                        Danger
-                        <div class="text-white-50 small">#e74a3b</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-secondary text-white shadow">
-                    <div class="card-body">
-                        Secondary
-                        <div class="text-white-50 small">#858796</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-light text-black shadow">
-                    <div class="card-body">
-                        Light
-                        <div class="text-black-50 small">#f8f9fc</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="card bg-dark text-white shadow">
-                    <div class="card-body">
-                        Dark
-                        <div class="text-white-50 small">#5a5c69</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <div class="col-lg-6 mb-4">
+    <div class="col-lg-8 mb-4">
 
         <!-- Illustrations -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                <h6 class="m-0 font-weight-bold text-primary">San pham moi nhat</h6>
             </div>
-            <div class="card-body">
-                <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="...">
-                </div>
-                <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                    constantly updated collection of beautiful svg images that you can use
-                    completely free and without attribution!</p>
-                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                    unDraw &rarr;</a>
-            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($orders as $item)
+                    <tr>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->order_customer_name }}</td>
+                        <td>{{ $item->order_customer_address }}</td>
+                        <td>{{ $item->order_customer_phone }}</td>
+                        <td>
+                            <a href=""><button class="btn btn-primary">Edit</button></a>
+                            <a href=""><button class="btn btn-primary">Details</button></a>
+
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
 
         <!-- Approach -->
@@ -305,4 +275,37 @@
 <!-- Page level custom scripts -->
 <script src="js/demo/chart-area-demo.js"></script>
 <script src="js/demo/chart-pie-demo.js"></script>
+<!-- script Chart -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script src="{{ asset('js/line-chart.js')}}"></script>
+<script src="{{ asset('js/pie-chart.js')}}"></script>
+
+<!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- overlayScrollbars -->
+<script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('dist/js/adminlte.js') }}"></script>
+
+<!-- PAGE PLUGINS -->
+<!-- jQuery Mapael -->
+<script src="{{ asset('plugins/jquery-mousewheel/jquery.mousewheel.js') }}"></script>
+<script src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery-mapael/maps/usa_states.min.js') }}"></script>
+<!-- ChartJS -->
+<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('dist/js/demo.js') }}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
+
+
 @endsection

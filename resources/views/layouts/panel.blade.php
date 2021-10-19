@@ -18,6 +18,17 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <!-- CSS Chart -->
+    <link rel="stylesheet" href="{{ asset('css/line-chart.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/line-chart.css')}}">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/navbar.css') }}">
 
     <!-- Custom styles for this page -->
     @yield('styles')
@@ -29,7 +40,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul id="navbar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('panel.index')}}">
@@ -93,8 +104,9 @@
                     data-parent="#accordionSidebar">
                     <div class=" collapse-inner bg-primary rounded card">
                         <div class="dropright mb-2">
-                            <button class="btn btn-outline-danger dropdown-toggle w-100" type="button" id="droprightGroupGoods"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-outline-danger dropdown-toggle w-100" type="button"
+                                id="droprightGroupGoods" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
 
                                 <span class="collapse-header text-white">Nhóm hàng</span>
                             </button>
@@ -104,8 +116,9 @@
                             </div>
                         </div>
                         <div class="dropright mb-2">
-                            <button class="btn btn-outline-success dropdown-toggle  w-100" type="button" id="droprightGroupProducts"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-outline-success dropdown-toggle  w-100" type="button"
+                                id="droprightGroupProducts" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
 
                                 <span class="collapse-header text-white ">Nhóm sản phẩm</span>
                             </button>
@@ -115,10 +128,11 @@
                             </div>
                         </div>
                         <div class="dropright">
-                            <button class="btn btn-outline-warning dropdown-toggle  w-100" type="button" id="droprightProducts"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-outline-warning dropdown-toggle  w-100" type="button"
+                                id="droprightProducts" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
 
-                                <span class="collapse-header text-white ">  Sản phẩm</span>
+                                <span class="collapse-header text-white "> Sản phẩm</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="droprightProducts">
                                 <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>

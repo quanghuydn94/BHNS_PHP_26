@@ -13,7 +13,7 @@
         <a class="btn btn-outline-primary mb-3" href="{{ route('orders.create') }}">Thêm đơn hàng</a>
         @endif
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered ml-2" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>

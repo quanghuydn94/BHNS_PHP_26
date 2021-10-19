@@ -6,6 +6,7 @@ use App\Http\Controllers\Panel\CustomerController;
 use App\Http\Controllers\Panel\EmployeeController;
 use App\Http\Controllers\Panel\GroupGoodsController;
 use App\Http\Controllers\Panel\OrdersController;
+use App\Http\Controllers\Panel\OrderDetailController;
 use App\Http\Controllers\Panel\ProductController;
 use App\Http\Controllers\Panel\ProductTypeController;
 use App\Http\Controllers\Panel\UserController;
@@ -95,6 +96,9 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
 
     //Routes Orders
 Route::resource('orders', OrdersController::class);
+
+//Routes OrderDetails
+Route::resource('orderDetails', OrderDetailController::class);
 
 
 });
