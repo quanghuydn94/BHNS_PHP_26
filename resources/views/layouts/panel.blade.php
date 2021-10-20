@@ -15,7 +15,6 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
@@ -93,8 +92,9 @@
                     data-parent="#accordionSidebar">
                     <div class=" collapse-inner bg-primary rounded card">
                         <div class="dropright mb-2">
-                            <button class="btn btn-outline-danger dropdown-toggle w-100" type="button" id="droprightGroupGoods"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-outline-danger dropdown-toggle w-100" type="button"
+                                id="droprightGroupGoods" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
 
                                 <span class="collapse-header text-white">Nhóm hàng</span>
                             </button>
@@ -104,8 +104,9 @@
                             </div>
                         </div>
                         <div class="dropright mb-2">
-                            <button class="btn btn-outline-success dropdown-toggle  w-100" type="button" id="droprightGroupProducts"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-outline-success dropdown-toggle  w-100" type="button"
+                                id="droprightGroupProducts" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
 
                                 <span class="collapse-header text-white ">Nhóm sản phẩm</span>
                             </button>
@@ -115,10 +116,11 @@
                             </div>
                         </div>
                         <div class="dropright">
-                            <button class="btn btn-outline-warning dropdown-toggle  w-100" type="button" id="droprightProducts"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-outline-warning dropdown-toggle  w-100" type="button"
+                                id="droprightProducts" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
 
-                                <span class="collapse-header text-white ">  Sản phẩm</span>
+                                <span class="collapse-header text-white "> Sản phẩm</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="droprightProducts">
                                 <a class="collapse-item" href="{{ route('products.index') }}">Danh sách</a>
@@ -143,7 +145,7 @@
                         {{-- @if (auth()->user()->rolename == 'admin')
                         <a class="collapse-item" href="{{ route('products.create') }}">Thêm</a>
                         @endif --}}
-                        <a class="collapse-item" href="{{ route('orders.index') }}">Danh sách</a>
+                        <a class="collapse-item" href="{{ route('order.index') }}">Danh sách</a>
                     </div>
                 </div>
             </li>

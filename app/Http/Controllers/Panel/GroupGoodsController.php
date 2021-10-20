@@ -112,7 +112,7 @@ class GroupGoodsController extends Controller
             $file = $request->file('group_image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-            $file->move('img', $filename);
+            $file->move('img/groupgoods', $filename);
         } else {
             $filename = $groupgoods->group_image;
         }

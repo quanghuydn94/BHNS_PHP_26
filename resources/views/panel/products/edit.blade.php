@@ -15,7 +15,7 @@
     </p>
 </div>
 <div class="card-body">
-    <form method="POST" action="{{ route('products.update', ['product' => $data->id]) }}">
+    <form method="POST" action="{{ route('products.update', ['product' => $data->id]) }}" enctype="multipart/form-data">
         <div class="mb-3 row">
             <label for=" " class="col-sm-2 col-form-label">Name Product</label>
             <div class="col-sm-10">
@@ -40,7 +40,7 @@
         <div class="mb-3 row">
             <label for=" " class="col-sm-2 col-form-label">Image</label>
             <div class="col-sm-10">
-                <input name="product_image" type="file" class="form-control" value="{{ $data->product_image }}">
+                <input name="product_image" type="file" class="form-control"  >
             </div>
         </div>
         <div class="mb-3 row">

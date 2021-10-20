@@ -2,17 +2,19 @@
 
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Panel\AccountBlockedController;
+use App\Http\Controllers\Panel\AutocompleteCustomerInputController;
+use App\Http\Controllers\Panel\ConsignmentDeleteController;
 use App\Http\Controllers\Panel\CustomerController;
 use App\Http\Controllers\Panel\EmployeeController;
 use App\Http\Controllers\Panel\GroupGoodsController;
-use App\Http\Controllers\Panel\OrdersController;
+use App\Http\Controllers\Panel\OrderController;
 use App\Http\Controllers\Panel\ProductController;
 use App\Http\Controllers\Panel\ProductTypeController;
+use App\Http\Controllers\Panel\SinglePageController;
+use App\Http\Controllers\Panel\SuppliersController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\WareHousesController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Panel\SinglePageController;
-use App\Http\Controllers\Panel\SuppliersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,14 +71,14 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     //Routes show blocked accounts
     Route::resource('accounts-locked', AccountBlockedController::class);
 
-    // Route::get('unlock/{id}', [UserController::class , 'unlock'])->name('account.unlock ');
+    //Routes show consignment delete
+    Route::resource('consignment-delete', ConsignmentDeleteController::class);
 
     //Routes Employees
     Route::resource('employees', EmployeeController::class);
 
     //Routes customers
     Route::resource('customers', CustomerController::class);
-    Route::get('customer-history', [CustomerController::class, 'historySales'])->name('customers.historyCustomer');
 
     //Routes Group Goods
     Route::resource('groupgoods', GroupGoodsController::class);
@@ -94,7 +96,18 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     Route::resource('suppliers', SuppliersController::class);
 
     //Routes Orders
-Route::resource('orders', OrdersController::class);
+    // Route::resource('orders', OrdersController::class);
+    Route::get('/orders/index', [OrderController::class, 'index'])->name('order.index');
 
+    Route::get('/orders/create', [OrderController::class, 'create'])->name('order.create');
+
+    Route::post('/orders/getCustomer', [OrderController::class, 'getCustomer'])->name('getCustomers');
+
+    // Route::get('/orders/create/{id}', [OrderController::class, 'getProduct']);
+
+    Route::get('orders/create/add-cart/{id}', [OrderController::class , 'addToCart'])->name('addToCart');
+
+        Route::get('orders/create/update-cart', [OrderController::class , 'updateCart'])->name('updateCart');
+        Route::post('/orders/create', [OrderController::class , 'store'])->name('order.store');
 
 });

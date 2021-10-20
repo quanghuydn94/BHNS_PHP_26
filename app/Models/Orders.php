@@ -25,4 +25,9 @@ class Orders extends Model
     {
         return $this->hasOne(OrderDetails::class);
     }
+
+    public function getCustomer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 }

@@ -19,7 +19,7 @@ class AccountBlockedController extends Controller
         if (Auth::user()->rolename == 'admin') {
 
             $users = User::all();
-            return response()->view('panel.lockedAccount.lockedaccounts', ['users' => $users]);
+            return response()->view('panel.itemDelete.lockedAccount.lockedaccounts', ['users' => $users]);
         } else {
             Auth::logout();
             return redirect('/')->withErrors('These credential does not match our records.');
@@ -57,7 +57,7 @@ class AccountBlockedController extends Controller
     public function show($id)
     {
         $user = User::find((int) $id);
-        return response()->view('panel.lockedAccount.detail-AccountsLocked', ['user' => $user]);
+        return response()->view('panel.itemDelete.lockedAccount.detail-AccountsLocked', ['user' => $user]);
     }
 
     /**

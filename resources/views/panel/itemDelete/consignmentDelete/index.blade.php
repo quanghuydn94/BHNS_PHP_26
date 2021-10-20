@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Consignments</h6>
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Consignments Deleted</h6>
     </div>
     @if (session()->get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,12 +18,10 @@
     @endif
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{ route('warehouses.create') }}">New Consignment</a>
-        <a class="badge badge-danger mb-3 text-right" href="{{ route('consignment-delete.index') }}">Consignment
-            Deleted</a>
+        <a class="btn btn-primary mb-3 text-right" href="{{ route('warehouses.index') }}">Back</a>
         @endif
         <div class="table-responsive">
-            <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -53,8 +51,8 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($list as $item)
-                    @if ($item->active == 1)
+                    @foreach ($consignments as $item)
+                    @if ($item->active == 0)
 
                     <tr>
                         <td>{{ $item->id }}</td>
@@ -66,16 +64,14 @@
                         <td>{{ $item->consignment_sale_price }}</td>
                         @if (auth()->user()->rolename == 'admin')
                         <td>
-                            <a href="{{ route('warehouses.edit', $item->id) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
-                            <a href=" {{route('warehouses.show', $item->id)}}"><button
+                            <a href=" {{route('consignment-delete.show', $item->id)}}"><button
                                     class="btn btn-primary">Details</button></a>
 
-                            <form method="POST" action="{{ route('warehouses.destroy',  $item->id) }}"
+                            <form method="POST" action="{{ route('consignment-delete.destroy',  $item->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Active</button>
                             </form>
                         </td>
                         @endif

@@ -23,6 +23,7 @@
                     <span class="des">Description</span>
                 </div>
                 <p class="card-text">{{ $data->product_name }}</p>
+                <p class="card-text">{{ $data->product_symbol }}</p>
                 <p class="card-text">{{ $data->product_description }}</p>
                 <p class="card-text">Price: {{ $data->product_price }}VND</p>
                 <p class="card-text">{{ $productTypes }}</p>

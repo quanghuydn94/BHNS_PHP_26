@@ -10,11 +10,10 @@ class OrderDetails extends Model
     use HasFactory;
     protected $table = 'orderdetails';
     protected $fillable = [
-        'product_name',
-        'product_image',
-        'orderdetail_quantity',
-        'orderdetail_totalprice',
-        'order_id ',
+        'product_id',
+        'orders_id',
+        'order_detail_quantity',
+        'order_detail_price',
         'active',
     ];
     public $timestamps = false;

@@ -107,18 +107,25 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'product_name' => 'required|string',
-            'product_symbol' => 'required|string',
-            'product_price' => 'required|numeric',
-            'product_description' => 'required|string',
-            'product_type_id' => 'required',
-        ];
+        // $rules = [
+        //     'product_name' => 'required|string',
+        //     'product_symbol' => 'required|string',
+        //     'product_price' => 'required|numeric',
+        //     'product_description' => 'required|string',
+        //     'product_type_id' => 'required',
+        // ];
 
-        $request->validate($rules);
+        // $request->validate($rules);
 
-        $data = Products::findOrFail($id);
-        if (!$request->hasFile('product_image')) {
+        $data = Products::find($id);
+        if ($request->hasFile('product_image')) {
+            $file = $request->file('product_image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('img/products', $filename);
+
+        }
+        else {
             $filename = $data->product_image;
         }
         $data->update([

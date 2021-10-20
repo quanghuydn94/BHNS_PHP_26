@@ -46,26 +46,26 @@
                         <p class="m-b-10 f-w-600">Date</p>
                         <h6 class="text-muted f-w-400">{{$customer_order->created_at}}</h6>
                     </div>
-                    <div class="col-sm-6">
+                    {{-- <div class="col-sm-6">
                         <p class="m-b-10 f-w-600"> Name Product</p>
                         <h6 class="text-muted f-w-400">{{$orderDetail->product_name}}</h6>
-                    </div>
-                    <div class="col-sm-6">
+                    </div> --}}
+                    {{-- <div class="col-sm-6">
                         <p class="m-b-10 f-w-600"> Image</p>
-                        <img class="text-muted f-w-400" src="{{url('img/products',$orderDetail->product_image)}}" width="100px" alt="{{$orderDetail->product_image}}">
-                    </div>
-                    <div class="col-sm-6">
+                        <img class="text-muted f-w-400" src="{{url('img/products',$user->avatar)}}" width="100px" alt="{{$orderDetail->product_image}}">
+                    </div> --}}
+                    {{-- <div class="col-sm-6">
                         <p class="m-b-10 f-w-600"> Quantity</p>
                         <h6 class="text-muted f-w-400">{{$orderDetail->orderdetail_quantity}}</h6>
-                    </div>
+                    </div> --}}
                     <div class="col-sm-6">
                         <p class="m-b-10 f-w-600"> Status</p>
                         <h6 class="text-muted f-w-400">{{$customer_order->order_status}}</h6>
                     </div>
-                    <div class="col-sm-6">
+                    {{-- <div class="col-sm-6">
                         <p class="m-b-10 f-w-600"> Total price</p>
                         <h6 class="text-muted f-w-400">{{$orderDetail->orderdetail_totalprice}} vnđ</h6>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

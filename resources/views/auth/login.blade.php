@@ -22,66 +22,67 @@
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> --}}
 </head>
 
-<body >
+<body>
 
-    <div class="row vh-100 d-flex justify-content-center align-items-center">
-        <div class="col-xl-10 col-lg-12 col-md-9">
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                        <div class="col-lg-6">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                </div>
-                                @if (session()->get('status'))
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <span>{{session()->get('status')}}</span>
-                                    {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <div class="container-fluid">
+        <div class="row vh-100 d-flex justify-content-center align-items-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    </div>
+                                    @if (session()->get('status'))
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <span>{{session()->get('status')}}</span>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
-                                        </button> --}}
-                                </div>
-                                @endif
-                                @if ($errors->any())
-                                <div class="alert alert-warning">
-                                    @foreach ($errors->all() as $error)
-                                    {{ $error }}<br />
-                                    @endforeach
-                                </div>
-                                @endif
-                                <form class="user" method="POST">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control form-control-user"
-                                            id="exampleInputEmail" name="email" aria-describedby="emailHelp"
-                                            placeholder="Enter Email Address...">
+                                        </button>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" name="password" placeholder="Password">
+                                    @endif
+                                    @if ($errors->any())
+                                    <div class="alert alert-warning">
+                                        @foreach ($errors->all() as $error)
+                                        {{ $error }}<br />
+                                        @endforeach
                                     </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Remember
-                                                Me</label>
+                                    @endif
+                                    <form class="user" method="POST">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" name="email" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address...">
                                         </div>
-                                    </div>
-                                    @csrf
-                                    <button class="btn btn-primary btn-user btn-block">
-                                        Login
-                                    </button>
-                                    <hr>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                id="exampleInputPassword" name="password" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Remember
+                                                    Me</label>
+                                            </div>
+                                        </div>
+                                        @csrf
+                                        <button class="btn btn-primary btn-user btn-block">
+                                            Login
+                                        </button>
+                                        <hr>
 
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>

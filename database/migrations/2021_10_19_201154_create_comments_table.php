@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderdetailsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateOrderdetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('orderdetails', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->string('comment_username');
+            $table->string('comment_email');
+            $table->longText('comment_content');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->unsignedInteger('orders_id');
-            $table->foreign('orders_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->integer('order_detail_quantity');
-            $table->decimal('order_detail_price');
+
             $table->boolean('active');
+
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreateOrderdetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orderdetails');
+        Schema::dropIfExists('comments');
     }
 }

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
-use App\Models\Orders;
+use App\Models\WareHouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class OrdersController extends Controller
+class ConsignmentDeleteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,15 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $list = Orders::all();
-        return response()->view('panel.orders.index', compact('list'));
+        if (Auth::user()->rolename == 'admin') {
+
+            $consignments = WareHouse::all();
+            return response()->view('panel.itemDelete.consignmentDelete.index', ['consignments' => $consignments]);
+        } else {
+            Auth::logout();
+            return redirect('/')->withErrors('These credential does not match our records.');
+        }
+
     }
 
     /**
@@ -26,8 +34,7 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        return response()->view('panel.orders.create');
-
+        //
     }
 
     /**
@@ -49,7 +56,9 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-        //
+        $consignment = Warehouse::find((int) $id);
+        return response()->view('panel.itemDelete.lockedAccount.detail-AccountsLocked', ['consignment' => $consignment]);
+
     }
 
     /**
@@ -83,6 +92,12 @@ class OrdersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Auth::user()->rolename == 'admin') {
+            WareHouse::findOrFail($id)->update(['active' => 1]);
+            return redirect()->back();
+        } else {
+            Auth::logout();
+            return redirect('/')->withErrors('These credential does not match our records.');
+        }
     }
 }

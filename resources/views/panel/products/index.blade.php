@@ -8,6 +8,14 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">DataTables Product</h6>
     </div>
+    @if (session()->get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span>{{session()->get('success')}}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
         <a class="btn btn-outline-primary mb-3" href="{{ route('products.create') }}">New Product</a>

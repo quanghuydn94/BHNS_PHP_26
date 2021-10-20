@@ -8,9 +8,17 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">DataTables Information Accounts</h6>
     </div>
+    @if (session()->get('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span>{{session()->get('success')}}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{ route('orders.create') }}">Thêm đơn hàng</a>
+        <a class="btn btn-outline-primary mb-3" href="{{ route('order.create') }}">Thêm đơn hàng</a>
         @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -18,8 +26,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>Address</th>
+                        <th>Phone</th>
                         <th>Tools</th>
                     </tr>
                 </thead>
@@ -27,14 +35,14 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>Address</th>
+                        <th>Phone</th>
                         <th>Tools</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @foreach ($list as $item)
-                    @if ($item->active == 1)
+                    @if ($item->active == 1 && $item->order_customer_phone !== null)
 
                     <tr>
                         <td>{{ $item->id }}</td>
