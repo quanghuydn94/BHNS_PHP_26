@@ -40,7 +40,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul id="navbar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav Nav-ul bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('panel.index')}}">
