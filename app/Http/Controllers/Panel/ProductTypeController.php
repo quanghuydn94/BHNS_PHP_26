@@ -69,12 +69,11 @@ class ProductTypeController extends Controller
      */
     public function show($id)
     {
-        $product_type_detail = ProductType::find((int)$id)->first();
-        $group_goods_id = $product_type_detail->group_goods_id;
-        $group_good = GroupGoods::find((int)$group_goods_id);
+        $productType = ProductType::find($id);
+        $groupGood = ProductType::find((int)$id)->getGroupGoodsOwner;
         return response()->view('panel.ProductType.showdetail', [
-            'product_type_detail'=>$product_type_detail,
-            'group_good'=>$group_good
+            'productType'=>$productType,
+            'groupGood'=>$groupGood
         ]);
     }
 

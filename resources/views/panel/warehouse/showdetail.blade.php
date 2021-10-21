@@ -6,11 +6,12 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4  bg-primary">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Details Consignment </h6>
+        <a href="{{route('warehouses.index')}}" class="border border-primary rounded text-decoration-none">
+            DataTables Consignments</a>
+        <span class="m-0 font-weight-bold text-primary"><i class="fas fa-chevron-right"></i>Details Consignment </span>
     </div>
 
     <div class="text-right mr-2">
-        <a href="{{route('warehouses.index')}}" class="badge badge-warning">Back</a>
     </div>
 
     <div class='container-fluid'>
@@ -50,8 +51,8 @@
                                 <td>{{$data->consignment_saled}}</td>
                                 <td>{{$data->consignment_return}}</td>
                                 <td>{{$data->consignment_currently}}</td>
-                                <td>{{$data->product_id }}</td>
-                                <td>{{$data->supplier_id }}</td>
+                                <td>{{$product->product_name }}</td>
+                                <td>{{$supplier->supplier_name }}</td>
                                 <td>{{$data->created_at}}</td>
                             </tr>
                         </tbody>

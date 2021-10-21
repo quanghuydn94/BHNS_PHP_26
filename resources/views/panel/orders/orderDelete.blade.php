@@ -6,7 +6,12 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Orders</h6>
+        <p class="m-0 font-weight-bold text-primary">
+            <a href="{{route('order.index')}}" class="border border-primary rounded text-decoration-none">
+                DataTables Orders</a>
+            <span> <i class="fas fa-chevron-right"></i> Information Orders Deleted</span>
+        </p>
+
     </div>
     @if (session()->get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -17,10 +22,6 @@
     </div>
     @endif
     <div class="card-body">
-        <a class="btn btn-outline-primary mb-3" href="{{ route('order.create') }}">Thêm đơn hàng</a>
-        @if (auth()->user()->rolename == 'admin')
-        <a href="{{route('order.tableDelete')}}" class="badge badge-danger mb-3">Table Orders Deleted</a>
-        @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -43,29 +44,21 @@
                 </tfoot>
                 <tbody>
                     @foreach ($list as $item)
-                    @if ($item->active == 1 && $item->order_customer_phone !== null)
+                    @if ($item->active == 0 && $item->order_customer_phone !== null)
 
                     <tr>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->order_customer_name }}</td>
                         <td>{{ $item->order_customer_address }}</td>
                         <td>{{ $item->order_customer_phone }}</td>
-
                         <td>
-                            <a href="{{ route('order.edit', ['id' => $item->id]) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
-                            <a href="{{route('order.show',['id'=>$item->id])}} "><button
-                                    class="btn btn-primary">Details</button></a>
-                            @if (auth()->user()->rolename == 'admin')
-
-                            <form method="POST" action="{{ route('order.delete', ['id' => $item->id]) }}"
+                            <form method="POST" action="{{ route('order.getBack', ['id' => $item->id]) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('post')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Active</button>
                             </form>
 
-                            @endif
                         </td>
                     </tr>
                     @endif

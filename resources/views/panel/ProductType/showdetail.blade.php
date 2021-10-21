@@ -18,15 +18,15 @@
         <div class="card mx-auto col-md-3 col-12 mt-5 pt-4">
             <div class="d-flex sale ">
 
-            </div> <img class='mx-auto img-thumbnail' src="{{url('img/groupgoods', $group_good->group_image) }}"
+            </div> <img class='mx-auto img-thumbnail' src="{{url('img/groupgoods', $groupGood->group_image) }}"
                 width="auto" height="auto" />
             <div class="card-body text-center mx-auto">
                 <div class="card-title">
                     <span class="des">Description</span>
                 </div>
-                <p class="card-text">{{ $product_type_detail->product_type_name }}</p>
-                <p class="card-text">{{ $product_type_detail->product_type_description }}</p>
-                <p class="card-text">{{ $group_good->group_name }}</p>
+                <p class="card-text">{{ $productType->product_type_name}}</p>
+                <p class="card-text">{{ $productType->product_type_description }}</p>
+                <p class="card-text">{{ $groupGood->group_name }}</p>
             </div>
         </div>
     </div>

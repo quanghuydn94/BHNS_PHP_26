@@ -21,78 +21,85 @@
 </div>
 @endif
 <div class="container">
+    <div class="card-header py-3">
+        <p class="m-0 font-weight-bold text-primary">
+            <a href="{{route('order.index')}}" class="border border-primary rounded text-decoration-none">
+                Orders DataTable</a>
+            <span> <i class="fas fa-chevron-right"></i>Add Information Orders</span>
+        </p>
+    </div>
     <div class="card-body ">
         <form method="POST" action="{{ route('order.store') }}">
 
             <!--Form Orders  -->
 
             <table class="  table table-bordered text-monospace update_cart_url" data-url="{{route('updateCart')}}">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Product Price(VNĐ)</th>
-                            <th>Product Quantity(Kg)</th>
-                            <th>SubTotal</th>
-                            <th>Action</th>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Price(VNĐ)</th>
+                        <th>Product Quantity(Kg)</th>
+                        <th>SubTotal</th>
+                        <th>Action</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $total = 0;
-                        @endphp
-                        @if (session()->get(key: 'cart') !== null)
-                        @foreach ($carts = session()->get(key:'cart') as $id => $cart )
-                        @php
-                        $total += $cart['price'] * $cart['quantity'];
-                        @endphp
-                        <tr>
-                            {{-- <td>{{$id}}</td> --}}
-                            <td>{{$cart['name']}}</td>
-                            <td>{{number_format($cart['price'])}}</td>
-                            <td>
-                                <input type="number" min="1" name="product_quantity" class="w-25 quatity"
-                                    value="{{$cart['quantity']}}">
-                            </td>
-                            <td> {{number_format($cart['price']*$cart['quantity'])}}</td>
-                            <td><a href=" " data-id="{{$id}}" class="btn-sm btn-primary cart_update">Update</a></td>
-                        </tr>
-                        @endforeach
-                        @endif
-                    </tbody>
-                </table>
-                <div class="card-footer">
-                    <h2 name="total_price">Total: {{number_format($total)}} VNĐ</h2>
-                    <div class="mb-3 row ">
-                        <label class="col-sm-1 col-form-label">Name</label>
-                        <div class="col-sm-4">
-                            <input name="customer_name" id='customer_name' type="text" class="form-control"
-                                placeholder="Nguyen Van A">
-                        </div>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                    $total = 0;
+                    @endphp
+                    @if (session()->get(key: 'cart') !== null)
+                    @foreach ($carts = session()->get(key:'cart') as $id => $cart )
+                    @php
+                    $total += $cart['price'] * $cart['quantity'];
+                    @endphp
+                    <tr>
+                        {{-- <td>{{$id}}</td> --}}
+                        <td>{{$cart['name']}}</td>
+                        <td>{{number_format($cart['price'])}}</td>
+                        <td>
+                            <input type="number" min="1" name="product_quantity" class="w-25 quatity"
+                                value="{{$cart['quantity']}}">
+                        </td>
+                        <td> {{number_format($cart['price']*$cart['quantity'])}}</td>
+                        <td><a href=" " data-id="{{$id}}" class="btn-sm btn-primary cart_update">Update</a></td>
+                    </tr>
+                    @endforeach
+                    @endif
+                </tbody>
+            </table>
+            <div class="card-footer">
+                <h2 name="total_price">Total: {{number_format($total)}} VNĐ</h2>
+                <div class="mb-3 row ">
+                    <label class="col-sm-1 col-form-label">Name</label>
+                    <div class="col-sm-4">
+                        <input name="customer_name" id='customer_name' type="text" class="form-control"
+                            placeholder="Nguyen Van A">
+                    </div>
 
-                        <label class="col-sm-1 col-form-label">Phone</label>
-                        <div class="col-sm-4">
-                            <input name="customer_phone" id='customer_phone' type="text" class="form-control"
-                                placeholder="+84123456789" autocomplete="text">
-                        </div>
+                    <label class="col-sm-1 col-form-label">Phone</label>
+                    <div class="col-sm-4">
+                        <input name="customer_phone" id='customer_phone' type="text" class="form-control"
+                            placeholder="+84123456789" autocomplete="text">
                     </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-1 col-form-label">Address</label>
-                        <div class="col-sm-4">
-                            <input name="customer_address" type="text" class="form-control" placeholder="">
-                        </div>
-                        <label class="col-sm-1 col-form-label">Email</label>
-                        <div class="col-sm-4">
-                            <input name="customer_email" id='customer_email' type="text" class="form-control"
-                                placeholder="email@example.com">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Checkout</button>
                 </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-1 col-form-label">Address</label>
+                    <div class="col-sm-4">
+                        <input name="customer_address" type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="col-sm-1 col-form-label">Email</label>
+                    <div class="col-sm-4">
+                        <input name="customer_email" id='customer_email' type="text" class="form-control"
+                            placeholder="email@example.com">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Checkout</button>
+            </div>
 
-    @csrf
-    </form>
-</div>
+            @csrf
+        </form>
+    </div>
 </div>
 
 
@@ -138,6 +145,7 @@
         });
 
     });
+
     function cartUpdate(event) {
         event.preventDefault();
         let urlUpdateCart = $('.update_cart_url').data('url');

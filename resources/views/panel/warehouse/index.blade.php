@@ -19,7 +19,7 @@
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
         <a class="btn btn-outline-primary mb-3" href="{{ route('warehouses.create') }}">New Consignment</a>
-        <a class="badge badge-danger mb-3 text-right" href="{{ route('consignment-delete.index') }}">Consignment
+        <a class="badge badge-danger mb-3" href="{{ route('consignment-delete.index') }}">Consignment
             Deleted</a>
         @endif
         <div class="table-responsive">
@@ -33,9 +33,7 @@
                         <th>Quantity</th>
                         <th>Purchase Price</th>
                         <th>Sale Price</th>
-                        @if (auth()->user()->rolename == 'admin')
                         <th>Tools</th>
-                        @endif
                     </tr>
                 </thead>
                 <tfoot>
@@ -47,9 +45,7 @@
                         <th>Quantity</th>
                         <th>Purchase Price</th>
                         <th>Sale Price</th>
-                        @if (auth()->user()->rolename == 'admin')
                         <th>Tools</th>
-                        @endif
                     </tr>
                 </tfoot>
                 <tbody>
@@ -64,12 +60,12 @@
                         <td>{{ $item->consignment_quantity }}</td>
                         <td>{{ $item->consignment_purchase_price }}</td>
                         <td>{{ $item->consignment_sale_price }}</td>
-                        @if (auth()->user()->rolename == 'admin')
                         <td>
-                            <a href="{{ route('warehouses.edit', $item->id) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
                             <a href=" {{route('warehouses.show', $item->id)}}"><button
                                     class="btn btn-primary">Details</button></a>
+                            @if (auth()->user()->rolename == 'admin')
+                            <a href="{{ route('warehouses.edit', $item->id) }}"><button
+                                    class="btn btn-primary">Edit</button></a>
 
                             <form method="POST" action="{{ route('warehouses.destroy',  $item->id) }}"
                                 class="d-inline-block">
@@ -77,8 +73,8 @@
                                 @method('delete')
                                 <button class="btn btn-primary">Delete</button>
                             </form>
+                            @endif
                         </td>
-                        @endif
                     </tr>
                     @endif
                     @endforeach

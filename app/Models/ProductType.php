@@ -21,7 +21,7 @@ class ProductType extends Model
 
     public function getGroupGoodsOwner()
     {
-        return $this->belongsTo(GroupGoods::class);
+        return $this->belongsTo(GroupGoods::class, 'group_goods_id');
     }
     public function getProducts(){
         return $this->hasMany(Products::class);

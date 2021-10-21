@@ -36,6 +36,6 @@ class WareHouse extends Model
 
     public function getSupplier()
     {
-        return $this->belongsTo(Suppliers::class , 'supplier_id');
+        return $this->belongsTo(Suppliers::class, 'supplier_id');
     }
 }

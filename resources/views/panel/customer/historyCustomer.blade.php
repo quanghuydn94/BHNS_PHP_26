@@ -20,11 +20,11 @@
                 <div class="row mb-3">
                     <div class="col-sm-6">
                         <h6 class="text-muted f-w-400">Name Customer</h6>
-                        <p class="m-b-10 f-w-600">{{$customer->name}}</p>
+                        <p class="m-b-10 f-w-600">{{$customer->customer_name}}</p>
                     </div>
                     <div class="col-sm-6">
                         <p class="m-b-10 f-w-600">Phone</p>
-                        <h6 class="text-muted f-w-400">{{$customer->phone}}</h6>
+                        <h6 class="text-muted f-w-400">{{$customer->customer_phone}}</h6>
                     </div>
                 </div>
 
@@ -73,8 +73,8 @@
                                 <div class="card-block text-center text-white">
                                     <div class="m-b-25"> <img src="{{url('img/users/client.jpg')}}" width="100px"
                                             class="img-radius" alt="User-Profile-Image"> </div>
-                                    <h6 class="f-w-600">{{$customer->name}}</h6>
-                                    <p>{{$customer->rolename}}</p> <i
+                                    <h6 class="f-w-600">{{$customer->customer_name}}</h6>
+                                    <p>Client</p> <i
                                         class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                 </div>
                             </div>
@@ -84,15 +84,15 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Email</p>
-                                            <h6 class="text-muted f-w-400">{{$customer->email}}</h6>
+                                            <h6 class="text-muted f-w-400">{{$customer->customer_email}}</h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Phone</p>
-                                            <h6 class="text-muted f-w-400">{{$customer->phone}}</h6>
+                                            <h6 class="text-muted f-w-400">{{$customer->customer_phone}}</h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Address</p>
-                                            <h6 class="text-muted f-w-400">{{$customer->address}}</h6>
+                                            <h6 class="text-muted f-w-400">{{$customer->customer_address}}</h6>
                                         </div>
 
                                     </div>
@@ -100,11 +100,11 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Email</p>
-                                            <h6 class="text-muted f-w-400">{{$customer->email}}</h6>
+                                            <h6 class="text-muted f-w-400">{{$customer->customer_email}}</h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Role Name</p>
-                                            <h6 class="text-muted f-w-400">{{$customer->rolename}}</h6>
+                                            <h6 class="text-muted f-w-400">Client</h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Date Join</p>

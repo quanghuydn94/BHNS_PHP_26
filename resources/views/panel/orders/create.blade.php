@@ -20,6 +20,14 @@
     @endforeach
 </div>
 @endif
+
+<div class="card-header py-3">
+    <p class="m-0 font-weight-bold text-primary">
+        <a href="{{route('order.index')}}" class="border border-primary rounded text-decoration-none">
+            Orders DataTable</a>
+        <span> <i class="fas fa-chevron-right"></i>Add Information Orders</span>
+    </p>
+</div>
 <div class="container">
     <div class="card-body ">
         <form method="POST" action="{{ route('order.store') }}">

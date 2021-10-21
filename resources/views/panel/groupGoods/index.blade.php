@@ -11,7 +11,7 @@
 
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-            <a class="btn btn-outline-primary mb-3" href="{{ route('groupgoods.create') }}">New GroupGoods</a>
+        <a class="btn btn-outline-primary mb-3" href="{{ route('groupgoods.create') }}">New GroupGoods</a>
         @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -43,13 +43,19 @@
                         <td><img width="50px" src="{{ url('img/groupgoods',$item->group_image) }}"></td>
                         <td>{{ $item->group_description }}</td>
                         <td>
-                            <a href="{{ route('groupgoods.edit', ['groupgood' => $item->id]) }}"><button class="btn btn-primary">Edit</button></a>
-                            <a href="{{ route('groupgoods.show', ['groupgood' => $item->id]) }}"><button class="btn btn-primary">Detail</button></a>
-                            <form method="POST" action="{{ route('groupgoods.destroy', ['groupgood' => $item->id]) }}" class="d-inline-block">
+                            <a href="{{ route('groupgoods.edit', ['groupgood' => $item->id]) }}"><button
+                                    class="btn btn-primary">Edit</button></a>
+                            <a href="{{ route('groupgoods.show', ['groupgood' => $item->id]) }}"><button
+                                    class="btn btn-primary">Detail</button></a>
+                            @if (auth()->user()->rolename == 'admin')
+
+                            <form method="POST" action="{{ route('groupgoods.destroy', ['groupgood' => $item->id]) }}"
+                                class="d-inline-block">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-primary">Delete</button>
                             </form>
+                            @endif
                         </td>
                     </tr>
                     @endif

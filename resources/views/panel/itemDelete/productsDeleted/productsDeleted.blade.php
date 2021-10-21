@@ -3,29 +3,25 @@
 <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 @section('content')
+
 <!-- DataTales Example -->
+
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    <div class="card-header shadow mb-4">
+        <p class="m-0 font-weight-bold text-primary">
+            <a href="{{route('products.index')}}" class="border border-primary rounded text-decoration-none">
+                Products DataTable </a>
+        </p>
     </div>
-    @if (session()->get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <span>{{session()->get('success')}}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
     <div class="card-body">
-        @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{ route('product-type.create') }}">New Product Types</a>
-        @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Image</th>
+                        <th>Price</th>
                         <th>Description</th>
                         <th>Tools</th>
                     </tr>
@@ -34,38 +30,41 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th width="30%">Description</th>
                         <th>Tools</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach ($list as $item)
-                    <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->product_type_name }}</td>
-                        <td>{{ $item->product_type_description }}</td>
-                        <td>
-                            <a href="{{ route('product-type.edit', $item->id) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
-                            <a href=" {{route('product-type.show', $item->id)}}"><button
-                                    class="btn btn-primary">Details</button></a>
-                            @if (auth()->user()->rolename == 'admin')
+                    @foreach ($products as $pro)
+                    @if ($pro->active == 0)
 
-                            <form method="POST" action="{{ route('product-type.destroy',  $item->id) }}"
+                    <tr>
+                        <td>{{ $pro->id }}</td>
+                        <td>{{ $pro->product_name }}</td>
+                        <td><img src="{{url('img/products',$pro->product_image )}}" width="50px" alt=""></td>
+                        <td>{{ number_format($pro->product_price) }}</td>
+                        <td width="30%">{{ $pro->product_description }}</td>
+                        <td>
+
+                            <a href="{{route('product.detailDeleted', $pro->id)}} "><button
+                                    class="btn btn-primary">Details</button></a>
+                            <form method="POST" action="{{ route('product.restoreProduct', $pro->id) }}"
                                 class="d-inline-block">
                                 @csrf
-                                @method('delete')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Active</button>
                             </form>
-                            @endif
                         </td>
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
 @endsection
 @section('scripts')
 <!-- Page level plugins -->

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Products;
-use App\Models\ProductType;
 use App\Models\Suppliers;
 use App\Models\WareHouse;
 use Illuminate\Http\Request;
@@ -89,10 +88,10 @@ class WareHousesController extends Controller
      */
     public function show($id)
     {
-        $products = Products::all();
-        $suppliers = Suppliers::all();
+        $product = WareHouse::find($id)->getProduct;
+        $supplier = WareHouse::find($id)->getSupplier;
         $data = WareHouse::findOrFail($id);
-        return response()->view('panel.warehouse.showdetail', compact('products', 'suppliers', 'data'));
+        return response()->view('panel.warehouse.showdetail', compact('data', 'product', 'supplier'));
     }
 
     /**
@@ -163,7 +162,7 @@ class WareHousesController extends Controller
     public function destroy($id)
     {
         $data = WareHouse::findOrFail($id);
-        $data->update(['active'=>0]);
+        $data->update(['active' => 0]);
         return redirect()->back();
 
     }

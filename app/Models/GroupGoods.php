@@ -20,6 +20,6 @@ class GroupGoods extends Model
 
     public function getProductType()
     {
-        return $this->hasOne(ProductType::class);
+        return $this->hasMany(ProductType::class);
     }
 }

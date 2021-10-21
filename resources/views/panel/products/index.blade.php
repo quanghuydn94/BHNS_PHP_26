@@ -19,6 +19,7 @@
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
         <a class="btn btn-outline-primary mb-3" href="{{ route('products.create') }}">New Product</a>
+        <a href="{{route('product.listDeleted')}}" class="badge badge-danger">Products Deleted</a>
         @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

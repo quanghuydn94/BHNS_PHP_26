@@ -87,7 +87,7 @@ class CustomerController extends Controller
     public function show($id)
     {
 
-        $customer = Customer::find((int) $id)->getUserCustomer; // display details information of customer
+        $customer = Customer::find((int)$id); // display details information of customer
 
         $dataOrders = OrderDetails::join('orders', 'orders.id','=','orderdetails.orders_id')
             ->join('products', 'products.id', '=', 'orderdetails.product_id')

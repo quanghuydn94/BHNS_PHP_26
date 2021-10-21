@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+
 class OrderController extends Controller
 {
     public function index()
@@ -121,25 +122,24 @@ class OrderController extends Controller
         $customers = Customer::all();
         $customer = $customers->where('customer_phone', $request->customer_phone)->first();
 
-        // dd($customer);
         if ($customer == null) {
 
-            $userCustomer = User::create([
-                'name' => $request->customer_name,
-                'phone' => $request->customer_phone,
-                'address' => $request->customer_address,
-                'email' => $request->customer_email,
-                'rolename' => 'client',
-                'active' => 1,
-            ]);
-            $userId = $userCustomer->id;
+            // $userCustomer = User::create([
+            //     'name' => $request->customer_name,
+            //     'phone' => $request->customer_phone,
+            //     'address' => $request->customer_address,
+            //     'email' => $request->customer_email,
+            //     'rolename' => 'client',
+            //     'active' => 1,
+            // ]);
+            // $userId = $userCustomer->id;
             // dd($userId);
             $customer = Customer::create([
                 'customer_name' => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
                 'customer_email' => $request->customer_email,
                 'customer_address' => $request->customer_address,
-                'user_id'=>$userId,
+                // 'user_id'=>$userId,
                 'active' => 1,
             ]);
 
@@ -224,5 +224,17 @@ class OrderController extends Controller
     {
         Orders::where('id', (int) $id)->update(['active' => 0]);
         return redirect()->route('order.index');
+    }
+
+     public function tableOrderDelete()
+    {
+        $list = Orders::all();
+        return response()->view('panel.orders.orderDelete', compact('list'));
+    }
+
+    public function getBack($id)
+    {
+        Orders::where('id', (int) $id)->update(['active' => 1]);
+        return redirect()->route('order.tableDelete');
     }
 }

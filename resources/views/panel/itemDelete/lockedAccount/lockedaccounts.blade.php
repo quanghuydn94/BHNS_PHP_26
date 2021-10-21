@@ -3,12 +3,17 @@
 <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 @section('content')
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Accounts Locked</h6>
-    </div>
 
+<!-- DataTales Example -->
+
+<div class="card shadow mb-4">
+    <div class="card-header shadow mb-4">
+        <p class="m-0 font-weight-bold text-primary">
+            <a href="{{route('users.index')}}" class="border border-primary rounded text-decoration-none">
+                DataTables Account</a>
+            <span> <i class="fas fa-chevron-right"></i>Accounts Locked</span>
+        </p>
+    </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -58,6 +63,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 @section('scripts')
 <!-- Page level plugins -->

@@ -8,6 +8,7 @@ use App\Http\Controllers\Panel\EmployeeController;
 use App\Http\Controllers\Panel\GroupGoodsController;
 use App\Http\Controllers\Panel\OrderController;
 use App\Http\Controllers\Panel\ProductController;
+use App\Http\Controllers\Panel\ProductsDeletedController;
 use App\Http\Controllers\Panel\ProductTypeController;
 use App\Http\Controllers\Panel\SinglePageController;
 use App\Http\Controllers\Panel\SuppliersController;
@@ -88,6 +89,14 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     //Routes products
     Route::resource('products', ProductController::class);
 
+    Route::get('/product/product-deleted', [ProductsDeletedController::class , 'index'])->name('product.listDeleted');
+
+    Route::get('/product/product-deleted-detail/{id}', [ProductsDeletedController::class, 'show'])->name('product.detailDeleted');
+
+    Route::post('/product/product-deleted-restore/{id}', [ProductsDeletedController::class, 'restore'])->name('product.restoreProduct');
+
+
+
     //Routes Warehouse
     Route::resource('warehouses', WareHousesController::class);
 
@@ -110,8 +119,15 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     Route::post('/orders/create', [OrderController::class, 'store'])->name('order.store');
 
     Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
+
     Route::post('/orders/edit/{id}', [OrderController::class, 'update'])->name('order.update');
+
     Route::get('/orders/show/{id}', [OrderController::class, 'show'])->name('order.show');
+
     Route::post('/orders/delete/{id}', [OrderController::class, 'destroy'])->name('order.delete');
+
+    Route::get('/orders/table-delete', [OrderController::class, 'tableOrderDelete'])->name('order.tableDelete');
+
+    Route::post('orders/table-delete/{id}', [OrderController::class, 'getBack'])->name('order.getBack');
 
 });

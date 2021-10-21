@@ -5,7 +5,7 @@
 @section('content')
 <div class="card-header py-3">
     <p class="m-0 font-weight-bold text-primary">
-        <a href="{{route('warehouses.index')}}" class="border border-primary rounded  ">
+        <a href="{{route('order.index')}}" class="border border-primary rounded  ">
             Back</a>
         <span> <i class="fas fa-chevron-right"></i>Update Information Consignment</span>
     </p>
