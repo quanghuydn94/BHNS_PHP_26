@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Orders;
+
 
 class OrderDetails extends Model
 {
@@ -17,4 +19,14 @@ class OrderDetails extends Model
         'active',
     ];
     public $timestamps = false;
+
+    public function getOrders()
+    {
+        return $this->belongsTo(Orders::class , 'orders_id');
+    }
+
+    public function getProduct()
+    {
+        return $this->belongsTo(Products::class , 'product_id');
+    }
 }

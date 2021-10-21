@@ -50,16 +50,12 @@
                         <td>{{ $item->order_customer_address }}</td>
                         <td>{{ $item->order_customer_phone }}</td>
                         <td>
-                            <a href="{{ route('users.edit', ['user' => $item->id]) }}"><button
+                            <a href="{{ route('order.edit', ['id' => $item->id]) }}"><button
                                     class="btn btn-primary">Edit</button></a>
-                            <a href="{{route('users.show',['user'=>$item->id])}} "><button
+                            <a href="{{route('order.show',['id'=>$item->id])}} "><button
                                     class="btn btn-primary">Details</button></a>
-                            <form method="POST" action="{{ route('users.destroy', ['user' => $item->id]) }}"
-                                class="d-inline-block">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-primary">Delete</button>
-                            </form>
+                            <a method="POST" action="{{ route('order.delete', ['id' => $item->id]) }}"
+                                class="btn btn-danger"> Delete </a>
                         </td>
                     </tr>
                     @endif

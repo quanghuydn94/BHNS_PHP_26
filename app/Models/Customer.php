@@ -17,7 +17,7 @@ class Customer extends Model
         return $this->hasOne(User::class);
     }
     public function getOrder(){
-        return $this->hasOne(Orders::class);
+        return $this->hasMany(Orders::class);
     }
 }
 

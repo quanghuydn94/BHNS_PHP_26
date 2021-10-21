@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Panel\AccountBlockedController;
-use App\Http\Controllers\Panel\AutocompleteCustomerInputController;
 use App\Http\Controllers\Panel\ConsignmentDeleteController;
 use App\Http\Controllers\Panel\CustomerController;
 use App\Http\Controllers\Panel\EmployeeController;
@@ -92,22 +91,27 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     //Routes Warehouse
     Route::resource('warehouses', WareHousesController::class);
 
-//Routes Suppliers
+    //Routes Suppliers
     Route::resource('suppliers', SuppliersController::class);
 
     //Routes Orders
-    // Route::resource('orders', OrdersController::class);
     Route::get('/orders/index', [OrderController::class, 'index'])->name('order.index');
 
     Route::get('/orders/create', [OrderController::class, 'create'])->name('order.create');
 
     Route::post('/orders/getCustomer', [OrderController::class, 'getCustomer'])->name('getCustomers');
 
-    // Route::get('/orders/create/{id}', [OrderController::class, 'getProduct']);
+    Route::get('orders/create/add-cart/{id}', [OrderController::class, 'addToCart'])->name('addToCart');
 
-    Route::get('orders/create/add-cart/{id}', [OrderController::class , 'addToCart'])->name('addToCart');
+    Route::get('orders/create/show-cart', [OrderController::class, 'showCart'])->name('showCart');
 
-        Route::get('orders/create/update-cart', [OrderController::class , 'updateCart'])->name('updateCart');
-        Route::post('/orders/create', [OrderController::class , 'store'])->name('order.store');
+    Route::get('orders/create/update-cart', [OrderController::class, 'updateCart'])->name('updateCart');
+
+    Route::post('/orders/create', [OrderController::class, 'store'])->name('order.store');
+
+    Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
+    Route::post('/orders/edit/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::get('/orders/show/{id}', [OrderController::class, 'show'])->name('order.show');
+    Route::get('/orders/delete/{id}', [OrderController::class, 'destroy'])->name('order.delete');
 
 });
