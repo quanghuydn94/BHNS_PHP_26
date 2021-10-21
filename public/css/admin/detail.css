@@ -17,7 +17,9 @@ body {
     border: none;
     margin-bottom: 30px
 }
-
+.f-s-13{
+    font-size: 13px;
+}
 .m-r-0 {
     margin-right: 0px
 }
@@ -29,7 +31,9 @@ body {
 .user-card-full .user-profile {
     border-radius: 5px 0 0 5px
 }
-
+.tbl-bg-color {
+    background:   #eca886;
+}
 .bg-c-lite-green {
     background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
     background: linear-gradient(to right, #ee5a6f, #f29263)

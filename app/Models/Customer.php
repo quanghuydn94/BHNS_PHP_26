@@ -13,11 +13,12 @@ class Customer extends Model
     protected $table = 'customers';
     protected $fillable = ['customer_name', 'customer_phone','customer_email','customer_address','user_id', 'active'];
 
+    public $timestamps = true;
     public function getUserCustomer(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function getOrder(){
-        return $this->hasMany(Orders::class);
+        return $this->hasMany(Orders::class, 'customer_id');
     }
 }
 

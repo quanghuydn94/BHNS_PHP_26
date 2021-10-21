@@ -27,6 +27,8 @@ class WareHouse extends Model
         'active',
     ];
 
+    public $timestamps = true;
+
     public function getProduct()
     {
         return $this->belongsTo(Products::class , 'product_id');

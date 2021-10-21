@@ -18,7 +18,7 @@ class OrderDetails extends Model
         'order_detail_price',
         'active',
     ];
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function getOrders()
     {

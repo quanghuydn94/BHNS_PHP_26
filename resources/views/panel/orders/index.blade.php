@@ -24,7 +24,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Date</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Phone</th>
@@ -33,7 +33,7 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
+                        <th>Date</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Phone</th>
@@ -45,7 +45,7 @@
                     @if ($item->active == 1 && $item->order_customer_phone !== null)
 
                     <tr>
-                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td>{{ $item->order_customer_name }}</td>
                         <td>{{ $item->order_customer_address }}</td>
                         <td>{{ $item->order_customer_phone }}</td>
@@ -54,8 +54,14 @@
                                     class="btn btn-primary">Edit</button></a>
                             <a href="{{route('order.show',['id'=>$item->id])}} "><button
                                     class="btn btn-primary">Details</button></a>
-                            <a method="POST" action="{{ route('order.delete', ['id' => $item->id]) }}"
-                                class="btn btn-danger"> Delete </a>
+
+                            <form method="POST" action="{{ route('order.delete', ['id' => $item->id]) }}"
+                                class="d-inline-block">
+                                @csrf
+                                @method('post')
+                                <button class="btn btn-primary">Delete</button>
+                            </form>
+
                         </td>
                     </tr>
                     @endif

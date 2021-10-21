@@ -19,11 +19,11 @@ class Orders extends Model
         'active',
         'order_status',
         'oder_note',];
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function getOrderDetail()
     {
-        return $this->hasMany(OrderDetails::class);
+        return $this->hasMany(OrderDetails::class, 'orders_id');
     }
 
     public function getCustomer()

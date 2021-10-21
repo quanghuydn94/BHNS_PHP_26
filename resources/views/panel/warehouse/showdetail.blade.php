@@ -44,8 +44,8 @@
                                 <td>{{$data->consignment_symbol}}</td>
                                 <td>{{$data->consignment_name}}</td>
                                 <td>{{$data->consignment_expiry}}</td>
-                                <td>{{$data->consignment_purchase_price}}</td>
-                                <td>{{$data->consignment_sale_price}}</td>
+                                <td>{{number_format($data->consignment_purchase_price)}}</td>
+                                <td>{{number_format($data->consignment_sale_price)}}</td>
                                 <td>{{$data->consignment_quantity}}</td>
                                 <td>{{$data->consignment_saled}}</td>
                                 <td>{{$data->consignment_return}}</td>

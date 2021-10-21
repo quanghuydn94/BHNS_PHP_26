@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Loại sản phẩm</label>
+            <label for="inputPassword" class="col-sm-2 col-form-label">Sản phẩm</label>
             <div class="col-sm-10">
                 <select name="product_id" class="form-control">
                     <option value="">---</option>

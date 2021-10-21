@@ -112,6 +112,6 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
     Route::post('/orders/edit/{id}', [OrderController::class, 'update'])->name('order.update');
     Route::get('/orders/show/{id}', [OrderController::class, 'show'])->name('order.show');
-    Route::get('/orders/delete/{id}', [OrderController::class, 'destroy'])->name('order.delete');
+    Route::post('/orders/delete/{id}', [OrderController::class, 'destroy'])->name('order.delete');
 
 });

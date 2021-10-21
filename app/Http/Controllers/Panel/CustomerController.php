@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
-use App\Models\User;
-use App\Models\Orders;
 use App\Models\OrderDetails;
+use App\Models\Orders;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -87,16 +87,24 @@ class CustomerController extends Controller
     public function show($id)
     {
 
-        $customer = Customer::find((int) $id); // display details information of customer
-        $userId = (int) $customer->user_id;
-        $user = User::find($userId);
-        $customer_order = Customer::find((int)$customer->id)->getOrder()->first();
-        $orderDetail = Orders::find((int)$customer_order->id)->getOrderDetail()->first();
+        $customer = Customer::find((int) $id)->getUserCustomer; // display details information of customer
+
+        $dataOrders = OrderDetails::join('orders', 'orders.id','=','orderdetails.orders_id')
+            ->join('products', 'products.id', '=', 'orderdetails.product_id')
+            ->where('orders.customer_id', '=', $id  )
+            ->select(
+                'orderdetails.order_detail_quantity',
+                'orderdetails.order_detail_price',
+                'orders.created_at',
+                'products.product_symbol',
+                'products.product_name',
+                'products.product_description',
+                )
+            ->get();
+
         return response()->view('panel.customer.historyCustomer', [
             'customer' => $customer,
-            'user' => $user,
-            'customer_order'=>$customer_order,
-            'orderDetail'=>$orderDetail,
+            'dataOrders' => $dataOrders,
         ]);
 
     }
@@ -122,7 +130,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Customer::find((int)$id)->update([
+        Customer::find((int) $id)->update([
             'customer_name' => $request->customer_name,
             'customer_phone' => $request->customer_phone,
             'customer_email' => $request->customer_email,
@@ -143,6 +151,5 @@ class CustomerController extends Controller
         Customer::find((int) $id)->update(['active' => 0]); //delete information customer, avoid foreign key error
         return redirect()->route('customers.index');
     }
-
 
 }

@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\OrderDetails;
 use App\Models\Orders;
 use App\Models\Products;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -61,7 +62,7 @@ class OrderController extends Controller
         return response()->json($response);
     }
 
-    public function addToCart(Request $request, $id)
+    public function addToCart( $id)
     {
 
         $product = Products::find($id);
@@ -110,9 +111,9 @@ class OrderController extends Controller
     {
         $rule = [
             'customer_name' => 'required|string',
-            'customer_phone' => 'required|string',
+            'customer_phone' => 'required|string|unique:users,phone',
             'customer_address' => 'required|string',
-            'customer_email' => 'required|email|unique:users',
+            'customer_email' => 'required|email|unique:users,email',
 
         ];
         $request->validate($rule);
@@ -123,22 +124,33 @@ class OrderController extends Controller
         // dd($customer);
         if ($customer == null) {
 
-            $cust = Customer::create([
+            $userCustomer = User::create([
+                'name' => $request->customer_name,
+                'phone' => $request->customer_phone,
+                'address' => $request->customer_address,
+                'email' => $request->customer_email,
+                'rolename' => 'client',
+                'active' => 1,
+            ]);
+            $userId = $userCustomer->id;
+            // dd($userId);
+            $customer = Customer::create([
                 'customer_name' => $request->customer_name,
                 'customer_phone' => $request->customer_phone,
                 'customer_email' => $request->customer_email,
                 'customer_address' => $request->customer_address,
+                'user_id'=>$userId,
                 'active' => 1,
             ]);
 
-            $customerId = $cust->id;
+            $customerId = $customer->id;
 
         } else {
 
             $customerId = $customer->id;
 
         }
-        // dd($customerId);
+        // dd($customer);
         $order = Orders::create([
 
             'order_customer_name' => $customer->customer_name,
@@ -147,6 +159,7 @@ class OrderController extends Controller
             'order_customer_address' => $request->customer_address,
             'customer_id' => $customerId,
             'active' => 1,
+            'order_status' => 'Have paid',
 
         ]);
         $orderId = $order->id;
@@ -171,41 +184,45 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order = Orders::find($id)->getCustomer;
-        $orderDetail = Orders::find($id)->getOrderDetail;
-        $product = OrderDetails::find();
+        $order = Orders::find((int) $id)->getCustomer;
 
-        // $orderCustomer = Customer::join('orders', 'orders.customer_id', '=', 'customers.id')
-        // ->join('orderdetails', 'orderdetail.orders_id', '=', 'orders.id')
-        // ->join('products', 'products.id', '=','orderdetails.product_id')
-        // ->get([
-        //     'customers.customer_name',
-        //     'customers.customer_phone',
-        //     'orders.order_customer_address',
-        //     'orders.order_customer_email',
-        // 'orderdetails.order_detail_quantity',
-        // 'orderdetails.order_detail_price',
-        // 'products.product_symbol',
-        // 'products.product_name',
-        // 'products.product_image',
-        // 'products.product_description',
-        // ]);
-        dd($orderDetail);
-        // return response()->view('panel.orders.showDetail', compact('order', 'orderDetail'));
+        $dataOrders = OrderDetails::join('products', 'products.id', '=', 'orderdetails.product_id')
+            ->where('orderdetails.orders_id', '=', (int) $id)
+            ->get();
+
+        return response()->view('panel.orders.showDetail', compact('order', 'dataOrders'));
     }
 
     public function edit($id)
     {
         $order = Orders::find($id);
-        return response()->view('panel.orders.edit', compact('order'));
+
+        $dataOrders = OrderDetails::join('products', 'products.id', '=', 'orderdetails.product_id')
+            ->where('orderdetails.orders_id', '=', (int) $id)
+            ->get();
+
+        return response()->view('panel.orders.edit', compact('order', 'dataOrders'));
 
     }
-    public function update()
+    public function update(Request $request, $id)
     {
+        Orders::find((int) $id)->update([
+            'order_customer_name' => $request->order_customer_name,
+            'order_customer_phone' => $request->order_customer_phone,
+            'order_customer_email' => $request->order_customer_email,
+            'order_customer_address' => $request->order_customer_address,
+            'order_note' => $request->order_note,
+            'order_status' => $request->order_status,
+        ]);
 
+        // OrderDetails::where('orders_id', ((int)$id))->update([
+
+        // ]);
+        return redirect()->route('order.index')->with('success', 'You have successfully updated');
     }
-    public function destroy()
+    public function destroy($id)
     {
-
+        Orders::where('id', (int) $id)->update(['active' => 0]);
+        return redirect()->route('order.index');
     }
 }

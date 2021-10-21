@@ -17,6 +17,8 @@ class Suppliers extends Model
         'active',
     ];
 
+    public $timestamps = true;
+
     public function getWareHouse(){
         return $this->hasMany(WareHouse::class);
     }
