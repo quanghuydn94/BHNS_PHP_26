@@ -97,33 +97,33 @@
 <script type="text/javascript">
     // CSRF Token,  Autocomplete
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    $(document).ready(function () {
-        $("#customer_phone").autocomplete({
-            source: function (request, response) {
-                // Fetch data
-                $.ajax({
-                    url: "{{route('getCustomers')}}",
-                    type: 'post',
-                    dataType: "json",
-                    data: {
-                        _token: CSRF_TOKEN,
-                        search: request.term
-                    },
-                    success: function (data) {
-                        // console.log(data);
-                        response(data);
-                    }
-                });
-            },
-            select: function (event, ui) {
-                // Set selection
-                $('#customer_phone').val(ui.item.phone); // display the selected text
-                $('#customer_name').val(ui.item.label); // save selected name to input
-                $('#customer_email').val(ui.item.email); // save selected email to input
-                return false;
-            }
-        });
-    });
+    // $(document).ready(function () {
+    //     $("#customer_phone").autocomplete({
+    //         source: function (request, response) {
+    //             // Fetch data
+    //             $.ajax({
+    //                 url: "{{route('getCustomers')}}",
+    //                 type: 'post',
+    //                 dataType: "json",
+    //                 data: {
+    //                     _token: CSRF_TOKEN,
+    //                     search: request.term
+    //                 },
+    //                 success: function (data) {
+    //                     // console.log(data);
+    //                     response(data);
+    //                 }
+    //             });
+    //         },
+    //         select: function (event, ui) {
+    //             // Set selection
+    //             $('#customer_phone').val(ui.item.phone); // display the selected text
+    //             $('#customer_name').val(ui.item.label); // save selected name to input
+    //             $('#customer_email').val(ui.item.email); // save selected email to input
+    //             return false;
+    //         }
+    //     });
+    // });
 
 
     // <script type="text/javascript">

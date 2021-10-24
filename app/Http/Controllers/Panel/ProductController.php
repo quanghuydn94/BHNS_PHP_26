@@ -64,7 +64,7 @@ class ProductController extends Controller
             'active' => 1,
         ]);
 
-        return redirect(route('products.index'));
+        return redirect(route('products.index'))->with('success','You have successfully added');
     }
 
     /**

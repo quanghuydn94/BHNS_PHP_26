@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\FrontEnd\ProductController as FrontEndProductController;
 use App\Http\Controllers\Panel\AccountBlockedController;
 use App\Http\Controllers\Panel\ConsignmentDeleteController;
 use App\Http\Controllers\Panel\CustomerController;
@@ -53,13 +54,13 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     Route::get('/', [SinglePageController::class, 'index'])->name('panel.index');
 
     // Routes Suppliers
-    Route::get('suppliers/create', function () {
-        return view('panel.suppliers.create');
-    })->name('panel.suppliers.create');
+    // Route::get('suppliers/create', function () {
+    //     return view('panel.suppliers.create');
+    // })->name('panel.suppliers.create');
 
-    Route::get('suppliers/index', function () {
-        return view('panel.suppliers.index');
-    })->name('panel.suppliers.index');
+    // Route::get('suppliers/index', function () {
+    //     return view('panel.suppliers.index');
+    // })->name('panel.suppliers.index');
 
     //Routes Users
     Route::get('profile', function () {
@@ -89,13 +90,11 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     //Routes products
     Route::resource('products', ProductController::class);
 
-    Route::get('/product/product-deleted', [ProductsDeletedController::class , 'index'])->name('product.listDeleted');
+    Route::get('/product/product-deleted', [ProductsDeletedController::class, 'index'])->name('product.listDeleted');
 
     Route::get('/product/product-deleted-detail/{id}', [ProductsDeletedController::class, 'show'])->name('product.detailDeleted');
 
     Route::post('/product/product-deleted-restore/{id}', [ProductsDeletedController::class, 'restore'])->name('product.restoreProduct');
-
-
 
     //Routes Warehouse
     Route::resource('warehouses', WareHousesController::class);
@@ -129,5 +128,18 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     Route::get('/orders/table-delete', [OrderController::class, 'tableOrderDelete'])->name('order.tableDelete');
 
     Route::post('orders/table-delete/{id}', [OrderController::class, 'getBack'])->name('order.getBack');
+
+});
+
+//Routes FrontEnd
+Route::group(['prefix' => 'frontend'], function () {
+    Route::get('/index', [FrontEndProductController::class, 'index'])->name('frontend.index');
+    Route::get('/shop', [FrontEndProductController::class, 'shop'])->name('shop.index');
+
+    Route::get('/cart/show', [FrontEndProductController::class, 'showCart'])->name('show.cart');
+    Route::get('/add-to-cart/{id}', [FrontEndProductController::class, 'addToCart'])->name('add.to.cart');
+    Route::get('/update-cart', [FrontEndProductController::class, 'update'])->name('update.cart');
+    Route::delete('/remove-from-cart', [FrontEndProductController::class, 'remove'])->name('remove.from.cart');
+    Route::get('/check-out', [FrontEndProductController::class, 'checkout'])->name('checkout.cart');
 
 });
