@@ -10,7 +10,7 @@
     <div class="card-header shadow mb-4">
         <p class="m-0 font-weight-bold text-primary">
             <a href="{{route('products.index')}}" class="border border-primary rounded text-decoration-none">
-                Products DataTable </a>
+            Danh sách sản phẩm</a>
         </p>
     </div>
     <div class="card-body">
@@ -18,22 +18,22 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Ảnh</th>
+                        <th>Giá(Vnd)</th>
+                        <th>Mô tả</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th width="30%">Description</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Ảnh</th>
+                        <th>Giá(Vnd)</th>
+                        <th>Mô tả</th>
+                        <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -49,11 +49,11 @@
                         <td>
 
                             <a href="{{route('product.detailDeleted', $pro->id)}} "><button
-                                    class="btn btn-primary">Details</button></a>
+                                    class="btn btn-primary">Chi tiết</button></a>
                             <form method="POST" action="{{ route('product.restoreProduct', $pro->id) }}"
                                 class="d-inline-block">
                                 @csrf
-                                <button class="btn btn-primary">Active</button>
+                                <button class="btn btn-primary">Kích hoạt</button>
                             </form>
                         </td>
                     </tr>

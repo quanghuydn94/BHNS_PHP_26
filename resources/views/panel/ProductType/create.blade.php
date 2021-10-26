@@ -9,30 +9,30 @@
 @endif
 <div class="card-header py-3">
     <p class="m-0 font-weight-bold text-primary">
-        <a href="{{route('product-type.index')}}" class="border border-primary rounded text-decoration-none"> DataTables
-            Product Types </a>
-        <span> <i class="fas fa-chevron-right"></i>Add Information Product Type</span>
+        <a href="{{route('product-type.index')}}" class="border border-primary rounded text-decoration-none">
+            Danh sách loại sản phẩm </a>
+        <span> <i class="fas fa-chevron-right"></i>Thêm thông tin loại sản phẩm</span>
     </p>
 </div>
 <div class="card-body">
     <form method="post" action="{{ route('product-type.store') }}">
         <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Name</label>
+            <label class="col-sm-2 col-form-label">Loại sản phẩm</label>
             <div class="col-sm-10">
-                <input name="product_type_name" type="text" class="form-control" placeholder="Product-type name">
+                <input name="product_type_name" type="text" class="form-control" placeholder="Loại sản phẩm">
             </div>
         </div>
         <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Description</label>
+            <label class="col-sm-2 col-form-label">Mô tả</label>
             <div class="col-sm-10">
                 <textarea name="product_type_description" type="text" class="form-control"
-                    placeholder="Description"></textarea>
+                    placeholder="Mô tả loại sản phẩm"></textarea>
             </div>
         </div>
         <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Group Goods Name</label>
+            <label class="col-sm-2 col-form-label">Nhóm hàng</label>
             <div class="col-sm-10">
-                <select name="group_goods_id" type="text" class="form-control" placeholder="Group goods">
+                <select name="group_goods_id" type="text" class="form-control">
                     @foreach ($groupGoods as $name )
                     <option value="{{$name->id}}">{{$name->group_name}}</option>
                     @endforeach
@@ -40,7 +40,7 @@
             </div>
         </div>
         @csrf
-        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary">Thêm</button>
     </form>
 </div>
 @endsection

@@ -7,10 +7,10 @@
 
  <div class="card shadow mb-4">
      <div class="card-header py-3">
-         <h6 class="m-0 font-weight-bold text-primary">DataTables Customer</h6>
+         <h6 class="m-0 font-weight-bold text-primary">Danh sách khách hàng</h6>
      </div>
      <div class="h4 mb-0 text-gray-600 p-3">
-         <a href="{{route('customers.create')}}" class="btn btn-outline-primary">New Customer</a>
+         <a href="{{route('customers.create')}}" class="btn btn-outline-primary">Khách hàng mới</a>
      </div>
      @if (session()->get('success'))
      <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,22 +26,22 @@
              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                  <thead>
                      <tr>
-                         <th>ID</th>
-                         <th>Name</th>
-                         <th>Phone</th>
-                         <th>Identity Num</th>
-                         <th>Address</th>
-                         <th>Tools</th>
+                         <th>STT</th>
+                         <th>Tên</th>
+                         <th>SĐT</th>
+                         <th>Địa chỉ</th>
+                         <th>Email</th>
+                         <th>Công cụ</th>
                      </tr>
                  </thead>
                  <tfoot>
                      <tr>
-                         <th>ID</th>
-                         <th>Name</th>
-                         <th>Phone</th>
-                         <th>Identity Num</th>
-                         <th>Address</th>
-                         <th>Tools</th>
+                         <th>STT</th>
+                         <th>Tên</th>
+                         <th>SĐT</th>
+                         <th>Địa chỉ</th>
+                         <th>Email</th>
+                         <th>Công cụ</th>
                      </tr>
                  </tfoot>
                  <tbody>
@@ -56,16 +56,16 @@
                          <td>{{ $cus->customer_email }}</td>
                          <td>
                              <a href="{{ route('customers.edit', $cus->id) }}"><button
-                                     class="btn btn-primary">Edit</button></a>
+                                     class="btn btn-primary">Sửa</button></a>
                              <a href="{{route('customers.show',$cus->id)}}"><button
-                                     class="btn btn-primary">Details</button></a>
+                                     class="btn btn-primary">Chi tiết</button></a>
                              @if (Auth::user()->rolename == 'admin')
 
                              <form method="POST" action="{{ route('customers.destroy', ['customer' => $cus->id]) }}"
                                  class="d-inline-block">
                                  @csrf
                                  @method('delete')
-                                 <button class="btn btn-primary">Delete</button>
+                                 <button class="btn btn-primary">Xóa</button>
                              </form>
                              @endif
                          </td>

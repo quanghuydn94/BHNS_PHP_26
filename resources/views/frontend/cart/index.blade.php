@@ -123,39 +123,6 @@
                         </div>
                         @endforeach
 
-                        <div class="col-lg-2">
-                            <div class="single__product">
-                                <div class="single_product__inner">
-                                    <span class="new_badge">new</span>
-                                    <span class="discount_price">-5%</span>
-                                    <div class="product_img">
-                                        <a href="#">
-                                            <img src="assets/img/product/6.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="product__content text-center">
-                                        <div class="produc_desc_info">
-                                            <div class="product_title">
-                                                <h4><a href="product-details.html">Mushroom Burger</a></h4>
-                                            </div>
-                                            <div class="product_price">
-                                                <p>$45.66</p>
-                                            </div>
-                                        </div>
-                                        <div class="product__hover">
-                                            <ul>
-                                                <li><a href="#"><i class="ion-android-cart"></i></a></li>
-                                                <li><a class="cart-fore" href="#" data-toggle="modal"
-                                                        data-target="#my_modal" title="Quick View"><i
-                                                            class="ion-android-open"></i></a></li>
-                                                <li><a href="product-details.html"><i class="ion-clipboard"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -173,8 +140,8 @@
                                     <img src="assets/img/ship/1.png" alt="shipping icon">
                                 </div>
                                 <div class="shipping_content">
-                                    <h6>Free Shipping On Order Over $120</h6>
-                                    <p>Free shipping on all order</p>
+                                    <h6>Miễn phí giao hàng hóa đơn trên</h6>
+                                    <p>{{number_format(200000)}} Vnd</p>
                                 </div>
                             </div>
                             <div class="single_shipping_box one d-flex">
@@ -182,8 +149,8 @@
                                     <img src="assets/img/ship/2.png" alt="shipping icon">
                                 </div>
                                 <div class="shipping_content">
-                                    <h6>Money Return</h6>
-                                    <p>Back guarantee under 7 days</p>
+                                    <h6>Đổi trả</h6>
+                                    <p>Trả lại đơn hàng trong 3 ngày</p>
                                 </div>
                             </div>
                             <div class="single_shipping_box two d-flex">
@@ -191,8 +158,7 @@
                                     <img src="assets/img/ship/3.png" alt="shipping icon">
                                 </div>
                                 <div class="shipping_content">
-                                    <h6>Member Discount</h6>
-                                    <p>Support online 24 hours a day</p>
+                                    <h6>Giảm giá cho thành viên</h6>
                                 </div>
                             </div>
                             <div class="single_shipping_box three d-flex">
@@ -200,8 +166,7 @@
                                     <img src="assets/img/ship/4.png" alt="shipping icon">
                                 </div>
                                 <div class="shipping_content">
-                                    <h6>Online Support 24/7</h6>
-                                    <p>Free shipping on all order</p>
+                                    <h6>Hỗ trợ 24/7</h6>
                                 </div>
                             </div>
                         </div>

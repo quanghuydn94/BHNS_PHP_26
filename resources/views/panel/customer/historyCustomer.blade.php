@@ -11,7 +11,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content  ">
             <div class="modal-header bg-c-lite-green">
-                <h5 class="modal-title text-white" id="historyCustomerModalLabel">History Sales</h5>
+                <h5 class="modal-title text-white" id="historyCustomerModalLabel">Lịch sử mua hàng</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -19,11 +19,11 @@
             <div class="modal-body">
                 <div class="row mb-3">
                     <div class="col-sm-6">
-                        <h6 class="text-muted f-w-400">Name Customer</h6>
+                        <h6 class="text-muted f-w-400">Tên khách hàng</h6>
                         <p class="m-b-10 f-w-600">{{$customer->customer_name}}</p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="m-b-10 f-w-600">Phone</p>
+                        <p class="m-b-10 f-w-600">SĐT</p>
                         <h6 class="text-muted f-w-400">{{$customer->customer_phone}}</h6>
                     </div>
                 </div>
@@ -33,12 +33,12 @@
                         <table class="table f-s-13 card">
                             <thead class="tbl-bg-color text-white">
                                 <tr>
-                                    <th>Product Name</th>
-                                    <th>Product Symbol</th>
-                                    <th>Product Quantity</th>
-                                    <th>Product Price</th>
-                                    <th>Product Description</th>
-                                    <th>Date</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Ký hiệu</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá</th>
+                                    <th>Mô tả</th>
+                                    <th>Ngày</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,24 +74,24 @@
                                     <div class="m-b-25"> <img src="{{url('img/users/client.jpg')}}" width="100px"
                                             class="img-radius" alt="User-Profile-Image"> </div>
                                     <h6 class="f-w-600">{{$customer->customer_name}}</h6>
-                                    <p>Client</p> <i
+                                    <p>Khách hàng</p> <i
                                         class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                 </div>
                             </div>
                             <div class="col-sm-8">
                                 <div class="card-block">
-                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Thông tin</h6>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Email</p>
                                             <h6 class="text-muted f-w-400">{{$customer->customer_email}}</h6>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Phone</p>
+                                            <p class="m-b-10 f-w-600">SĐT</p>
                                             <h6 class="text-muted f-w-400">{{$customer->customer_phone}}</h6>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Address</p>
+                                            <p class="m-b-10 f-w-600">Địa chỉ</p>
                                             <h6 class="text-muted f-w-400">{{$customer->customer_address}}</h6>
                                         </div>
 
@@ -103,20 +103,20 @@
                                             <h6 class="text-muted f-w-400">{{$customer->customer_email}}</h6>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Role Name</p>
+                                            <p class="m-b-10 f-w-600">Vai trò</p>
                                             <h6 class="text-muted f-w-400">Client</h6>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Date Join</p>
+                                            <p class="m-b-10 f-w-600">Ngày đăng ký</p>
                                             <h6 class="text-muted f-w-400">{{$customer->created_at}}</h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <a href="" class="badge badge-primary" data-toggle="modal"
-                                                data-target="#historyCustomerModal">Buyer History </a>
+                                                data-target="#historyCustomerModal">Lịch sử mua hàng</a>
                                         </div>
                                     </div>
                                     <div class="p-2 text-right">
-                                        <a href="{{ route('customers.index') }}" class="badge badge-primary"> Back </a>
+                                        <a href="{{ route('customers.index') }}" class="badge badge-primary"> Trờ lại </a>
                                     </div>
                                 </div>
                             </div>

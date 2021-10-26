@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Information Accounts</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách tài khoản</h6>
     </div>
 
     <div class="card-body">
@@ -14,20 +14,20 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
+                        <th>STT</th>
+                        <th>Tên</th>
                         <th>Email</th>
-                        <th>Role</th>
-                        <th>Tools</th>
+                        <th>Vai trò</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
+                        <th>STT</th>
+                        <th>Tên</th>
                         <th>Email</th>
-                        <th>Role</th>
-                        <th>Tools</th>
+                        <th>Vai trò</th>
+                        <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -43,12 +43,12 @@
                             {{-- <a href="{{ route('users.edit', ['user' => $item->id]) }}"><button
                                 class="btn btn-primary">Edit</button></a> --}}
                             <a href="{{route('users.show',['user'=>$item->id])}} "><button
-                                    class="btn btn-primary">Details</button></a>
+                                    class="btn btn-primary">Chi tiết</button></a>
                             <form method="POST" action="{{ route('users.destroy', ['user' => $item->id]) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Xóa</button>
                             </form>
                         </td>
                     </tr>

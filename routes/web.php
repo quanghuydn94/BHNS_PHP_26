@@ -136,10 +136,11 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'frontend'], function () {
     Route::get('/index', [FrontEndProductController::class, 'index'])->name('frontend.index');
     Route::get('/shop', [FrontEndProductController::class, 'shop'])->name('shop.index');
+    Route::get('/product-detail/{id}', [FrontEndProductController::class, 'detailsProduct'])->name('details.product');
+
 
     Route::get('/cart/show', [FrontEndProductController::class, 'showCart'])->name('show.cart');
     Route::get('/add-to-cart/{id}', [FrontEndProductController::class, 'addToCart1'])->name('add.to.cart');
-    // Route::get('/add-cart/{id}', [FrontEndProductController::class, 'addCart2'])->name('add.cart');
 
     Route::get('/update-cart', [FrontEndProductController::class, 'update'])->name('update.cart');
     Route::get('/remove-from-cart', [FrontEndProductController::class, 'remove'])->name('remove.from.cart');

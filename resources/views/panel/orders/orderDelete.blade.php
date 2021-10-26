@@ -8,8 +8,8 @@
     <div class="card-header py-3">
         <p class="m-0 font-weight-bold text-primary">
             <a href="{{route('order.index')}}" class="border border-primary rounded text-decoration-none">
-                DataTables Orders</a>
-            <span> <i class="fas fa-chevron-right"></i> Information Orders Deleted</span>
+                Danh sách đơn hàng</a>
+            <span> <i class="fas fa-chevron-right"></i>Thông tin</span>
         </p>
 
     </div>
@@ -26,20 +26,20 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Tools</th>
+                        <th>Ngày</th>
+                        <th>Tên khách hàng</th>
+                        <th>Địa chỉ</th>
+                        <th>SĐT</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Tools</th>
+                        <th>Ngày</th>
+                        <th>Tên khách hàng</th>
+                        <th>Địa chỉ</th>
+                        <th>SĐT</th>
+                        <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -47,7 +47,7 @@
                     @if ($item->active == 0 && $item->order_customer_phone !== null)
 
                     <tr>
-                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td>{{ $item->order_customer_name }}</td>
                         <td>{{ $item->order_customer_address }}</td>
                         <td>{{ $item->order_customer_phone }}</td>
@@ -56,7 +56,7 @@
                                 class="d-inline-block">
                                 @csrf
                                 @method('post')
-                                <button class="btn btn-primary">Active</button>
+                                <button class="btn btn-primary">Kích hoạt</button>
                             </form>
 
                         </td>

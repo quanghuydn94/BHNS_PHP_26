@@ -72,21 +72,16 @@
                                                         <li class="mega_item">
                                                             <a class="mega_title" href="#">1</a>
                                                             <ul>
-
-                                                                <li><a href="shop.html">Sản phẩm</a></li>
-
-                                                                <li><a href="product-details.html">Chi tiết sản phẩm</a>
-                                                                </li>
-                                                                <li><a href="my-account.html">Tài khoản</a></li>
+                                                                <li><a href="wishlist.html">Danh mục ưu thích</a></li>
+                                                                <li><a href="{{route('shop.index')}}">Sản phẩm</a></li>
+                                                                <li><a href="{{route('show.cart')}}">Giỏ hàng</a></li>
+                                                                <li><a href="{{route('checkout.cart')}}">Thanh toán</a></li>
                                                             </ul>
                                                         </li>
                                                         <li class="mega_item">
                                                             <a class="mega_title" href="#"> 2</a>
                                                             <ul>
-                                                                <li><a href="wishlist.html">Danh mục ưu thích</a></li>
-                                                                <li><a href="{{route('show.cart')}}">Giỏ hàng</a></li>
-                                                                <li><a href="{{route('checkout.cart')}}">Thanh toán</a>
-                                                                </li>
+                                                                <li><a href="my-account.html">Tài khoản</a></li>
                                                                 <li><a href="login.html">Đăng nhập</a></li>
                                                                 <li><a href="register.html">Đăng ký</a></li>
                                                             </ul>
@@ -126,7 +121,7 @@
                                                             <a class="mega_title" href="#">1</a>
                                                             <ul>
 
-                                                                <li><a href="shop.html">Sản phẩm</a></li>
+                                                                <li><a href="{{route('shop.index')}}">Sản phẩm</a></li>
 
                                                                 <li><a href="product-details.html">Chi tiết sản phẩm</a>
                                                                 </li>
@@ -138,7 +133,7 @@
                                                             <ul>
                                                                 <li><a href="wishlist.html">Danh mục ưu thích</a></li>
                                                                 <li><a href="{{route('show.cart')}}">Giỏ hàng</a></li>
-                                                                <li><a href="checkout.html">Thanh toán</a></li>
+                                                                <li><a href="{{route('checkout.cart')}}">Thanh toán</a></li>
                                                                 <li><a href="login.html">Đăng nhập</a></li>
                                                                 <li><a href="register.html">Đăng ký</a></li>
                                                             </ul>
@@ -198,17 +193,21 @@
                                                     <div class="mini_cart_item">
                                                         <div class="mini_cart_img">
                                                             <a href="#">
-                                                                <img src="{{url('img/products',$cart['image'])}} " width="50px" height="50px">
+                                                                <img src="{{url('img/products',$cart['image'])}} "
+                                                                    width="50px" height="50px">
                                                                 <span class="cart_count">{{$cart['quantity']}} </span>
                                                             </a>
                                                         </div>
                                                         <div class="cart_info">
                                                             <h5><a href="product-details.html">{{$cart['name']}} </a>
                                                             </h5>
-                                                            <span class="cart_price">{{number_format($cart['price'])}}Vnd </span>
+                                                            <span
+                                                                class="cart_price">{{number_format($cart['price'])}}Vnd
+                                                            </span>
                                                         </div>
                                                         <div class="cart_remove">
-                                                            <a href="#"><i data-id="{{$id}}" class="zmdi zmdi-delete"></i></a>
+                                                            <a href="#"><i data-id="{{$id}}"
+                                                                    class="zmdi zmdi-delete"></i></a>
                                                         </div>
                                                     </div>
                                                     @endforeach
@@ -245,34 +244,15 @@
                                             <a href="#"><i class="ion-gear-b"></i></a>
                                         </div>
                                         <div class="content-setting-dropdown">
-                                            <div class="language-selector-wrapper">
-                                                <div class="language-selector">
-                                                    <ul>
-                                                        <li><a href="#"><img src="assets/img/1.jpg" alt="English"><span
-                                                                    class="expand-more">English</span></a></li>
-
-                                                        <li><a href="#"><img src="assets/img/banner/frances2.jpg"
-                                                                    alt="Language"><span
-                                                                    class="expand-more">Français</span>
-                                                            </a></li>
-
-                                                    </ul>
-
-                                                </div>
-                                                <div class="currency-selector-wrapper">
-                                                    <ul>
-                                                        <li><a href="#">EUR $</a></li>
-                                                        <li><a href="#">USD $</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="user_info_top">
-                                                    <ul>
-                                                        <li><a href="my-account.html">my account</a></li>
-                                                        <li><a href="checkout.html">Checkout</a></li>
-                                                        <li><a href="login.html">Sign in</a></li>
-                                                    </ul>
-                                                </div>
+                                            {{-- <div class="language-selector-wrapper"> --}}
+                                            <div class="user_info_top">
+                                                <ul>
+                                                    <li><a href="my-account.html">Tài khoản của tôi</a></li>
+                                                    <li><a href="checkout.html">Thanh toán</a></li>
+                                                    <li><a href="login.html">Đăng nhập</a></li>
+                                                </ul>
                                             </div>
+                                            {{-- </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -305,17 +285,17 @@
                                     <a href="#"><img src="assets/img/logo/logo_footer.png" alt=""></a>
                                 </div>
                                 <div class="footer_content">
-                                    <p>Address: 123 Main Street, Anytown, CA 12345 - USA.</p>
-                                    <p>Phone: +(000) 800 456 789</p>
-                                    <p>Email: Contact@posthemes.com</p>
+                                    <p>Địa chỉ: 123 Tôn Đức Thắng, Hòa Minh, Tp. Đà Nẵng </p>
+                                    <p>SĐT: +(84) 800 456 789</p>
+                                    <p>Email: Contact@gmail.com</p>
                                 </div>
                                 <div class="footer_social">
-                                    <h4>Get in Touch:</h4>
+                                    <h4>Liên hệ qua:</h4>
                                     <div class="footer_social_icon">
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-youtube"></i></a>
+                                        <a href="https://facebook.com"><i class="fa fa-facebook"></i></a>
+                                        <a href="https://twitter.com"><i class="fa fa-twitter"></i></a>
+                                        <a href="https://gmail.com"><i class="fa fa-google-plus"></i></a>
+                                        <a href="https://youtube.com"><i class="fa fa-youtube"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -328,15 +308,15 @@
                             <div class="single_footer widget">
                                 <div class="single_footer_widget_inner">
                                     <div class="footer_title">
-                                        <h2>Products</h2>
+                                        <h2>Sản Phẩm</h2>
                                     </div>
                                     <div class="footer_menu">
                                         <ul>
-                                            <li><a href="#">Prices drop</a></li>
-                                            <li><a href="#"> New products</a></li>
-                                            <li><a href="#"> Best sales</a></li>
-                                            <li><a href="#"> Contact us</a></li>
-                                            <li><a href="#"> My account</a></li>
+
+                                            <li><a href="{{route('shop.index')}}"> Sản phẩm mới</a></li>
+                                            <li><a href="{{route('shop.index')}}"> Sản phẩm bán chạy</a></li>
+                                            <li><a href=" "> Liên hệ chúng tôi</a></li>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -346,15 +326,12 @@
                             <div class="single_footer widget">
                                 <div class="single_footer_widget_inner">
                                     <div class="footer_title">
-                                        <h2>Login</h2>
+                                        <h2>Đăng nhập</h2>
                                     </div>
                                     <div class="footer_menu">
                                         <ul>
-                                            <li><a href="#">Sitemap</a></li>
-                                            <li><a href="#"> Stores</a></li>
-                                            <li><a href="#"> Login</a></li>
-                                            <li><a href="#"> Contact us</a></li>
-                                            <li><a href="#"> My account</a></li>
+                                            <li><a href="#"> Đăng nhập</a></li>
+                                            <li><a href=" "> Đăng ký</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -364,36 +341,18 @@
                             <div class="single_footer widget">
                                 <div class="single_footer_widget_inner">
                                     <div class="footer_title">
-                                        <h2> Your account </h2>
+                                        <h2> Tài khoản của bạn </h2>
                                     </div>
                                     <div class="footer_menu">
                                         <ul>
-                                            <li><a href="#">Personal info</a></li>
-                                            <li><a href="#"> Orders</a></li>
-                                            <li><a href="#"> Login</a></li>
-                                            <li><a href="#"> Credit slips</a></li>
-                                            <li><a href="#"> Addresses</a></li>
+                                            <li><a href="#">Thông tin cá nhân</a></li>
+                                            <li><a href="#"> Đơn hàng</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <!--Single Footer end-->
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-xs-12">
-                        <div class="footer_title">
-                            <h2> Join Our Newsletter Now </h2>
-                        </div>
-                        <div class="footer_news_letter">
-                            <p>Get E-mail updates about our latest shop and special offers.</p>
-                            <div class="newsletter_form">
-                                <form action="#">
-                                    <input type="email" required placeholder="Your Email Address">
-                                    <input type="submit" value="Subscribe">
-                                </form>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -403,7 +362,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-xs-12">
                             <div class="copyright_text">
-                                <p>Copyright 2018 <a href="#">Organicfood</a>. All Rights Reserved</p>
+                                <p>Copyright 2021 <a href="#">Organicfood</a>. All Rights Reserved</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-xs-12">
@@ -455,28 +414,27 @@
     </script>
     @endif
     <script type="text/javascript">
-
         //Remove item product from icon cart
-     $("#change-item-cart").on("click", ".zmdi-delete", function (e) {
-         e.preventDefault();
-         let id = $(this).data("id");
-         $.ajax({
-             method: "GET",
-             url: "remove-from-cart/",
-             data: {
-                 _token: '{{ csrf_token() }}',
-                 id: id
-             },
-             success: function (repsonse) {
-                 $("#cart-icon").load(" #cart-icon");
-                 $("#change-item-cart").load(" #change-item-cart");
-                 $(".checkout-form").load(" .checkout-form");
+        $("#change-item-cart").on("click", ".zmdi-delete", function (e) {
+            e.preventDefault();
+            let id = $(this).data("id");
+            $.ajax({
+                method: "GET",
+                url: "remove-from-cart/",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: id
+                },
+                success: function (repsonse) {
+                    $("#cart-icon").load(" #cart-icon");
+                    $("#change-item-cart").load(" #change-item-cart");
+                    $(".checkout-form").load(" .checkout-form");
 
-                 alertify.set('notifier', 'position', 'bottom-right');
-                 alertify.success('You have successfully removed!');
-             }
-         });
-     });
+                    alertify.set('notifier', 'position', 'bottom-right');
+                    alertify.success('You have successfully removed!');
+                }
+            });
+        });
     </script>
 
 </body>

@@ -8,39 +8,10 @@
                 <div class="customer-login mb-40">
                     <h3>
                         <i class="fa fa-file-o" aria-hidden="true"></i>
-                        Returning customer?
-                        <a class="Returning" href="#" data-toggle="collapse" data-target="#Returning_customer"
-                            aria-expanded="true">Click here to login</a>
+                        Trở thành thành viên?
+                        <a class="Returning text-success" href="#">Nhấp vào đây để đăng ký</a>
 
                     </h3>
-                    <div id="Returning_customer" class="collapse" data-parent="#accordion">
-                        <div class="card-bodyfive">
-                            <div class="col-12">
-                                <p>Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum
-                                    luctus..</p>
-                            </div>
-                            <div class="col-lg-4">
-                                <form action="#">
-                                    <div class="Returning_cart_body mb-20">
-                                        <label for="b_names">Username or email <span>*</span></label>
-                                        <input id="b_names" type="text">
-                                    </div>
-                                    <div class="Returning_cart_body mb-20">
-                                        <label for="names">Password <span>*</span></label>
-                                        <input id="names" type="text">
-                                    </div>
-                                    <div class="Returning_cart_body returning_three login mb-20">
-                                        <input value="Login" type="submit">
-                                        <label for="remember-me-box">
-                                            <input id="remember-me-box" type="checkbox">
-                                            Remember me
-                                        </label>
-                                    </div>
-                                    <a href="#">Lost your password?</a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -50,7 +21,7 @@
                 @if(Auth::user() == null)
                     <div class="col-lg-6 col-md-6">
                         @csrf
-                        <h3>Billing Details</h3>
+                        <h3>Chi tiết đơn hàng</h3>
                         @if ($errors->any())
                         <div class="alert alert-warning">
                             @foreach ($errors->all() as $error)
@@ -60,25 +31,25 @@
                         @endif
                         <div class="row">
                             <div class="col-lg-6 mb-30">
-                                <label for="b_name">Customers Name <span>*</span></label>
+                                <label for="b_name">Tên khách hàng<span>*</span></label>
                                 <input id="b_name" type="text" name="name">
                             </div>
                             <div class="col-12 mb-30">
-                                <label>Address <span>*</span></label>
-                                <input placeholder="Street/District/City" type="text" name="address">
+                                <label>Địa chỉ <span>*</span></label>
+                                <input placeholder="Tên đường( Thôn)/ Phường( Xã)/ Quận( Huyện)/ Thành phố (Tỉnh)" type="text" name="address">
                             </div>
                             <div class="col-lg-6 mb-30">
-                                <label for="b_email">Email Address <span>*</span></label>
+                                <label for="b_email">Địa chỉ Email<span>*</span></label>
                                 <input id="b_email" type="text" name="email" placeholder="a@google.com">
                             </div>
                             <div class="col-lg-6 mb-30">
-                                <label>Phone <span>*</span></label>
+                                <label>Số điện thoại <span>*</span></label>
                                 <input placeholder="Phone Number" type="text" name="phone">
                             </div>
                             <div class="col-12 mb-30">
                                 <input id="b_c_account" type="checkbox" data-target="createp_account" />
                                 <label class="righ_0" for="b_c_account" data-toggle="collapse"
-                                    data-target="#collapseOne" aria-controls="collapseOne">Create an account?</label>
+                                    data-target="#collapseOne" aria-controls="collapseOne">Tạo tài khoản</label>
 
                                 <div id="collapseOne" class="collapse" data-parent="#accordion">
                                     <div class="card-body1">
@@ -97,9 +68,9 @@
                             </div>
                             <div class="col-12">
                                 <div class="order-notes">
-                                    <label for="order_note">Order Notes</label>
+                                    <label for="order_note">Ghi chú</label>
                                     <textarea id="order_note" name="customer_name"
-                                        placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        placeholder="Ghi chú thông tin cần thiết về đơn hàng của bạn, quan trọng cho việc giao hàng"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -108,13 +79,13 @@
                 @endif
                     <div class="col-lg-6 col-md-6">
                         <div class="order-wrapper">
-                            <h3>Your order</h3>
+                            <h3>Đơn hàng của bạn</h3>
                             <div class="order-table table-responsive mb-30">
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-total">Total</th>
+                                            <th class="product-name">Sản Phẩm</th>
+                                            <th class="product-total">Tổng tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -136,11 +107,11 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>Cart Subtotal</th>
+                                            <th>Tổng tiền giỏ hàng</th>
                                             <td>{{number_format($total)}}Vnd</td>
                                         </tr>
                                         <tr>
-                                            <th>Order Total</th>
+                                            <th>Tổng tiền đơn hàng (phụ phí)</th>
                                             <td><strong>{{number_format($total*1.05)}} Vnd(VAT: 5%)</strong></td>
                                         </tr>
                                     </tfoot>
@@ -150,11 +121,11 @@
                                 {{-- <form action="{{route('paybycash.cart')}}" method="POST">
                                     @csrf --}}
                                     <div class="order-button1 mr-2">
-                                        <button type="submit">Pay by Cash</button>
+                                        <button type="submit">Thanh toán (Tiền mặt)</button>
                                     </div>
                                 {{-- </form> --}}
                                 <div class="order-button2">
-                                    <button type="submit" name="payonline">Pay Online</button>
+                                    <button type="submit" name="payonline">Thanh toán Online</button>
                                 </div>
                             </div>
                         </div>

@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Products::all();
+        $products = Products::limit(10)->get();
         return view('frontend.cart.index', compact('products'));
     }
 
@@ -19,6 +19,20 @@ class ProductController extends Controller
         $products = Products::all();
         return view('frontend.cart.shop', compact('products'));
     }
+
+    public function detailsProduct($id)
+    {
+        $product = Products::find($id);
+        $type_id =$product->product_type_id;
+        $relatedProduct = Products::join('product_types', 'product_types.id', '=', 'products.product_type_id')
+            ->where('products.product_type_id', '=', $type_id )
+            ->limit(6)
+            ->get();
+        // dd($relatedProduct);
+        return view('frontend.cart.product-detail', compact('product', 'relatedProduct'));
+    }
+
+
 
     public function addToCart1(Request $request, $id)
     {

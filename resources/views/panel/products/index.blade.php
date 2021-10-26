@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Product</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h6>
     </div>
     @if (session()->get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,32 +18,32 @@
     @endif
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{ route('products.create') }}">New Product</a>
-        <a href="{{route('product.listDeleted')}}" class="badge badge-danger">Products Deleted</a>
+        <a class="btn btn-outline-primary mb-3" href="{{ route('products.create') }}">Sản phẩm mới</a>
+        <a href="{{route('product.listDeleted')}}" class="badge badge-danger">Sản phẩm đã xóa</a>
         @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th>Product Types</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Ảnh</th>
+                        <th>Giá</th>
+                        <th>Loại sản phẩm</th>
                         @if (auth()->user()->rolename == 'admin')
-                        <th>Tools</th>
+                        <th>Công cụ</th>
                         @endif
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th>Product Types</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Ảnh</th>
+                        <th>Giá</th>
+                        <th>Loại sản phẩm</th>
                         @if (auth()->user()->rolename == 'admin')
-                        <th>Tools</th>
+                        <th>Công cụ</th>
                         @endif
                     </tr>
                 </tfoot>
@@ -60,16 +60,16 @@
                         <td>
                             @if (auth()->user()->rolename == 'admin')
                             <a href="{{ route('products.edit', ['product' => $item->id]) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
+                                    class="btn btn-primary">Sửa</button></a>
                             <a href="{{ route('products.show', ['product' => $item->id]) }} "><button
-                                    class="btn btn-primary">Details</button></a>
+                                    class="btn btn-primary">Chi tiết</button></a>
 
                             @if (auth()->user()->rolename == 'admin')
                             <form method="POST" action="{{ route('products.destroy', ['product' => $item->id]) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Xóa</button>
                             </form>
                             @endif
                             @endif

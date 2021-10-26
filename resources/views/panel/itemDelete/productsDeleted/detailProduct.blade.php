@@ -8,12 +8,12 @@
     <div class="card-header py-3">
     <p class="m-0 font-weight-bold text-primary">
         <a href="{{route('products.index')}}" class="border border-primary rounded  ">
-            Products DataTable</a>
-        <span> <i class="fas fa-chevron-right"></i>Details Product</span>
+        Danh sách sản phẩm</a>
+        <span> <i class="fas fa-chevron-right"></i>Chi tiết sản phẩm</span>
     </p>
 </div>
     <div class="text-right mr-2">
-        <a href="{{route('products.index')}}" class="badge badge-warning">Back</a>
+        <a href="{{route('products.index')}}" class="badge badge-warning">Trở lại</a>
     </div>
 
     <div class='container-fluid'>
@@ -24,7 +24,7 @@
                 width="200px" height="300px" />
             <div class="card-body text-center mx-auto">
                 <div class="card-title">
-                    <span class="des">Description</span>
+                    <span class="des">Mô tả</span>
                 </div>
                 <p class="card-text">{{ $product->product_name }}</p>
                 <p class="card-text">{{ $product->product_symbol }}</p>

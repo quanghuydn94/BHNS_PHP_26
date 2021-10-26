@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách loại sản phẩm</h6>
     </div>
     @if (session()->get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,24 +18,24 @@
     @endif
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{ route('product-type.create') }}">New Product Types</a>
+        <a class="btn btn-outline-primary mb-3" href="{{ route('product-type.create') }}">Thêm loại sản phẩm</a>
         @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Mô tả</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Mô tả</th>
+                        <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -46,16 +46,16 @@
                         <td>{{ $item->product_type_description }}</td>
                         <td>
                             <a href="{{ route('product-type.edit', $item->id) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
+                                    class="btn btn-primary">Sửa</button></a>
                             <a href=" {{route('product-type.show', $item->id)}}"><button
-                                    class="btn btn-primary">Details</button></a>
+                                    class="btn btn-primary">Chi tiết</button></a>
                             @if (auth()->user()->rolename == 'admin')
 
                             <form method="POST" action="{{ route('product-type.destroy',  $item->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Xóa</button>
                             </form>
                             @endif
                         </td>

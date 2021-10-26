@@ -10,8 +10,8 @@
 <div class="card-header py-3">
     <p class="m-0 font-weight-bold text-primary">
         <a href="{{route('warehouses.index')}}" class="border border-primary rounded text-decoration-none">
-            DataTables Consignments</a>
-        <span> <i class="fas fa-chevron-right"></i>Update Information Consignment</span>
+        Danh sách lô hàng</a>
+        <span> <i class="fas fa-chevron-right"></i>Sửa thông tin lô hàng</span>
     </p>
 </div>
 <div class="card-body  justify-content-center">
@@ -101,7 +101,7 @@
         </div>
         @csrf
         @method('put')
-        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary">Sửa</button>
     </form>
 </div>
 @endsection

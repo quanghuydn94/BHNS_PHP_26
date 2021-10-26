@@ -6,31 +6,31 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables GroupGoods</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách nhóm hàng</h6>
     </div>
 
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{ route('groupgoods.create') }}">New GroupGoods</a>
+        <a class="btn btn-outline-primary mb-3" href="{{ route('groupgoods.create') }}">Nhóm hàng mới</a>
         @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Ảnh</th>
+                        <th>Mô tả</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Ảnh</th>
+                        <th>Mô tả</th>
+                        <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -44,16 +44,16 @@
                         <td>{{ $item->group_description }}</td>
                         <td>
                             <a href="{{ route('groupgoods.edit', ['groupgood' => $item->id]) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
+                                    class="btn btn-primary">Sửa</button></a>
                             <a href="{{ route('groupgoods.show', ['groupgood' => $item->id]) }}"><button
-                                    class="btn btn-primary">Detail</button></a>
+                                    class="btn btn-primary">Chi tiết</button></a>
                             @if (auth()->user()->rolename == 'admin')
 
                             <form method="POST" action="{{ route('groupgoods.destroy', ['groupgood' => $item->id]) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Xóa</button>
                             </form>
                             @endif
                         </td>

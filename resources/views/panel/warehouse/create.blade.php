@@ -10,8 +10,8 @@
 <div class="card-header py-3">
     <p class="m-0 font-weight-bold text-primary">
         <a href="{{route('warehouses.index')}}" class="border border-primary rounded text-decoration-none">
-            DataTables Consignments</a>
-        <span> <i class="fas fa-chevron-right"></i>Add Information Consignment</span>
+        Danh sách lô hàng</a>
+        <span> <i class="fas fa-chevron-right"></i>Thêm lô hàng</span>
     </p>
 </div>
 <div class="card-body  justify-content-center">
@@ -31,7 +31,7 @@
         <div class="mb-3 row">
             <label class="col-sm-2 col-form-label">Hạn sử dụng</label>
             <div class="col-sm-10">
-                <input name="consignment_expiry" type="date" class="form-control" placeholder="Hạn sử dụng">
+                <input name="consignment_expiry" type="date" class="form-control" placeholder="Ngày tháng">
             </div>
         </div>
         <div class="mb-3 row">
@@ -94,7 +94,7 @@
             </div>
         </div>
         @csrf
-        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary">Thêm</button>
     </form>
 </div>
 @endsection

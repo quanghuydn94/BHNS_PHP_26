@@ -35,7 +35,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="far fa-smile-wink fa-spin"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Quản lý <sup>2</sup></div>
             </a>
 
             <!-- Divider -->
@@ -45,7 +45,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('panel.index')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Thống kê</span></a>
             </li>
 
             <!-- Divider -->
@@ -53,7 +53,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Menu
+                Danh mục
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -62,7 +62,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
                     aria-expanded="true" aria-controls="collapseUsers">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Quản ly người dùng</span>
+                    <span>Quản lý người dùng</span>
                 </a>
                 <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -141,10 +141,6 @@
                 <div id="collapseOrders" class="collapse" aria-labelledby="headingOrders"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        {{-- <h6 class="collapse-header">Quản lý đơn hàng</h6> --}}
-                        {{-- @if (auth()->user()->rolename == 'admin')
-                        <a class="collapse-item" href="{{ route('products.create') }}">Thêm</a>
-                        @endif --}}
                         <a class="collapse-item" href="{{ route('order.index') }}">Danh sách</a>
                     </div>
                 </div>
@@ -199,7 +195,7 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
@@ -361,20 +357,16 @@
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="{{route('users.profile')}}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Thông tin
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('users.profile')}}">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
+                                    Đổi mật khẩu
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Đăng xuất
                                 </a>
                             </div>
                         </li>
@@ -390,13 +382,13 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h4 mb-0 text-gray-600">
-                            <a href="{{route('panel.index')}}" class="btn btn-primary">Home</a>
+                            <a href="{{route('panel.index')}}" class="btn btn-primary"><i class="fas fa-home"></i></a>
                         </h1>
                         @if (Auth::user()->rolename == 'admin')
 
                         <a href="{{route('accounts-locked.index')}}"
-                            class="text-right badge badge-danger shadow p-1 rounded">Blocked
-                            accounts</a>
+                            class="text-right badge badge-danger shadow p-1 rounded">
+                             Tài khoản bị khóa</a>
                         @endif
                     </div>
 
@@ -434,17 +426,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Bạn muốn đăng xuất?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Chọn nút "Đăng xuất" bên dưới nếu bạn muốn đăng xuất</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy bỏ</button>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class="btn btn-primary">Logout</button>
+                        <button class="btn btn-primary">Đăng xuất</button>
                     </form>
                 </div>
             </div>

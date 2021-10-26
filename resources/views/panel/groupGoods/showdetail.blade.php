@@ -6,39 +6,36 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4  bg-primary">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Details GroupGoods</h6>
+        <p class="m-0 font-weight-bold text-primary">
+            <a href="{{route('groupgoods.index')}}" class="border border-primary rounded text-decoration-none">
+                Danh sách nhóm hàng</a>
+            <span> <i class="fas fa-chevron-right"></i>Thông tin nhóm hàng</span>
+        </p>
     </div>
 
     <div class="card-body  w-50 mx-auto">
         <div class="card-header">
-            Featured
+            Thông tin
         </div>
         <ul class="list-group list-group-flush  ">
             <li class="list-group-item">
-                <h5>Id</h5>
+                <strong>STT</strong>
                 <span>{{ $groupgood->id }}</span>
             </li>
             <li class="list-group-item">
-                <h5>Name Groupgoods</h5>
+                <strong>Nhóm Hàng: </strong>
                 <span>{{ $groupgood->group_name }}</span>
             </li>
             <li class="list-group-item">
-                <h5>Image</h5>
-                <span class="border rounded"><img src="{{url('img/groupgoods', $groupgood->group_image) }}" width="150px" alt=""> </span>
+                <strong>Ảnh</strong>
+                <span class=" d-flex justify-content-center  "><img src="{{url('img/groupgoods', $groupgood->group_image) }}"
+                   class="border rounded" width="150px" alt="{{$groupgood->group_image}}"> </span>
             </li>
             <li class="list-group-item">
-                <h5>Description</h5>
+                <strong>Mô tả</strong>
                 <span>{{ $groupgood->group_description }}</span>
             </li>
         </ul>
     </div>
 </div>
 @endsection
-{{-- @section('scripts')
-<!-- Page level plugins -->
-<script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
-<!-- Page level custom scripts -->
-<script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
-@endsection --}}

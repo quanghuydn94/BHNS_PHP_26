@@ -10,8 +10,8 @@
     <div class="card-header shadow mb-4">
         <p class="m-0 font-weight-bold text-primary">
             <a href="{{route('users.index')}}" class="border border-primary rounded text-decoration-none">
-                DataTables Account</a>
-            <span> <i class="fas fa-chevron-right"></i>Accounts Locked</span>
+            Danh sách tài khoản</a>
+            <span> <i class="fas fa-chevron-right"></i>Tài khoản đã khóa</span>
         </p>
     </div>
     <div class="card-body">
@@ -19,20 +19,20 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
+                        <th>STT</th>
+                        <th>Tên</th>
                         <th>Email</th>
-                        <th>Role</th>
-                        <th>Tools</th>
+                        <th>Vai trò</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
+                        <th>STT</th>
+                        <th>Tên</th>
                         <th>Email</th>
-                        <th>Role</th>
-                        <th>Tools</th>
+                        <th>Vai trò</th>
+                        <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -47,12 +47,12 @@
                         <td>
 
                             <a href="{{route('accounts-locked.show', $user->id)}} "><button
-                                    class="btn btn-primary">Details</button></a>
+                                    class="btn btn-primary">Chi tiết</button></a>
                             <form method="POST" action="{{ route('accounts-locked.destroy', $user->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Active</button>
+                                <button class="btn btn-primary">Kích hoạt</button>
                             </form>
                         </td>
                     </tr>

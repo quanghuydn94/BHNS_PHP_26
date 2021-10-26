@@ -8,9 +8,8 @@
     <div class="card-header py-3">
         <p class="m-0 font-weight-bold text-primary">
             <a href="{{route('product-type.index')}}" class="border border-primary rounded text-decoration-none">
-                DataTables
-                Product Types </a>
-            <span> <i class="fas fa-chevron-right"></i>Detail Product Type</span>
+            Danh sách loại đơn hàng </a>
+            <span> <i class="fas fa-chevron-right"></i>Thông tin loại sản phẩm</span>
         </p>
     </div>
 
@@ -22,7 +21,7 @@
                 width="auto" height="auto" />
             <div class="card-body text-center mx-auto">
                 <div class="card-title">
-                    <span class="des">Description</span>
+                    <span class="des">Mô tả</span>
                 </div>
                 <p class="card-text">{{ $productType->product_type_name}}</p>
                 <p class="card-text">{{ $productType->product_type_description }}</p>

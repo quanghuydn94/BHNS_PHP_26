@@ -24,8 +24,8 @@
     <div class="card-header py-3">
         <p class="m-0 font-weight-bold text-primary">
             <a href="{{route('order.index')}}" class="border border-primary rounded text-decoration-none">
-                Orders DataTable</a>
-            <span> <i class="fas fa-chevron-right"></i>Add Information Orders</span>
+                Danh sách đơn hàng</a>
+            <span> <i class="fas fa-chevron-right"></i>Thêm đơn hàng</span>
         </p>
     </div>
     <div class="card-body ">
@@ -36,11 +36,11 @@
             <table class="  table table-bordered text-monospace update_cart_url" data-url="{{route('updateCart')}}">
                 <thead>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Product Price(VNĐ)</th>
-                        <th>Product Quantity(Kg)</th>
-                        <th>SubTotal</th>
-                        <th>Action</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá sản phẩm(VNĐ)</th>
+                        <th>Số lượng(Kg)</th>
+                        <th>Tông tiền</th>
+                        <th>Chức năng</th>
 
                     </tr>
                 </thead>
@@ -69,32 +69,32 @@
                 </tbody>
             </table>
             <div class="card-footer">
-                <h2 name="total_price">Total: {{number_format($total)}} VNĐ</h2>
+                <h2 name="total_price">Tổng tiền: {{number_format($total)}} VNĐ</h2>
                 <div class="mb-3 row ">
-                    <label class="col-sm-1 col-form-label">Name</label>
+                    <label class="col-sm-2 col-form-label">Tên khách hàng</label>
                     <div class="col-sm-4">
                         <input name="customer_name" id='customer_name' type="text" class="form-control"
                             placeholder="Nguyen Van A">
                     </div>
 
-                    <label class="col-sm-1 col-form-label">Phone</label>
+                    <label class="col-sm-2 col-form-label">SĐT</label>
                     <div class="col-sm-4">
                         <input name="customer_phone" id='customer_phone' type="text" class="form-control"
                             placeholder="+84123456789" autocomplete="text">
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label class="col-sm-1 col-form-label">Address</label>
+                    <label class="col-sm-2 col-form-label">Địa chỉ</label>
                     <div class="col-sm-4">
                         <input name="customer_address" type="text" class="form-control" placeholder="">
                     </div>
-                    <label class="col-sm-1 col-form-label">Email</label>
+                    <label class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-4">
                         <input name="customer_email" id='customer_email' type="text" class="form-control"
                             placeholder="email@example.com">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Checkout</button>
+                <button type="submit" class="btn btn-primary">Thanh toán</button>
             </div>
 
             @csrf

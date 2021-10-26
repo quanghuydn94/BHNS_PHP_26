@@ -32,7 +32,6 @@
 
  <!--- shop_wrapper area  -->
  <div class="container">
-
      <div class="row">
          <div class="col-lg-3 col-md-8 col-12">
              <div class="shop_sidebar">
@@ -42,7 +41,6 @@
                              <h3>Danh mục </h3>
                          </div>
                          <ul class="shop_toggle">
-
                              <li class="has-sub"><a href="#">Rau tươi </a>
                                  <ul class="categorie_sub">
                                      <li><a href="#">Dưa leo</a></li>
@@ -50,19 +48,14 @@
                                      <li><a href="#">Khoai tây</a></li>
                                      <li><a href="#">Hành</a></li>
                                  </ul>
-
                              </li>
-
                              <li class="has-sub"><a href="#">Trái cây </a>
                                  <ul class="categorie_sub">
                                      <li><a href="#">Chuối</a></li>
                                      <li><a href="#">Cam</a></li>
                                      <li><a href="#">Sầu riêng</a></li>
                                  </ul>
-
                              </li>
-
-
                          </ul>
                      </div>
                  </div>
@@ -76,63 +69,9 @@
                              <input type="text" name="text" id="amount" />
                          </div>
                      </div>
-
-                     <div class="size_clearfix widget  mb-30">
-                         <div class="widget_title">
-                             <h3>Kích thước</h3>
-                         </div>
-                         <ul>
-                             <li>
-                                 <input id="facet_size" type="checkbox">
-                                 <label for="facet_size">S (11)</label>
-                             </li>
-
-                             <li>
-                                 <input id="facet_size_one" type="checkbox">
-                                 <label for="facet_size_one">M(11)</label>
-                             </li>
-                             <li>
-                                 <input id="facet_size_two" type="checkbox">
-                                 <label for="facet_size_two">L(11)</label>
-                             </li>
-                         </ul>
-                     </div>
-
-
-
-                     <div class="Compositions widget mb-30">
-                         <div class="widget_title">
-                             <h3>Properties</h3>
-                         </div>
-                         <ul>
-                             <li>
-                                 <input type="checkbox" id="pro1">
-                                 <label for="pro1"> Colorful Dress(6)</label>
-                             </li>
-                             <li>
-                                 <input type="checkbox" id="pro2">
-                                 <label for="pro2"> Maxi Dress(2)</label>
-                             </li>
-                             <li>
-                                 <input type="checkbox" id="pro3">
-                                 <label for="pro3">Midi Dress(4)</label>
-                             </li>
-                             <li>
-                                 <input type="checkbox" id="pro4">
-                                 <label for="pro4">Short Dress(7)</label>
-                             </li>
-                             <li>
-                                 <input type="checkbox" id="pro5">
-                                 <label for="pro5">Short Sleeve(4)</label>
-                             </li>
-
-                         </ul>
-
-                     </div>
                  </div>
              </div>
          </div>
-
          <div class="col-lg-9 col-md-12 col-12">
              <div class="categories_banner">
                  <div class="categories_banner_inner">
@@ -149,20 +88,16 @@
                                      <li><a class="active" data-toggle="tab" href="#shop_active" role="tab"
                                              aria-controls="shop_active" aria-selected="true"><i class="fa fa-th"
                                                  aria-hidden="true"></i></a></li>
-
-                                     <li><a data-toggle="tab" href="#featured_active" role="tab"
-                                             aria-controls="featured_active" aria-selected="false"><i class="fa fa-list"
-                                                 aria-hidden="true"></i></a></li>
                                  </ul>
                              </div>
                              <div class="tab_menu_right">
-                                 <p>There are 14 products.</p>
+                                 <p></p>
                              </div>
                          </div>
                      </div>
                      <div class="col-lg-6 col-md-5 col-sm-6">
                          <div class="Relevance">
-                             <span>Sort by:</span>
+                             <span>Phân loại:</span>
                              <div class="dropdown dropdown-shop">
                                  <select name="drop" id="dropdown">
                                      <option value="1">Relevance</option>
@@ -176,7 +111,6 @@
                      </div>
                  </div>
              </div>
-
              <div class="tab_product_wrapper">
                  <div class="tab-content">
                      <div class="tab-pane fade show active" id="shop_active">
@@ -185,7 +119,7 @@
                              <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 product">
                                  <div class="single__product">
                                      <div class="single_product__inner">
-                                         <span class="new_badge">new</span>
+                                         <span class="new_badge">Mới</span>
                                          <span class="discount_price">-5%</span>
                                          <div class="product_img">
                                              <a href="#">
@@ -207,17 +141,14 @@
                                              </div>
                                              <div class="product__hover">
                                                  <ul>
-
-                                                     <li><a data-id="{{$pro->id}}" href="javascript:"
-                                                             class="add__cart" role="button"><i
-                                                                 class="ion-android-cart"></i></a>
+                                                     <li><a data-id="{{$pro->id}}" href="javascript:" class="add__cart"
+                                                             role="button"><i class="ion-android-cart"></i></a>
                                                      </li>
                                                      <li><a class="cart-fore" href="#" data-toggle="modal"
                                                              href="javascript:" data-target="#my_modal{{$pro->id}}"
-                                                             title="Quick View"><i class="ion-android-open"></i></a>
+                                                             title="Xem nhanh"><i class="ion-android-open"></i></a>
                                                      </li>
-
-                                                     <li><a href="product-details.html"><i
+                                                     <li><a href="{{route('details.product',$pro->id)}}"><i
                                                                  class="ion-clipboard"></i></a>
                                                      </li>
                                                  </ul>
@@ -226,26 +157,21 @@
                                      </div>
                                  </div>
                              </div>
-
-
                              @endforeach
                          </div>
                      </div>
-
                  </div>
              </div>
-
              <div class="shop_pagination">
                  <div class="row align-items-center">
                      <div class="col-lg-4 col-md-6 col-sm-6">
                          <div class="total_item_shop">
-                             Showing 13-14 of 14 item(s)
+                             Hiện thị 12 sản phẩm
                          </div>
                      </div>
                      <div class="col-lg-6 offset-lg-2 col-md-6 col-sm-6">
                          <div class="page_list_clearfix text-center">
                              <div class="pagination">
-
                              </div>
                          </div>
                      </div>
@@ -256,12 +182,8 @@
  </div>
  <!--- shop_wrapper area end  -->
 
-
-
-
  <!-- modal area start -->
  @foreach ($products as $pro )
-
 
  <div class="modal fade" id="my_modal{{$pro->id}}" tabindex="-1" role="dialog" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
@@ -292,34 +214,25 @@
                                          </div>
                                      </div>
                                  </div>
-                                 {{-- <div class="products_tab_button  modals">
-                                                                 <ul class="nav product_navactive" role="tablist">
-                                                                     <li>
-                                                                         <a class="nav-link active" data-toggle="tab"
-                                                                             href="#imgeone" role="tab"
-                                                                             aria-controls="imgeone"
-                                                                             aria-selected="false"><img
-                                                                                 src="assets/img/cart/nav.jpg"
-                                                                                 alt=""></a>
-                                                                     </li>
-                                                                     <li>
-                                                                         <a class="nav-link" data-toggle="tab"
-                                                                             href="#imgetwo" role="tab"
-                                                                             aria-controls="imgetwo"
-                                                                             aria-selected="false"><img
-                                                                                 src="assets/img/cart/nav1.jpg"
-                                                                                 alt=""></a>
-                                                                     </li>
-                                                                     <li>
-                                                                         <a class="nav-link button_three"
-                                                                             data-toggle="tab" href="#imgethree"
-                                                                             role="tab" aria-controls="imgethree"
-                                                                             aria-selected="false"><img
-                                                                                 src="assets/img/cart/nav2.jpg"
-                                                                                 alt=""></a>
-                                                                     </li>
-                                                                 </ul>
-                                                             </div> --}}
+                                 <div class="products_tab_button  modals">
+                                     <ul class="nav product_navactive" role="tablist">
+                                         <li>
+                                             <a class="nav-link active" data-toggle="tab" href="#imgeone" role="tab"
+                                                 aria-controls="imgeone" aria-selected="false"><img
+                                                     src="assets/img/cart/nav.jpg" alt=""></a>
+                                         </li>
+                                         <li>
+                                             <a class="nav-link" data-toggle="tab" href="#imgetwo" role="tab"
+                                                 aria-controls="imgetwo" aria-selected="false"><img
+                                                     src="assets/img/cart/nav1.jpg" alt=""></a>
+                                         </li>
+                                         <li>
+                                             <a class="nav-link button_three" data-toggle="tab" href="#imgethree"
+                                                 role="tab" aria-controls="imgethree" aria-selected="false"><img
+                                                     src="assets/img/cart/nav2.jpg" alt=""></a>
+                                         </li>
+                                     </ul>
+                                 </div>
                              </div>
                          </div>
                          <div class="col-lg-7 col-md-7 col-sm-12">
@@ -338,7 +251,7 @@
                                          </div>
                                          <div class="product_variants">
                                              <div class="quickview_plus_minus">
-                                                 <span class="control_label">Quantity</span>
+                                                 <span class="control_label">Số lượng</span>
                                                  <div class="quickview_plus_minus_inner">
                                                      <div class="cart-plus-minus">
                                                          <input type="number" min="1" value="1" name="quantity_modal"
@@ -346,12 +259,10 @@
                                                      </div>
                                                      <div class="add_button add_modal">
                                                          <button type="button" class="btn_add_cart"
-                                                             data-id="{{$pro->id}}"> Add to
-                                                             cart</button>
+                                                             data-id="{{$pro->id}}"> Thêm giỏ hàng</button>
                                                      </div>
                                                  </div>
                                              </div>
-
                                              <div class="cart_description">
                                                  <p>{{$pro->product_description}}</p>
                                              </div>
@@ -360,9 +271,20 @@
                                  </div>
                              </div>
                          </div>
-
                      </div>
-
+                     <div class="row">
+                         <div class="col-12">
+                             <div class="social-share">
+                                 <h3>Chia sẻ sản phẩm này</h3>
+                                 <ul>
+                                     <li><a href="https://facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                     <li><a href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                     <li><a href="https://gmail.com"><i class="fa fa-google-plus"></i></a></li>
+                                     <li><a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                                 </ul>
+                             </div>
+                         </div>
+                     </div>
                  </div>
              </div>
          </div>
@@ -381,26 +303,26 @@
 
  <script>
      //Add to cart index shop
-     $(".add__cart").on('click',function (e) {
+     $(".add__cart").on('click', function (e) {
          e.preventDefault();
          let id = $(this).data("id");
          let quantity = $(this).parents(".single__product").find('input.quantity').val();
-        //  console.log(quantity);
-          $.ajax({
-              type: "GET",
-              url: "add-to-cart/" + id,
-              data: {
+         //  console.log(quantity);
+         $.ajax({
+             type: "GET",
+             url: "add-to-cart/" + id,
+             data: {
                  id: id,
                  quantity: quantity
-              },
-              success: function (repsonse) {
-                  $("#cart-icon").load(" #cart-icon");
-                  // $("#change-item-cart").html(repsonse);
-                  $("#change-item-cart").load(" #change-item-cart");
-                  alertify.set('notifier', 'position', 'bottom-right');
-                  alertify.success('You have successfully added!');
-              }
-          });
+             },
+             success: function (repsonse) {
+                 $("#cart-icon").load(" #cart-icon");
+                 // $("#change-item-cart").html(repsonse);
+                 $("#change-item-cart").load(" #change-item-cart");
+                 alertify.set('notifier', 'position', 'bottom-right');
+                 alertify.success('You have successfully added!');
+             }
+         });
      });
 
      //Add to cart modal

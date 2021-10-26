@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Employees</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách nhân viên</h6>
     </div>
     @if (session()->get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,22 +26,22 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Identity Num</th>
-                        <th>Address</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>SĐT</th>
+                        <th>Số CMND</th>
+                        <th>Địa chỉ</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Identity Num</th>
-                        <th>Address</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>SĐT</th>
+                        <th>Số CMND</th>
+                        <th>Địa chỉ</th>
+                        <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -57,16 +57,16 @@
                         <td>
                             @if (Auth::user()->rolename == 'admin')
                             <a href="{{ route('employees.edit', $em->id) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
+                                    class="btn btn-primary">Sửa</button></a>
                             <form method="POST" action="{{ route('employees.destroy',$em->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Xóa</button>
                             </form>
                             @endif
                             <a href="{{route('employees.show',$em->id)}}"><button
-                                    class="btn btn-primary">Details</button></a>
+                                    class="btn btn-primary">Chi tiết</button></a>
                         </td>
                     </tr>
                     @endif

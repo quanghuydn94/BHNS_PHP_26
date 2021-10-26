@@ -24,8 +24,8 @@
 <div class="card-header py-3">
     <p class="m-0 font-weight-bold text-primary">
         <a href="{{route('order.index')}}" class="border border-primary rounded text-decoration-none">
-            Orders DataTable</a>
-        <span> <i class="fas fa-chevron-right"></i>Add Information Orders</span>
+           Danh sách đơn hàng</a>
+        <span> <i class="fas fa-chevron-right"></i>Thêm đơn hàng</span>
     </p>
 </div>
 <div class="container">
@@ -39,21 +39,21 @@
                         <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
+                                    <th>STT</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
                                     @if (auth()->user()->rolename == 'admin')
-                                    <th>Tools</th>
+                                    <th>Chức năng</th>
                                     @endif
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
+                                    <th>STT</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
                                     @if (auth()->user()->rolename == 'admin')
-                                    <th>Tools</th>
+                                    <th>Chức năng</th>
                                     @endif
                                 </tr>
                             </tfoot>
@@ -67,7 +67,7 @@
                                     @if (auth()->user()->rolename == 'admin')
                                     <td>
                                         <a href="" data-url="{{route('addToCart',['id'=>$pro->id])}}"
-                                            class="add btn-sm btn-primary">add</a>
+                                            class="add btn-sm btn-primary">Thêm</a>
                                     </td>
                                     @endif
                                 </tr>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
             </div>
-            <a class="btn-sm btn-warning" href="{{route('showCart')}}">👋Show Orders</a>
+            <a class="btn-sm btn-warning" href="{{route('showCart')}}">👋Hiển thị đơn hàng</a>
             @csrf
         </form>
     </div>

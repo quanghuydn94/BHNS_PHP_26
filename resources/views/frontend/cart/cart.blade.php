@@ -41,12 +41,12 @@
                             <table data-url="{{ route('update.cart') }}" class="update_cart_url">
                                 <thead>
                                     <tr>
-                                        <th class="img-thumbnail">Image</th>
-                                        <th class="product-name">Product</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
-                                        <th class="product-remove">Remove</th>
+                                        <th class="img-thumbnail">Ảnh</th>
+                                        <th class="product-name">Sản Phẩm</th>
+                                        <th class="product-price">Giá</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                        <th class="product-subtotal">Tổng tiền</th>
+                                        <th class="product-remove">Chỉnh sửa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -91,7 +91,7 @@
                             <div class="col-lg-7 col-sm-7 col-md-7">
                                 <div class="buttons-carts">
                                     {{-- <input value="Update Cart" type="submit"> --}}
-                                    <a href="{{route('shop.index')}}">Continue Shopping</a>
+                                    <a href="{{route('shop.index')}}">Tiếp tục mua hàng</a>
                                 </div>
                                 {{-- <div class="buttons-carts coupon">
                                 <h3>Coupon</h3>
@@ -102,17 +102,17 @@
                             </div>
                             <div class="col-lg-5 col-sm-5 col-md-5">
                                 <div class="cart_totals  text-right">
-                                    <h2>Cart Totals</h2>
+                                    <h2>Tổng đơn hàng</h2>
                                     <div class="cart-subtotal">
-                                        <span>Subtotal</span>
+                                        <span>Tổng tiền sản phẩm</span>
                                         <span>{{number_format($cartTotal)}}Vnd</span>
                                     </div>
                                     <div class="order-total">
-                                        <span><strong>Total</strong> </span>
+                                        <span><strong>Tổng tiền (phụ phí)</strong> </span>
                                         <span><strong>{{number_format($cartTotal)}}Vnd</strong> </span>
                                     </div>
                                     <div class="wc-proceed-to-checkout">
-                                        <a href="{{route('checkout.cart')}}">Proceed to Checkout</a>
+                                        <a href="{{route('checkout.cart')}}">Tiến hành Thanh toán</a>
                                     </div>
                                 </div>
                             </div>

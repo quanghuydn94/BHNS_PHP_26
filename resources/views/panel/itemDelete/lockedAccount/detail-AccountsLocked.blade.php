@@ -1,7 +1,6 @@
 @extends('layouts.panel')
 @section('styles')
 <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{asset('css/admin/detail.css')}}">
 @endsection
 @section('content')
@@ -26,43 +25,43 @@
                         </div>
                         <div class="col-sm-8">
                             <div class="card-block">
-                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information Account Locked</h6>
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Thông tin tài khoản</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
                                         <h6 class="text-muted f-w-400">{{$user->email}}</h6>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Phone</p>
+                                        <p class="m-b-10 f-w-600">SĐT</p>
                                         <h6 class="text-muted f-w-400">{{$user->phone}}</h6>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Address</p>
+                                        <p class="m-b-10 f-w-600">Địa chỉ</p>
                                         <h6 class="text-muted f-w-400">{{$user->address}}</h6>
                                     </div>
 
                                 </div>
-                                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">User Account</h6>
+                                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Tài khoản</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
                                         <h6 class="text-muted f-w-400">{{$user->email}}</h6>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Role Name</p>
+                                        <p class="m-b-10 f-w-600">Vai trò</p>
                                         <h6 class="text-muted f-w-400">{{$user->rolename}}</h6>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Date Join</p>
+                                        <p class="m-b-10 f-w-600">Ngày đăng ký</p>
                                         <h6 class="text-muted f-w-400">{{$user->created_at}}</h6>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Status Active</p>
+                                        <p class="m-b-10 f-w-600">Trạng thái</p>
                                         <h6 class="text-muted f-w-400">{{$user->active}}</h6>
                                     </div>
                                 </div>
                                 <div class="p-2 text-right">
-                                    <a href="{{ route('accounts-locked.index') }}" class="badge badge-primary"> Back </a>
+                                    <a href="{{ route('accounts-locked.index') }}" class="badge badge-primary"> Trở lại </a>
                                 </div>
                             </div>
                         </div>

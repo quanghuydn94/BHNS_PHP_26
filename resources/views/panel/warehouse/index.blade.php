@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Consignments</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách lô hàng</h6>
     </div>
     @if (session()->get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,34 +18,34 @@
     @endif
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{ route('warehouses.create') }}">New Consignment</a>
-        <a class="badge badge-danger mb-3" href="{{ route('consignment-delete.index') }}">Consignment
-            Deleted</a>
+        <a class="btn btn-outline-primary mb-3" href="{{ route('warehouses.create') }}">Thêm lô hàng</a>
+        <a class="badge badge-danger mb-3" href="{{ route('consignment-delete.index') }}">Lô hàng
+            đã xóa</a>
         @endif
         <div class="table-responsive">
             <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Symbol</th>
-                        <th>Expiry</th>
-                        <th>Quantity</th>
-                        <th>Purchase Price</th>
-                        <th>Sale Price</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Ký hiệu</th>
+                        <th>Thời hạn</th>
+                        <th>Số lượng</th>
+                        <th>Giá mua</th>
+                        <th>Giá bán</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Symbol</th>
-                        <th>Expiry</th>
-                        <th>Quantity</th>
-                        <th>Purchase Price</th>
-                        <th>Sale Price</th>
-                        <th>Tools</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Ký hiệu</th>
+                        <th>Thời hạn</th>
+                        <th>Số lượng</th>
+                        <th>Giá mua</th>
+                        <th>Giá bán</th>
+                        <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -62,16 +62,16 @@
                         <td>{{ $item->consignment_sale_price }}</td>
                         <td>
                             <a href=" {{route('warehouses.show', $item->id)}}"><button
-                                    class="btn btn-primary">Details</button></a>
+                                    class="btn btn-primary">Chi tiết</button></a>
                             @if (auth()->user()->rolename == 'admin')
                             <a href="{{ route('warehouses.edit', $item->id) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
+                                    class="btn btn-primary">Sửa</button></a>
 
                             <form method="POST" action="{{ route('warehouses.destroy',  $item->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Xóa</button>
                             </form>
                             @endif
                         </td>

@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Orders</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách đơn hàng</h6>
     </div>
     @if (session()->get('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -19,26 +19,26 @@
     <div class="card-body">
         <a class="btn btn-outline-primary mb-3" href="{{ route('order.create') }}">Thêm đơn hàng</a>
         @if (auth()->user()->rolename == 'admin')
-        <a href="{{route('order.tableDelete')}}" class="badge badge-danger mb-3">Table Orders Deleted</a>
+        <a href="{{route('order.tableDelete')}}" class="badge badge-danger mb-3">Đơn hàng đã xóa</a>
         @endif
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Tools</th>
+                        <th>Ngày</th>
+                        <th>Tên khách hàng</th>
+                        <th>Địa chỉ</th>
+                        <th>SĐT</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Tools</th>
+                        <th>Ngày</th>
+                        <th>Tên khách hàng</th>
+                        <th>Địa chỉ</th>
+                        <th>SĐT</th>
+                        <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -53,16 +53,16 @@
 
                         <td>
                             <a href="{{ route('order.edit', ['id' => $item->id]) }}"><button
-                                    class="btn btn-primary">Edit</button></a>
+                                    class="btn btn-primary">Sửa</button></a>
                             <a href="{{route('order.show',['id'=>$item->id])}} "><button
-                                    class="btn btn-primary">Details</button></a>
+                                    class="btn btn-primary">Chi tiết</button></a>
                             @if (auth()->user()->rolename == 'admin')
 
                             <form method="POST" action="{{ route('order.delete', ['id' => $item->id]) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('post')
-                                <button class="btn btn-primary">Delete</button>
+                                <button class="btn btn-primary">Xóa</button>
                             </form>
 
                             @endif

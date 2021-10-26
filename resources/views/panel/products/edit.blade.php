@@ -10,26 +10,26 @@
 <div class="card-header py-3">
     <p class="m-0 font-weight-bold text-primary">
         <a href="{{route('products.index')}}" class="border border-primary rounded text-decoration-none">
-            DataTables Products</a>
-        <span> <i class="fas fa-chevron-right"></i>Update Information Products</span>
+            Danh sách sản phẩm</a>
+        <span> <i class="fas fa-chevron-right"></i>Sửa thông tin sản phẩm</span>
     </p>
 </div>
 <div class="card-body">
     <form method="POST" action="{{ route('products.update', ['product' => $data->id]) }}" enctype="multipart/form-data">
         <div class="mb-3 row">
-            <label for=" " class="col-sm-2 col-form-label">Name Product</label>
+            <label for=" " class="col-sm-2 col-form-label">Tên sản phẩm</label>
             <div class="col-sm-10">
                 <input name="product_name" type="text" class="form-control" value="{{ $data->product_name }}">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for=" " class="col-sm-2 col-form-label">Symbol Product</label>
+            <label for=" " class="col-sm-2 col-form-label">Ký hiệu</label>
             <div class="col-sm-10">
                 <input name="product_symbol" type="text" class="form-control" value="{{ $data->product_symbol }}">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for=" " class="col-sm-2 col-form-label">Price</label>
+            <label for=" " class="col-sm-2 col-form-label">Giá</label>
             <div class="col-sm-10 d-flex">
                 <input name="product_price" type="text" class="form-control" value="{{ $data->product_price }}">
                 <div class="input-group-append">
@@ -38,20 +38,20 @@
             </div>
         </div>
         <div class="mb-3 row">
-            <label for=" " class="col-sm-2 col-form-label">Image</label>
+            <label for=" " class="col-sm-2 col-form-label">Ảnh</label>
             <div class="col-sm-10">
                 <input name="product_image" type="file" class="form-control"  >
             </div>
         </div>
         <div class="mb-3 row">
-            <label for=" " class="col-sm-2 col-form-label">Description</label>
+            <label for=" " class="col-sm-2 col-form-label">Mô tả</label>
             <div class="col-sm-10">
                 <textarea name="product_description" type="text" class="form-control"
                     value="{{ $data->product_description }}">{{ $data->product_description }}</textarea>
             </div>
         </div>
         <div class="mb-3 row">
-            <label for=" " class="col-sm-2 col-form-label">Category</label>
+            <label for=" " class="col-sm-2 col-form-label">Loại sản phẩm</label>
             <div class="col-sm-10">
                 <select name="product_type_id" class="form-control">
                     @foreach($productTypes as $type)
@@ -63,7 +63,7 @@
         </div>
         @method('put')
         @csrf
-        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary">Sửa</button>
     </form>
 </div>
 @endsection

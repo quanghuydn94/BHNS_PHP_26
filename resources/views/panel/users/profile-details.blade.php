@@ -12,7 +12,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <h5 class="modal-title" id="changePasswordModalLabel">Đổi mật khẩu</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -29,29 +29,26 @@
                     <form action="{{route('change-password.store')}}" method="post" class="w-75 mx-auto">
                         @csrf
                         <div class=" text-white  m-b-10">
-                            <label>Password Currently</label>
+                            <label>Mật khẩu hiện tại</label>
                             <input type="password" name="password_current" class="form-control "
                                 placeholder="  **************">
                         </div>
                         <div class="  text-white m-b-10">
-                            <label>New Password </label>
+                            <label>Mật khẩu mới</label>
                             <input type="password" name="password" class="form-control " placeholder="  **************">
                         </div>
                         <div class=" text-white m-b-10">
-                            <label>Confirm New Password</label>
+                            <label>Xác nhận mật khẩu</label>
                             <input type="password" name="password_confirmation" class="form-control  "
                                 placeholder="   **************">
                         </div>
                         <div class=" m-t-40">
-                            <button type="submit" class="form-control btn-light b-b-default  ">Save</button>
+                            <button type="submit" class="form-control btn-light b-b-default  ">Thay đổi</button>
                         </div>
                     </form>
                 </div>
             </div>
-            {{-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div> --}}
+
         </div>
     </div>
 </div>
@@ -86,51 +83,47 @@
                                     </button>
                                 </div>
                                 @endif
-                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Thông tin </h6>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
                                         <h6 class="text-muted f-w-400">{{Auth::user()->email}}</h6>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Phone</p>
+                                        <p class="m-b-10 f-w-600">SĐT</p>
                                         <h6 class="text-muted f-w-400">{{Auth::user()->phone}}</h6>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Address</p>
+                                        <p class="m-b-10 f-w-600">Địa chỉ</p>
                                         <h6 class="text-muted f-w-400">{{Auth::user()->address}}</h6>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Identity Num</p>
-                                        <h6 class="text-muted f-w-400">{{Auth::user()->avatar}}</h6>
                                     </div>
                                 </div>
                                 <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"> </h6>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Role Name</p>
+                                        <p class="m-b-10 f-w-600">Vai trò</p>
                                         <h6 class="text-muted f-w-400">{{Auth::user()->rolename}}</h6>
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">
                                             <a href="#" class="badge badge-warning"
-                                                data-toggle="modal" data-target="#changePasswordModal">Change
-                                                password</a>
+                                                data-toggle="modal" data-target="#changePasswordModal">
+                                                 Đổi mật khẩu</a>
                                         </p>
                                     </div>
                                     <div class="col-sm-6">
-                                        <p class="m-b-10 f-w-600">Date Join</p>
+                                        <p class="m-b-10 f-w-600">Ngày đăng ký</p>
                                         <h6 class="text-muted f-w-400">{{Auth::user()->created_at}}</h6>
                                     </div>
                                 </div>
                                 @if (Auth::user()->rolename == 'admin')
 
                                 <div class="p-2 text-right">
-                                    <a href="{{ route('users.index') }}" class="badge badge-primary"> Back </a>
+                                    <a href="{{ route('users.index') }}" class="badge badge-primary"> Trở lại </a>
                                 </div>
                                 @elseif (Auth::user()->rolename == 'admin' || Auth::user()->rolename == 'employee')
                                 <div class="p-2 text-right">
-                                    <a href="{{ route('panel.index') }}" class="badge badge-primary"> Back </a>
+                                    <a href="{{ route('panel.index') }}" class="badge badge-primary"> Trở lại </a>
                                 </div>
                                 @endif
                             </div>

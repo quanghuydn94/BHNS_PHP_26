@@ -6,33 +6,33 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Suppliers</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách nhà cung cấp</h6>
     </div>
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
-        <a class="btn btn-outline-primary mb-3" href="{{route('suppliers.create')}} ">Add New Suppliers</a>
+        <a class="btn btn-outline-primary mb-3" href="{{route('suppliers.create')}} ">Thêm nhà cung cấp</a>
         @endif
         <div class="table-responsive ">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Địa chỉ</th>
+                        <th>SĐT</th>
                         @if (auth()->user()->rolename == 'admin')
-                        <th>Tools</th>
+                        <th>Công cụ</th>
                         @endif
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Địa chỉ</th>
+                        <th>SĐT</th>
                         @if (auth()->user()->rolename == 'admin')
-                        <th>Tools</th>
+                        <th>Công cụ</th>
                         @endif
                     </tr>
                 </tfoot>
@@ -48,15 +48,16 @@
                         @if (auth()->user()->rolename == 'admin')
                         <td class="d-flex justify-content-between">
                             <a href="{{ route('suppliers.edit', $item->id) }}"><button
-                                    class="badge badge-primary">Edit</button></a>
-                            <a href="{{route('suppliers.show',$item->id)}} "><button  class="badge badge-primary">Details</button></a>
+                                    class="badge badge-primary">Sửa</button></a>
+                            <a href="{{route('suppliers.show',$item->id)}} "><button
+                                class="badge badge-primary">Chi tiết</button></a>
 
                             @if (auth()->user()->rolename == 'admin')
                             <form method="POST" action="{{ route('suppliers.destroy',$item->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button  class="badge badge-primary">Delete</button>
+                                <button  class="badge badge-primary">Xóa</button>
                             </form>
                             @endif
                         </td>

@@ -7,10 +7,12 @@
 <div class="card shadow mb-4  bg-primary">
     <div class="card-header py-3">
         <a href="{{route('warehouses.index')}}" class="border border-primary rounded text-decoration-none">
-            DataTables Consignments</a>
-        <span class="m-0 font-weight-bold text-primary"><i class="fas fa-chevron-right"></i>Details Consignment </span>
+        Danh sách lô hàng</a>
+        <span class="m-0 font-weight-bold text-primary"><i class="fas fa-chevron-right"></i>Chi tiết lô hàng</span>
     </div>
-
+    <div class="text-right mr-2">
+        <a href="{{route('warehouses.index')}}" class="badge badge-warning">Trở lại</a>
+    </div>
     <div class="text-right mr-2">
     </div>
 
@@ -18,25 +20,24 @@
         <div class="row ">
             <div class="  bg-white  col-lg-12 mt-5 pt-4">
                 <div class="card-title">
-                    <span class="des">Description</span>
+                    <span class="des">Mô tả</span>
                 </div>
                 <div class="card-body">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Symbol</th>
-                                <th>Name</th>
-                                <th>Expiry</th>
-                                <th>Purchase Price (VND/Kg)</th>
-                                <th>Sale Price (VND/Kg)</th>
-                                <th>Quantity (Kg)</th>
-                                <th>Saled (Kg)</th>
-                                <th>Return (Kg)</th>
-                                <th>Currently(Kg)</th>
-                                <th>Product</th>
-                                <th>Supplier</th>
-                                <th>Date at</th>
+                                <th>STT</th>
+                                <th>Ký hiệu</th>
+                                <th>Tên</th>
+                                <th>Thời hạn</th>
+                                <th>Giá mua(VND/Kg)</th>
+                                <th>Giá bán(VND/Kg)</th>
+                                <th>Số lượng (Kg)</th>
+                                <th>Đã bán (Kg)</th>
+                                <th>Trả lại (Kg)</th>
+                                <th>Hiện tại(Kg)</th>
+                                <th>Nhà cung cấp</th>
+                                <th>Ngày</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,7 +52,6 @@
                                 <td>{{$data->consignment_saled}}</td>
                                 <td>{{$data->consignment_return}}</td>
                                 <td>{{$data->consignment_currently}}</td>
-                                <td>{{$product->product_name }}</td>
                                 <td>{{$supplier->supplier_name }}</td>
                                 <td>{{$data->created_at}}</td>
                             </tr>
