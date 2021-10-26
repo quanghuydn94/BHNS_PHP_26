@@ -20,6 +20,8 @@ class CreateOrdersTable extends Migration
             $table->string('order_customer_email')->nullable();
             $table->string('order_customer_address')->nullable();
             $table->string('order_note')->nullable();
+            $table->unsignedBigInteger('order_status_id');
+            $table->foreign('order_status_id')->references('id')->on('orderstatus')->onDelete('cascade');
             $table->unsignedInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->boolean('active');

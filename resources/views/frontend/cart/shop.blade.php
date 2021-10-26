@@ -1,9 +1,11 @@
  @extends('layouts.frontend')
  @section('styles')
-<!-- Css Alert -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
-    <!-- Default theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+ <!-- Css Alert -->
+ <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+ <!-- Default theme -->
+ <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+ <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/panigation.css')}}">
  @endsection
  @section('content')
 
@@ -178,16 +180,16 @@
              <div class="tab_product_wrapper">
                  <div class="tab-content">
                      <div class="tab-pane fade show active" id="shop_active">
-                         <div class="row">
+                         <div class="row product-content">
                              @foreach ($products as $pro )
-                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 product">
                                  <div class="single__product">
                                      <div class="single_product__inner">
                                          <span class="new_badge">new</span>
                                          <span class="discount_price">-5%</span>
                                          <div class="product_img">
                                              <a href="#">
-                                                 <img src="{{url('img/products',$pro->product_image)}} " height="200px"
+                                                 <img src="{{url('img/products',$pro->product_image)}} " height="170px"
                                                      width="auto" alt="">
                                              </a>
                                          </div>
@@ -198,18 +200,22 @@
                                                      </h4>
                                                  </div>
                                                  <div class="product_price">
+                                                     <input type="hidden" min="1" value="1" name="quantity_modal"
+                                                         class="cart-plus-minus-box quantity">
                                                      <p>{{number_format($pro->product_price)}} Vnd</p>
                                                  </div>
                                              </div>
                                              <div class="product__hover">
                                                  <ul>
 
-                                                     <li><a onclick="AddCart({{$pro->id}})" href="javascript:"
-                                                            class="add__cart" role="button"><i class="ion-android-cart"></i></a>
+                                                     <li><a data-id="{{$pro->id}}" href="javascript:"
+                                                             class="add__cart" role="button"><i
+                                                                 class="ion-android-cart"></i></a>
                                                      </li>
                                                      <li><a class="cart-fore" href="#" data-toggle="modal"
-                                                             data-target="#my_modal" title="Quick View"><i
-                                                                 class="ion-android-open"></i></a></li>
+                                                             href="javascript:" data-target="#my_modal{{$pro->id}}"
+                                                             title="Quick View"><i class="ion-android-open"></i></a>
+                                                     </li>
 
                                                      <li><a href="product-details.html"><i
                                                                  class="ion-clipboard"></i></a>
@@ -220,6 +226,8 @@
                                      </div>
                                  </div>
                              </div>
+
+
                              @endforeach
                          </div>
                      </div>
@@ -236,14 +244,9 @@
                      </div>
                      <div class="col-lg-6 offset-lg-2 col-md-6 col-sm-6">
                          <div class="page_list_clearfix text-center">
-                             <ul>
-                                 <li class="prev"><a href="#"><i class="zmdi zmdi-chevron-left"></i>
-                                         Previous</a></li>
-                                 <li><a href="#">1</a></li>
-                                 <li class="current_page"><a href="#">2</a></li>
-                                 <li><a href="#">3</a></li>
-                                 <li class="next"><a href="#"> Next <i class="zmdi zmdi-chevron-right"></i></a></li>
-                             </ul>
+                             <div class="pagination">
+
+                             </div>
                          </div>
                      </div>
                  </div>
@@ -257,8 +260,10 @@
 
 
  <!-- modal area start -->
+ @foreach ($products as $pro )
 
- <div class="modal fade" id="my_modal" tabindex="-1" role="dialog" aria-hidden="true">
+
+ <div class="modal fade" id="my_modal{{$pro->id}}" tabindex="-1" role="dialog" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -272,7 +277,8 @@
                                  <div class="tab-content" id="pills-tabContent">
                                      <div class="tab-pane fade show active" id="imgeone" role="tabpanel">
                                          <div class="product_tab_img">
-                                             <a href="#"><img src="assets/img/cart/nav12.jpg" alt=""></a>
+                                             <a href="#"><img src="{{url('/img/products',$pro->product_image)}}"
+                                                     alt=""></a>
                                          </div>
                                      </div>
                                      <div class="tab-pane fade" id="imgetwo" role="tabpanel">
@@ -286,25 +292,34 @@
                                          </div>
                                      </div>
                                  </div>
-                                 <div class="products_tab_button  modals">
-                                     <ul class="nav product_navactive" role="tablist">
-                                         <li>
-                                             <a class="nav-link active" data-toggle="tab" href="#imgeone" role="tab"
-                                                 aria-controls="imgeone" aria-selected="false"><img
-                                                     src="assets/img/cart/nav.jpg" alt=""></a>
-                                         </li>
-                                         <li>
-                                             <a class="nav-link" data-toggle="tab" href="#imgetwo" role="tab"
-                                                 aria-controls="imgetwo" aria-selected="false"><img
-                                                     src="assets/img/cart/nav1.jpg" alt=""></a>
-                                         </li>
-                                         <li>
-                                             <a class="nav-link button_three" data-toggle="tab" href="#imgethree"
-                                                 role="tab" aria-controls="imgethree" aria-selected="false"><img
-                                                     src="assets/img/cart/nav2.jpg" alt=""></a>
-                                         </li>
-                                     </ul>
-                                 </div>
+                                 {{-- <div class="products_tab_button  modals">
+                                                                 <ul class="nav product_navactive" role="tablist">
+                                                                     <li>
+                                                                         <a class="nav-link active" data-toggle="tab"
+                                                                             href="#imgeone" role="tab"
+                                                                             aria-controls="imgeone"
+                                                                             aria-selected="false"><img
+                                                                                 src="assets/img/cart/nav.jpg"
+                                                                                 alt=""></a>
+                                                                     </li>
+                                                                     <li>
+                                                                         <a class="nav-link" data-toggle="tab"
+                                                                             href="#imgetwo" role="tab"
+                                                                             aria-controls="imgetwo"
+                                                                             aria-selected="false"><img
+                                                                                 src="assets/img/cart/nav1.jpg"
+                                                                                 alt=""></a>
+                                                                     </li>
+                                                                     <li>
+                                                                         <a class="nav-link button_three"
+                                                                             data-toggle="tab" href="#imgethree"
+                                                                             role="tab" aria-controls="imgethree"
+                                                                             aria-selected="false"><img
+                                                                                 src="assets/img/cart/nav2.jpg"
+                                                                                 alt=""></a>
+                                                                     </li>
+                                                                 </ul>
+                                                             </div> --}}
                              </div>
                          </div>
                          <div class="col-lg-7 col-md-7 col-sm-12">
@@ -314,87 +329,119 @@
                                          <h2>{{$pro->product_name}}</h2>
                                      </div>
                                      <div class="current_price">
-                                         <span class="regular">$64.99</span>
-                                         <span class="regular_price">$78.99</span>
+                                         {{-- <span class="regular">$64.99</span> --}}
+                                         <span class="regular_price">{{$pro->product_price}}</span>
                                      </div>
                                      <div class="product_information product_modal">
                                          <div id="product_modal_content">
-                                             <p>Short-sleeved blouse with feminine draped sleeve detail.</p>
+                                             <p>Gạo trồng theo phương thức hiện đại, dẻo, thơm, ngon.</p>
                                          </div>
                                          <div class="product_variants">
-                                             <div class="product_variants_item modal_item">
-                                                 <span class="control_label">Size</span>
-                                                 <select id="group_1">
-                                                     <option value="1">S</option>
-                                                     <option value="2" selected="selected">M</option>
-                                                     <option value="3">L</option>
-                                                 </select>
-                                             </div>
-
                                              <div class="quickview_plus_minus">
                                                  <span class="control_label">Quantity</span>
                                                  <div class="quickview_plus_minus_inner">
                                                      <div class="cart-plus-minus">
-                                                         <input type="text" value="02" name="qtybutton"
-                                                             class="cart-plus-minus-box">
+                                                         <input type="number" min="1" value="1" name="quantity_modal"
+                                                             class="cart-plus-minus-box quantity">
                                                      </div>
                                                      <div class="add_button add_modal">
-                                                         <button type="submit"> Add to cart</button>
+                                                         <button type="button" class="btn_add_cart"
+                                                             data-id="{{$pro->id}}"> Add to
+                                                             cart</button>
                                                      </div>
                                                  </div>
                                              </div>
 
                                              <div class="cart_description">
-                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                                     enim
-                                                     ad minim veniam,</p>
+                                                 <p>{{$pro->product_description}}</p>
                                              </div>
                                          </div>
                                      </div>
                                  </div>
                              </div>
                          </div>
+
                      </div>
-                     <div class="row">
-                         <div class="col-12">
-                             <div class="social-share">
-                                 <h3>Share this product</h3>
-                                 <ul>
-                                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                     <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                     <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                     <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                 </ul>
-                             </div>
-                         </div>
-                     </div>
+
                  </div>
              </div>
          </div>
      </div>
  </div>
+ @endforeach
+
+ <!-- modal area end -->
  @endsection
  @section('scripts')
-<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+ <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+ <script src="{{asset('FrontEnd/assets/js/panigation.js')}}"></script>
 
 
  <script>
-     function AddCart(id) {
-        $.ajax({
-            type: "GET",
-            url: "add-to-cart/" + id,
-            success: function (repsonse) {
-                $("#cart-icon").load(" #cart-icon");
-                // $("#change-item-cart").html(repsonse);
-                $("#change-item-cart").load(" #change-item-cart");
-                alertify.set('notifier','position', 'bottom-right');
-                alertify.success('You have successfully added!');
-            }
-        });
-     }
+     //Add to cart index shop
+     $(".add__cart").on('click',function (e) {
+         e.preventDefault();
+         let id = $(this).data("id");
+         let quantity = $(this).parents(".single__product").find('input.quantity').val();
+        //  console.log(quantity);
+          $.ajax({
+              type: "GET",
+              url: "add-to-cart/" + id,
+              data: {
+                 id: id,
+                 quantity: quantity
+              },
+              success: function (repsonse) {
+                  $("#cart-icon").load(" #cart-icon");
+                  // $("#change-item-cart").html(repsonse);
+                  $("#change-item-cart").load(" #change-item-cart");
+                  alertify.set('notifier', 'position', 'bottom-right');
+                  alertify.success('You have successfully added!');
+              }
+          });
+     });
+
+     //Add to cart modal
+
+
+     $(".btn_add_cart").on('click', function (e) {
+         e.preventDefault();
+         let id = $(this).data("id");
+         let quantity = $(this).parents(".quickview_plus_minus_inner").find('input.quantity').val();
+         $.ajax({
+             method: "GET",
+             url: "add-to-cart/" + id,
+             data: {
+                 id: id,
+                 quantity: quantity
+             },
+             success: function (data) {
+                 $("#cart-icon").load(" #cart-icon");
+                 $("#change-item-cart").load(" #change-item-cart");
+                 alertify.set('notifier', 'position', 'bottom-right');
+                 alertify.success('You have successfully added!');
+             }
+         });
+
+     });
+
+
+
+
+
+     //  $(".mini_cart_checkout").on('click', "a", function (e) {
+     //      e.preventDefault();
+     //      $.ajax({
+     //          method: "get",
+     //          url: "check-out",
+     //          success: function (response) {
+     //              if (response.message == "error") {
+     //                  alert('Do not have any products');
+     //              }
+     //          }
+     //      });
+     //  });
  </script>
  @endsection

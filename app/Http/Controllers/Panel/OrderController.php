@@ -26,14 +26,6 @@ class OrderController extends Controller
         return response()->view('panel.orders.create', compact('products'));
     }
 
-    // public function getProduct($id)
-    // {
-    //     $product = DB::table("products")
-    //         ->select('product_name', 'product_price', 'id'  )
-    //         ->where("id", $id)
-    //         ->first();
-    //     return json_encode($product);
-    // }
 
     public function getCustomer(Request $request)
     {
@@ -67,7 +59,7 @@ class OrderController extends Controller
     {
 
         $product = Products::find($id);
-        $cart = session()->get(key:'cart');
+        $cart = session()->get('cart');
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] = $cart[$id]['quantity'] + 1;
         } else {
@@ -80,7 +72,7 @@ class OrderController extends Controller
         }
         session()->put('cart', $cart);
         echo "</pre>";
-        print_r(session()->get(key:'cart'));
+        print_r(session()->get('cart'));
         return response()->json([
             'code' => 200,
             'message' => 'success',
@@ -90,17 +82,17 @@ class OrderController extends Controller
 
     public function showCart()
     {
-        $carts = session()->get(key:'cart');
+        $carts = session()->get('cart');
         return response()->view('panel.orders.showOrders', compact('carts'));
     }
 
     public function updateCart(Request $request)
     {
         if ($request->id && $request->quatity) {
-            $carts = session()->get(key:'cart');
+            $carts = session()->get('cart');
             $carts[$request->id]['quantity'] = $request->quatity;
             session()->put('cart', $carts);
-            $carts = session()->get(key:'cart');
+            $carts = session()->get('cart');
             $products = Products::all();
             $cartComponent = view('panel.orders.showOrders', compact('carts', 'products'))->render();
             return response()->json([
@@ -146,11 +138,9 @@ class OrderController extends Controller
             $customerId = $customer->id;
 
         } else {
-
             $customerId = $customer->id;
-
         }
-        // dd($customer);
+
         $order = Orders::create([
 
             'order_customer_name' => $customer->customer_name,
@@ -163,7 +153,7 @@ class OrderController extends Controller
 
         ]);
         $orderId = $order->id;
-        foreach (session()->get(key:'cart') as $id => $cart) {
+        foreach (session()->get('cart') as $id => $cart) {
 
             $product = Products::find($id);
             $productId = $product->id;
@@ -179,7 +169,6 @@ class OrderController extends Controller
         };
         session()->forget('cart');
         return redirect()->route('order.index')->with('success', 'You have successfully added');
-
     }
 
     public function show($id)
@@ -215,9 +204,6 @@ class OrderController extends Controller
             'order_status' => $request->order_status,
         ]);
 
-        // OrderDetails::where('orders_id', ((int)$id))->update([
-
-        // ]);
         return redirect()->route('order.index')->with('success', 'You have successfully updated');
     }
     public function destroy($id)

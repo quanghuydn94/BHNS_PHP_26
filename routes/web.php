@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\FrontEnd\CheckoutController;
 use App\Http\Controllers\FrontEnd\ProductController as FrontEndProductController;
 use App\Http\Controllers\Panel\AccountBlockedController;
 use App\Http\Controllers\Panel\ConsignmentDeleteController;
@@ -137,9 +138,12 @@ Route::group(['prefix' => 'frontend'], function () {
     Route::get('/shop', [FrontEndProductController::class, 'shop'])->name('shop.index');
 
     Route::get('/cart/show', [FrontEndProductController::class, 'showCart'])->name('show.cart');
-    Route::get('/add-to-cart/{id}', [FrontEndProductController::class, 'addToCart'])->name('add.to.cart');
+    Route::get('/add-to-cart/{id}', [FrontEndProductController::class, 'addToCart1'])->name('add.to.cart');
+    // Route::get('/add-cart/{id}', [FrontEndProductController::class, 'addCart2'])->name('add.cart');
+
     Route::get('/update-cart', [FrontEndProductController::class, 'update'])->name('update.cart');
-    Route::delete('/remove-from-cart', [FrontEndProductController::class, 'remove'])->name('remove.from.cart');
+    Route::get('/remove-from-cart', [FrontEndProductController::class, 'remove'])->name('remove.from.cart');
     Route::get('/check-out', [FrontEndProductController::class, 'checkout'])->name('checkout.cart');
+    Route::post('/check-out', [CheckoutController::class , 'store'])->name('paybycash.cart');
 
 });

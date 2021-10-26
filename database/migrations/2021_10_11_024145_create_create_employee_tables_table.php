@@ -20,7 +20,7 @@ class CreateCreateEmployeeTablesTable extends Migration
             $table->string('employee_phone', 12)->nullable();
             $table->string('employee_address')->nullable();
             $table->boolean('active');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

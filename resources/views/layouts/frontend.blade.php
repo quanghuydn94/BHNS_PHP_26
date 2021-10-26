@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/responsive.css')}}">
     <script src="{{asset('FrontEnd/assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 
+    <!-- Css Alert -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
     <!-- Yield styles -->
     @yield('styles')
 
@@ -169,12 +174,13 @@
                                                 <div class="cart_icon ">
                                                     <a href="#">
                                                         @php $totlalQty = 0 @endphp
-
-                                                        @foreach ((array) session('cart') as $id => $details )
+                                                        @if(session()->get('cart') != null)
+                                                        @foreach ( session('cart') as $id => $cart )
                                                         @php
-                                                        $totlalQty +=$details['quantity'];
+                                                        $totlalQty +=$cart['quantity'];
                                                         @endphp
                                                         @endforeach
+                                                        @endif
                                                         <span class="cart_icon_inner">
                                                             <i class="ion-android-cart"></i>
                                                             <span class="cart_count">{{$totlalQty}}</span>
@@ -188,30 +194,30 @@
                                                 <div id="change-item-cart">
                                                     @if (session('cart'))
                                                     @php $total = 0 @endphp
-                                                    @foreach (session('cart') as $id => $detail )
+                                                    @foreach (session('cart') as $id => $cart )
                                                     <div class="mini_cart_item">
                                                         <div class="mini_cart_img">
                                                             <a href="#">
-                                                                <img src="{{url('img/products',$detail['image'])}} " width="50px" height="50px">
-                                                                <span class="cart_count">{{$detail['quantity']}} </span>
+                                                                <img src="{{url('img/products',$cart['image'])}} " width="50px" height="50px">
+                                                                <span class="cart_count">{{$cart['quantity']}} </span>
                                                             </a>
                                                         </div>
                                                         <div class="cart_info">
-                                                            <h5><a href="product-details.html">{{$detail['name']}} </a>
+                                                            <h5><a href="product-details.html">{{$cart['name']}} </a>
                                                             </h5>
-                                                            <span class="cart_price">{{number_format($detail['price'])}}Vnd </span>
+                                                            <span class="cart_price">{{number_format($cart['price'])}}Vnd </span>
                                                         </div>
                                                         <div class="cart_remove">
-                                                            <a href="#"><i class="zmdi zmdi-delete"></i></a>
+                                                            <a href="#"><i data-id="{{$id}}" class="zmdi zmdi-delete"></i></a>
                                                         </div>
                                                     </div>
                                                     @endforeach
                                                     @endif
                                                     <div class="price_content">
                                                         @php $total = 0 @endphp
-                                                        @foreach ((array) session('cart') as $id => $details )
+                                                        @foreach ((array) session('cart') as $id => $cart )
                                                         @php
-                                                        $total += $details['price'] * $details['quantity'];
+                                                        $total += $cart['price'] * $cart['quantity'];
                                                         @endphp
                                                         @endforeach
 
@@ -433,8 +439,45 @@
     <script src="{{asset('FrontEnd/assets/js/plugins.js')}}"></script>
     <script src="{{asset('FrontEnd/assets/js/main.js')}}"></script>
     <script src="{{asset('FrontEnd/assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+
 
     @yield('scripts')
+
+
+    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+
+    @if(session()->get('cartNull'))
+    <script>
+        swal("Notification", "You do not have any orders, go to the shop", "warning");
+    </script>
+    @endif
+    <script type="text/javascript">
+
+        //Remove item product from icon cart
+     $("#change-item-cart").on("click", ".zmdi-delete", function (e) {
+         e.preventDefault();
+         let id = $(this).data("id");
+         $.ajax({
+             method: "GET",
+             url: "remove-from-cart/",
+             data: {
+                 _token: '{{ csrf_token() }}',
+                 id: id
+             },
+             success: function (repsonse) {
+                 $("#cart-icon").load(" #cart-icon");
+                 $("#change-item-cart").load(" #change-item-cart");
+                 $(".checkout-form").load(" .checkout-form");
+
+                 alertify.set('notifier', 'position', 'bottom-right');
+                 alertify.success('You have successfully removed!');
+             }
+         });
+     });
+    </script>
 
 </body>
 

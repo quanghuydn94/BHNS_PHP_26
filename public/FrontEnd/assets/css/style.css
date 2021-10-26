@@ -3563,7 +3563,7 @@ span.control_labels {
   color: #555555;
   margin: 0;
 }
-.order-button button {
+.order-button1 button {
 	padding: 12px 40px;
 	margin-top: 10px;
 	background: #78a206;
@@ -3576,10 +3576,30 @@ span.control_labels {
 	border-radius: 25px;
 	border: 1px solid transparent;
 }
-.order-button button:hover {
+.order-button1 button:hover {
 	background: #333333 ;
 	color: #fff;
 }
+
+.order-button2 button {
+    padding: 12px 40px;
+    margin-top: 10px;
+    background: #166FB0;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    -webkit-transition: .3s;
+    transition: .3s;
+    cursor: pointer;
+    border-radius: 25px;
+    border: 1px solid transparent;
+}
+
+.order-button2 button:hover {
+    background: #333133;
+    color: #fff;
+}
+
 .order-table.table-responsive table {
 	width: 100%;
 }

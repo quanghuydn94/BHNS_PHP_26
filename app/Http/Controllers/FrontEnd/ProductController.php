@@ -20,7 +20,7 @@ class ProductController extends Controller
         return view('frontend.cart.shop', compact('products'));
     }
 
-    public function addToCart(Request $request, $id)
+    public function addToCart1(Request $request, $id)
     {
         $product = Products::findOrFail($id);
 
@@ -31,7 +31,7 @@ class ProductController extends Controller
         } else {
             $cart[$id] = [
                 "name" => $product->product_name,
-                "quantity" => 1,
+                "quantity" => $request->quantity,
                 "price" => $product->product_price,
                 "image" => $product->product_image,
                 "des" => $product->product_description,
@@ -39,11 +39,38 @@ class ProductController extends Controller
         }
 
         session()->put('cart', $cart);
-        // return view('frontend.cart.miniCart', compact('cart'));
-        return response()->json(['message' => 'success']);
+    //     // return view('frontend.cart.miniCart', compact('cart'));
+    //     return response()->json(['message' => 'success']);
         // return redirect()->route('shop.index')->with('success', 'Product added to cart successfully!');
 
     }
+
+    // public function addCart2(Request $request, $id)
+    // {
+    //     $product = Products::findOrFail($id);
+
+    //     $cart = session()->get('cart1', []);
+
+    //     if (isset($cart[$id])) {
+    //         $cart[$id]['quantity']++;
+    //     } else {
+    //         $cart[$id] = [
+    //             "name" => $product->product_name,
+    //             "quantity" => $request->quantity,
+    //             "price" => $product->product_price,
+    //             "image" => $product->product_image,
+    //             "des" => $product->product_description,
+    //         ];
+    //     }
+
+    //     session()->put('cart1', $cart);
+    //     dd(session()->get('cart1'));
+    //     // return response()->json(['message' => 'success']);
+    //     return view('frontend.cart.miniCart', compact('cart'));
+    //     // return response()->json(['message' => 'success']);
+    //     // return redirect()->route('shop.index')->with('success', 'Product added to cart successfully!');
+
+    // }
 
     public function showCart()
     {
@@ -57,7 +84,6 @@ class ProductController extends Controller
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            // session()->flash('success', 'Cart updated successfully');
         }
     }
 
@@ -83,8 +109,8 @@ class ProductController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Product removed successfully');
         }
+        // return view('frontend.cart.miniCart', compact('cart'));
     }
 
     public function checkout()
@@ -92,8 +118,10 @@ class ProductController extends Controller
         if(session()->get('cart') != null) {
 
             return view('frontend.cart.checkout');
-        } else {
-            return redirect()->back()->with('success', 'Do not have Orders');
+        }
+        else {
+
+            return redirect()->back()->with('cartNull', 'Cart empty!') ;
 
         }
     }
