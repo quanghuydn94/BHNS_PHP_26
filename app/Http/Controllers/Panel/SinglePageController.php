@@ -14,7 +14,7 @@ class SinglePageController extends Controller
             return view('panel.index');
         } else {                                                                         // if rolename is not admin or employee then logout and show message errors
             Auth::logout();
-            return redirect('/')->withErrors('These credentials do not match our records.');
+            return redirect('/')->withErrors('Thông tin không trùng khớp.');
         }
     }
 }

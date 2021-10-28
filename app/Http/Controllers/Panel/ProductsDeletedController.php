@@ -17,7 +17,7 @@ class ProductsDeletedController extends Controller
             ['products' => $products]);
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin không trùng khớp.');
         }
 
     }
@@ -31,7 +31,7 @@ class ProductsDeletedController extends Controller
             ['product' => $product]);
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin không trùng khớp.');
         }
     }
 
@@ -42,7 +42,7 @@ class ProductsDeletedController extends Controller
             return redirect()->back();
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin không trùng khớp.');
         }
     }
 }

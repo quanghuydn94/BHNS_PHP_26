@@ -42,7 +42,7 @@ Route::post('/', [\App\Http\Controllers\Auth\AuthenticatedSessionController::cla
 
 Route::post('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
-    ->name('logout');
+    ->name('logout.admin');
 // Route::get('/panel/change-password/{id}', function ($id) {
 //     $user = \App\Models\User::find((int)$id);
 //     return response()->view('auth.changePassword',['user'=>$user]);
@@ -134,10 +134,29 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
 
 //Routes FrontEnd
 Route::group(['prefix' => 'frontend'], function () {
-    Route::get('/index', [FrontEndProductController::class, 'index'])->name('frontend.index');
+    Route::get('/register', [App\Http\Controllers\FrontEnd\Auth\RegisteredUserController::class, 'create'])
+        ->middleware('guest')
+        ->name('register');
+
+    Route::post('/register', [App\Http\Controllers\FrontEnd\Auth\RegisteredUserController::class, 'store'])
+        ->middleware('guest');
+
+    Route::get('/login', [App\Http\Controllers\FrontEnd\Auth\AuthenticatedSessionController::class, 'create'])
+        ->middleware('guest')
+        ->name('login');
+
+    Route::post('/login', [App\Http\Controllers\FrontEnd\Auth\AuthenticatedSessionController::class, 'store'])
+        ->middleware('guest');
+    Route::get('/logout', [App\Http\Controllers\FrontEnd\Auth\AuthenticatedSessionController::class, 'destroy'])
+        ->middleware('auth')
+        ->name('logout');
+    Route::get('my-account', [\App\Http\Controllers\FrontEnd\MyAccountController::class, 'get'])->name('my-account');
+    Route::post('my-account', [\App\Http\Controllers\FrontEnd\MyAccountController::class, 'post']);
+
+
+    Route::get('/organic', [FrontEndProductController::class, 'index'])->name('frontend.index');
     Route::get('/shop', [FrontEndProductController::class, 'shop'])->name('shop.index');
     Route::get('/product-detail/{id}', [FrontEndProductController::class, 'detailsProduct'])->name('details.product');
-
 
     Route::get('/cart/show', [FrontEndProductController::class, 'showCart'])->name('show.cart');
     Route::get('/add-to-cart/{id}', [FrontEndProductController::class, 'addToCart1'])->name('add.to.cart');
@@ -145,6 +164,8 @@ Route::group(['prefix' => 'frontend'], function () {
     Route::get('/update-cart', [FrontEndProductController::class, 'update'])->name('update.cart');
     Route::get('/remove-from-cart', [FrontEndProductController::class, 'remove'])->name('remove.from.cart');
     Route::get('/check-out', [FrontEndProductController::class, 'checkout'])->name('checkout.cart');
-    Route::post('/check-out', [CheckoutController::class , 'store'])->name('paybycash.cart');
+    Route::post('/check-out', [CheckoutController::class, 'payment'])->name('paybycash.cart');
+    Route::get('/check-out-online', [CheckoutController::class, 'payOnline'])->name('payonline.cart');
+    Route::get('/credit-card', [CheckoutController::class, 'viewCreditCard'])->name('creditcard.cart');
 
 });

@@ -168,7 +168,7 @@ class OrderController extends Controller
 
         };
         session()->forget('cart');
-        return redirect()->route('order.index')->with('success', 'You have successfully added');
+        return redirect()->route('order.index')->with('success', 'Bạn đã thêm thành công');
     }
 
     public function show($id)

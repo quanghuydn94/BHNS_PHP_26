@@ -171,7 +171,7 @@ class UserController extends Controller
             return redirect()->back();
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin không khớp với dữ liệu');
         }
     }
 }

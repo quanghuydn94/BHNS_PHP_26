@@ -25,8 +25,12 @@ class ProductController extends Controller
         $product = Products::find($id);
         $type_id =$product->product_type_id;
         $relatedProduct = Products::join('product_types', 'product_types.id', '=', 'products.product_type_id')
-            ->where('products.product_type_id', '=', $type_id )
-            ->limit(6)
+            ->where('product_types.id', '=', $type_id )
+            ->select('products.id',
+                    'products.product_name',
+                    'products.product_image',
+                    'products.product_price',
+                    'products.product_description')
             ->get();
         // dd($relatedProduct);
         return view('frontend.cart.product-detail', compact('product', 'relatedProduct'));
@@ -130,8 +134,8 @@ class ProductController extends Controller
     public function checkout()
     {
         if(session()->get('cart') != null) {
-
-            return view('frontend.cart.checkout');
+            $carts = session()->get(key:'cart');
+            return view('frontend.checkout.checkout', compact('carts'));
         }
         else {
 

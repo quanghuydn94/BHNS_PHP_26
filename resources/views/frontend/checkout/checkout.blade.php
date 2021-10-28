@@ -118,14 +118,14 @@
                                 </table>
                             </div>
                             <div class="payment-method d-flex justify-content-center">
-                                {{-- <form action="{{route('paybycash.cart')}}" method="POST">
-                                    @csrf --}}
+                                <form action="{{route('paybycash.cart')}}" method="POST">
+                                    @csrf
                                     <div class="order-button1 mr-2">
                                         <button type="submit">Thanh toán (Tiền mặt)</button>
                                     </div>
-                                {{-- </form> --}}
+                                </form>
                                 <div class="order-button2">
-                                    <button type="submit" name="payonline">Thanh toán Online</button>
+                                    <a  href="{{route('payonline.cart')}}" class="text-white">Thanh toán Online </a>
                                 </div>
                             </div>
                         </div>
@@ -139,10 +139,17 @@
 @endsection
 @section('scripts')
 <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
-
-@if(session()->get('haveordered'))
+@if(session()->get('orders'))
 <script>
-    swal("Goods job", "Order has been booked successfully", "success");
+
+   swal({title: "Thành công",
+                text: "Đơn hàng của bạn đã được đặt",
+                icon: "success",
+                button: "Quay lại"}).then(function() {
+            window.location = "{{route('shop.index')}}";
+        });
+
+
 </script>
 @endif
 @endsection

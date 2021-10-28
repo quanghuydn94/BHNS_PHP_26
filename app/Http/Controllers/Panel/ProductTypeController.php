@@ -57,7 +57,7 @@ class ProductTypeController extends Controller
             'active'=>1,
         ]);
 
-        return redirect()->route('product-type.index')->with('success', 'You have successfully added ');
+        return redirect()->route('product-type.index')->with('success', 'Bạn đã thêm thành công');
 
     }
 

@@ -58,8 +58,7 @@
                                     <div class="menu">
                                         <nav>
                                             <ul>
-                                                <li class="active"><a href="{{route('frontend.index')}}">Trang chủ <i
-                                                            class="fa fa-angle-down"></i></a>
+                                                <li class="active"><a href="{{route('frontend.index')}}">Trang chủ </a>
 
                                                 </li>
                                                 <li><a href="about.html">Chúng tôi </a> </li>
@@ -96,7 +95,10 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-
+                                                @if(Auth::user() == null)
+                                                <li class="mega_parent"><a class="text-primary" href="{{route('login')}}">Đăng Nhập</a>
+                                                </li>
+                                                @endif
                                             </ul>
                                         </nav>
                                     </div>
@@ -104,14 +106,11 @@
                                     <div class="mobile-menu d-lg-none">
                                         <nav>
                                             <ul>
-                                                <li class="active"><a href="index.html">Trang chủ <i
-                                                            class="fa fa-angle-down"></i></a>
-                                                    <ul class="sub_menu">
-                                                        <li><a href="index.html">Trang chủ 1</a></li>
-                                                    </ul>
+                                                <li class="active"><a href="{{route('frontend.index')}}">Trang chủ </a>
+
                                                 </li>
                                                 <li><a href="about.html">Chúng tôi </a> </li>
-                                                <li><a href="shop.html">Cửa hàng</a> </li>
+                                                <li><a href="{{route('shop.index')}}">Cửa hàng</a> </li>
                                                 <li><a href="blog.html">Blog </a>
                                                 </li>
                                                 <li class="mega_parent"><a href="#">Danh mục <i
@@ -120,20 +119,16 @@
                                                         <li class="mega_item">
                                                             <a class="mega_title" href="#">1</a>
                                                             <ul>
-
+                                                                <li><a href="wishlist.html">Danh mục ưu thích</a></li>
                                                                 <li><a href="{{route('shop.index')}}">Sản phẩm</a></li>
-
-                                                                <li><a href="product-details.html">Chi tiết sản phẩm</a>
-                                                                </li>
-                                                                <li><a href="my-account.html">Tài khoản</a></li>
+                                                                <li><a href="{{route('show.cart')}}">Giỏ hàng</a></li>
+                                                                <li><a href="{{route('checkout.cart')}}">Thanh toán</a></li>
                                                             </ul>
                                                         </li>
                                                         <li class="mega_item">
                                                             <a class="mega_title" href="#"> 2</a>
                                                             <ul>
-                                                                <li><a href="wishlist.html">Danh mục ưu thích</a></li>
-                                                                <li><a href="{{route('show.cart')}}">Giỏ hàng</a></li>
-                                                                <li><a href="{{route('checkout.cart')}}">Thanh toán</a></li>
+                                                                <li><a href="my-account.html">Tài khoản</a></li>
                                                                 <li><a href="login.html">Đăng nhập</a></li>
                                                                 <li><a href="register.html">Đăng ký</a></li>
                                                             </ul>
@@ -147,6 +142,9 @@
                                                             </ul>
                                                         </li>
                                                     </ul>
+                                                </li>
+                                                <li class="mega_parent"><a class="text-primary" href="{{route('login')}}">Đăng ký</a>
+
                                                 </li>
 
                                             </ul>
@@ -221,40 +219,39 @@
                                                         @endforeach
 
                                                         <div class="cart-total-price">
-                                                            <span class="label">Total </span>
+                                                            <span class="label">Tổng tiền </span>
                                                             <span class="value"> {{number_format($total)}}Vnd</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="min_cart_view">
-                                                    <a href="{{route('show.cart')}}">View Cart</a>
+                                                    <a href="{{route('show.cart')}}">Xem giỏ hàng</a>
                                                 </div>
 
                                                 <div class="min_cart_checkout">
-                                                    <a href="{{route('checkout.cart')}}">Checkout</a>
+                                                    <a href="{{route('checkout.cart')}}">Thanh Toán</a>
                                                 </div>
                                             </div>
 
                                             <!--Mini Cart Box End -->
                                         </div>
                                     </div>
-
+                                    @if(Auth::user() != null)
                                     <div class="header_account">
                                         <div class="account_inner">
                                             <a href="#"><i class="ion-gear-b"></i></a>
                                         </div>
                                         <div class="content-setting-dropdown">
-                                            {{-- <div class="language-selector-wrapper"> --}}
                                             <div class="user_info_top">
                                                 <ul>
-                                                    <li><a href="my-account.html">Tài khoản của tôi</a></li>
-                                                    <li><a href="checkout.html">Thanh toán</a></li>
-                                                    <li><a href="login.html">Đăng nhập</a></li>
+                                                    <li><a href="{{route('my-account')}}">Tài khoản của tôi</a></li>
+                                                    <li><a href="{{route('checkout.cart')}}">Thanh toán</a></li>
+                                                    <li><a href="{{route('logout')}}">Đăng xuất</a></li>
                                                 </ul>
                                             </div>
-                                            {{-- </div> --}}
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -410,7 +407,7 @@
 
     @if(session()->get('cartNull'))
     <script>
-        swal("Notification", "You do not have any orders, go to the shop", "warning");
+        swal("Chú ý", "Giỏ hàng của ban đang trống, vui lòng vào cửa hàng ", "warning");
     </script>
     @endif
     <script type="text/javascript">

@@ -434,7 +434,7 @@
                 <div class="modal-body">Chọn nút "Đăng xuất" bên dưới nếu bạn muốn đăng xuất</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy bỏ</button>
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout.admin') }}">
                         @csrf
                         <button class="btn btn-primary">Đăng xuất</button>
                     </form>
