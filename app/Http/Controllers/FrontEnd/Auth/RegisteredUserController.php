@@ -34,9 +34,9 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:12', 'unique:users,phone'],
+            'phone' => ['required', 'string', 'max:12', 'unique:users,phone','unique:customers,customer_phone'],
             'address' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users','unique:customers,customer_email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
             'address' => $request->address,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'rolename' => 'client',
+            'rolename' => 'Khách hàng',
         ]);
         Customer::create([
             'customer_name' => $request->name,

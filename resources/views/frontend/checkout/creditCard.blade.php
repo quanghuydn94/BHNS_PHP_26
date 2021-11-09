@@ -49,7 +49,8 @@
 
         </div>
 
-        <form action="">
+        <form action="{{route('payCreditCard.cart')}}">
+            @csrf
             <div class="inputBox">
                 <span>Số thẻ</span>
                 <input type="text" maxlength="16" class="card-number-input">
@@ -98,34 +99,11 @@
                     <input type="text" maxlength="4" class="cvv-input">
                 </div>
             </div>
-            <input type="button" onclick="Payment()" value="thanh toán" class="submit-btn">
+            <input type="submit"   value="thanh toán" class="submit-btn">
         </form>
 
     </div>
 
-
-
-
-
-    <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
-
-    <script>
-        function alertPayment() {
-            swal({
-                title: "Thành công",
-                text: "Đơn hàng của bạn đã được đặt",
-                icon: "success",
-                button: "Quay lại"
-            }).then(function() {
-            window.location = "{{route('shop.index')}}";
-        });
-        }
-
-
-        function Payment(){
-            window.setTimeout(alertPayment, 2000);
-        }
-    </script>
     <script>
         document.querySelector('.card-number-input').oninput = () => {
             document.querySelector('.card-number-box').innerText = document.querySelector('.card-number-input')

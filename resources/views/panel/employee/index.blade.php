@@ -8,14 +8,6 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách nhân viên</h6>
     </div>
-    @if (session()->get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <span>{{session()->get('success')}}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
     @if (Auth::user()->rolename == 'admin')
     <div class="p-2">
         <a href="{{ route('employees.create') }}"><button class="btn btn-primary">Thêm Nhân Viên</button></a>
@@ -56,17 +48,17 @@
                         <td>{{ $em->employee_address }}</td>
                         <td>
                             @if (Auth::user()->rolename == 'admin')
+                            <a href="{{route('employees.show',$em->id)}}"><button
+                                class="btn btn-primary">Chi tiết</button></a>
                             <a href="{{ route('employees.edit', $em->id) }}"><button
                                     class="btn btn-primary">Sửa</button></a>
                             <form method="POST" action="{{ route('employees.destroy',$em->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Xóa</button>
+                                <button class="btn btn-danger">Xóa</button>
                             </form>
                             @endif
-                            <a href="{{route('employees.show',$em->id)}}"><button
-                                    class="btn btn-primary">Chi tiết</button></a>
                         </td>
                     </tr>
                     @endif
@@ -84,4 +76,18 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script>
+    @if(session()->get('success'))
+
+   swal({title: "Thành công",
+                text: '{{session()->get('success')}}',
+                icon: "success",
+
+        });
+
+
+    @endif
+</script>
 @endsection

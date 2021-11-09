@@ -22,7 +22,7 @@ class ConsignmentDeleteController extends Controller
             return response()->view('panel.itemDelete.consignmentDelete.index', ['consignments' => $consignments]);
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin đăng nhập không đúng.');
         }
 
     }
@@ -97,7 +97,7 @@ class ConsignmentDeleteController extends Controller
             return redirect()->back();
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin đăng nhập không đúng.');
         }
     }
 }

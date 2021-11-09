@@ -7,6 +7,8 @@ use App\Models\Products;
 use App\Models\Suppliers;
 use App\Models\WareHouse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class WareHousesController extends Controller
 {
@@ -17,9 +19,8 @@ class WareHousesController extends Controller
      */
     public function index()
     {
-        $list = WareHouse::all();
-
-        return response()->view('panel.warehouse.index', compact('list'));
+        $lists = WareHouse::all();
+        return response()->view('panel.warehouse.index', compact('lists'));
 
     }
 
@@ -45,20 +46,25 @@ class WareHousesController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
+         $validate = Validator::make($request->all(),
+            [
             'consignment_symbol' => 'required|string',
             'consignment_name' => 'required|string',
             'consignment_expiry' => 'required|date:m/d/Y',
             'consignment_purchase_price' => 'required|numeric',
             'consignment_sale_price' => 'required|numeric',
             'consignment_quantity' => 'required|integer',
-            'consignment_saled' => 'required|integer',
-            'consignment_return' => 'required|integer',
-            'consignment_currently' => 'required|integer',
             'product_id' => 'required|integer',
             'supplier_id' => 'required|integer',
-        ];
-        $request->validate($rules);
+            ],
+            [
+                'required' => ' không được để trống',
+                'date' => '  Phải là dang ngày',
+                'numeric' => ' Phải là số',
+            ]);
+        if ($validate->fails()) {
+            return redirect()->route('warehouses.create')->withErrors($validate);
+        }
 
         WareHouse::create([
             'consignment_symbol' => $request->consignment_symbol,
@@ -67,16 +73,14 @@ class WareHousesController extends Controller
             'consignment_purchase_price' => $request->consignment_purchase_price,
             'consignment_sale_price' => $request->consignment_sale_price,
             'consignment_quantity' => $request->consignment_quantity,
-            'consignment_saled' => $request->consignment_saled,
-            'consignment_return' => $request->consignment_return,
-            'consignment_currently' => $request->consignment_currently,
+            'consignment_currently'=> $request->consignment_quantity,
             'product_id' => $request->product_id,
             'supplier_id' => $request->supplier_id,
             'active' => 1,
 
         ]);
 
-        return redirect(route('warehouses.index'));
+        return redirect(route('warehouses.index'))->with('success','Bạn đã thêm thành công');
 
     }
 
@@ -119,21 +123,6 @@ class WareHousesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'consignment_symbol' => 'required|string',
-            'consignment_name' => 'required|string',
-            'consignment_expiry' => 'required|date:m/d/Y',
-            'consignment_purchase_price' => 'required|numeric',
-            'consignment_sale_price' => 'required|numeric',
-            'consignment_quantity' => 'required|integer',
-            'consignment_saled' => 'required|integer',
-            'consignment_return' => 'required|integer',
-            'consignment_currently' => 'required|integer',
-            'product_id' => 'required|integer',
-            'supplier_id' => 'required|integer',
-        ];
-        $request->validate($rules);
-
         $data = WareHouse::findOrFail($id);
         $data->update([
             'consignment_symbol' => $request->consignment_symbol,
@@ -145,11 +134,12 @@ class WareHousesController extends Controller
             'consignment_saled' => $request->consignment_saled,
             'consignment_return' => $request->consignment_return,
             'consignment_currently' => $request->consignment_currently,
+            'consignment_status' => $request->consignment_status,
             'product_id' => $request->product_id,
             'supplier_id' => $request->supplier_id,
         ]);
 
-        return redirect(route('warehouses.index'));
+        return redirect(route('warehouses.index'))->with('success','Bạn đã sửa thành công');
 
     }
 
@@ -163,7 +153,7 @@ class WareHousesController extends Controller
     {
         $data = WareHouse::findOrFail($id);
         $data->update(['active' => 0]);
-        return redirect()->back();
+        return redirect()->back()->with('success','Bạn đã xóa thành công');
 
     }
 }

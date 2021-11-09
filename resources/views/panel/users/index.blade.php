@@ -40,8 +40,7 @@
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->rolename }}</td>
                         <td>
-                            {{-- <a href="{{ route('users.edit', ['user' => $item->id]) }}"><button
-                                class="btn btn-primary">Edit</button></a> --}}
+
                             <a href="{{route('users.show',['user'=>$item->id])}} "><button
                                     class="btn btn-primary">Chi tiết</button></a>
                             <form method="POST" action="{{ route('users.destroy', ['user' => $item->id]) }}"
@@ -67,4 +66,17 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script>
+    @if(session()->get('success'))
+
+   swal({title: "Thành công",
+                text: '{{session()->get('success')}}',
+                icon: "success",
+
+        });
+
+
+    @endif
+</script>
 @endsection

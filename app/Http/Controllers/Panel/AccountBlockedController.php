@@ -22,7 +22,7 @@ class AccountBlockedController extends Controller
             return response()->view('panel.itemDelete.lockedAccount.lockedaccounts', ['users' => $users]);
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin đăng nhập không đúng.');
         }
 
     }
@@ -96,11 +96,11 @@ class AccountBlockedController extends Controller
             $user = User::find($id);
             $user->update(['active' => 1]);
 
-            return redirect()->back();
+            return redirect()->back()->with('success','Bạn đã kích hoạt thành công');
 
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin đăng nhập không đúng.');
         }
 
     }

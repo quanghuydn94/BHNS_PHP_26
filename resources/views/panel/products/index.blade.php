@@ -8,17 +8,10 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h6>
     </div>
-    @if (session()->get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <span>{{session()->get('success')}}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
+
     <div class="card-body">
-        @if (auth()->user()->rolename == 'admin')
         <a class="btn btn-outline-primary mb-3" href="{{ route('products.create') }}">Sản phẩm mới</a>
+        @if (auth()->user()->rolename == 'admin')
         <a href="{{route('product.listDeleted')}}" class="badge badge-danger">Sản phẩm đã xóa</a>
         @endif
         <div class="table-responsive">
@@ -30,9 +23,7 @@
                         <th>Ảnh</th>
                         <th>Giá</th>
                         <th>Loại sản phẩm</th>
-                        @if (auth()->user()->rolename == 'admin')
                         <th>Công cụ</th>
-                        @endif
                     </tr>
                 </thead>
                 <tfoot>
@@ -42,9 +33,7 @@
                         <th>Ảnh</th>
                         <th>Giá</th>
                         <th>Loại sản phẩm</th>
-                        @if (auth()->user()->rolename == 'admin')
                         <th>Công cụ</th>
-                        @endif
                     </tr>
                 </tfoot>
                 <tbody>
@@ -58,7 +47,6 @@
                         <td>{{ $item->product_price }}</td>
                         <td>{{ $item->productType->product_type_name }}</td>
                         <td>
-                            @if (auth()->user()->rolename == 'admin')
                             <a href="{{ route('products.edit', ['product' => $item->id]) }}"><button
                                     class="btn btn-primary">Sửa</button></a>
                             <a href="{{ route('products.show', ['product' => $item->id]) }} "><button
@@ -69,9 +57,8 @@
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-primary">Xóa</button>
+                                <button class="btn btn-danger">Xóa</button>
                             </form>
-                            @endif
                             @endif
                         </td>
                     </tr>
@@ -90,4 +77,17 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script>
+    @if(session()->get('success'))
+
+   swal({title: "Thành công",
+                text: '{{session()->get('success')}}',
+                icon: "success",
+
+        });
+
+
+    @endif
+</script>
 @endsection

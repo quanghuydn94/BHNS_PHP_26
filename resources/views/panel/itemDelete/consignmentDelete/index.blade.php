@@ -8,14 +8,7 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">LÔ HÀNG ĐÃ XÓA</h6>
     </div>
-    @if (session()->get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <span>{{session()->get('success')}}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
+
     <div class="card-body">
         @if (auth()->user()->rolename == 'admin')
         <a class="btn btn-primary mb-3 text-right" href="{{ route('warehouses.index') }}">Trở lại</a>
@@ -88,4 +81,17 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script>
+    @if(session()->get('success'))
+
+   swal({title: "Thành công",
+                text: '{{session()->get('success')}}',
+                icon: "success",
+
+        });
+
+
+    @endif
+</script>
 @endsection

@@ -4360,6 +4360,12 @@ input[type="button"].btn-block {
   flex-direction: row;
 }
 
+.dropdown-notification {
+     height: 250px;
+     position: absolute;
+     overflow-y: scroll;
+}
+
 .navbar-expand .navbar-nav .dropdown-menu {
   position: absolute;
 }
@@ -10222,6 +10228,11 @@ a:focus {
 .topbar .dropdown .dropdown-menu {
   width: calc(100% - 1.5rem);
   right: 0.75rem;
+}
+
+.topbar .dropdown-notification {
+    height: 250px;
+    overflow-y: scroll;
 }
 
 .topbar .dropdown-list {

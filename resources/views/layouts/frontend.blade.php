@@ -61,7 +61,7 @@
                                                 <li class="active"><a href="{{route('frontend.index')}}">Trang chủ </a>
 
                                                 </li>
-                                                <li><a href="about.html">Chúng tôi </a> </li>
+                                                <li><a href="{{route('about.us')}}">Chúng tôi </a> </li>
                                                 <li><a href="{{route('shop.index')}}">Cửa hàng</a> </li>
                                                 <li><a href="blog.html">Blog </a>
                                                 </li>
@@ -69,28 +69,22 @@
                                                             class="fa fa-angle-down"></i></a>
                                                     <ul class="mega_menu">
                                                         <li class="mega_item">
-                                                            <a class="mega_title" href="#">1</a>
                                                             <ul>
-                                                                <li><a href="wishlist.html">Danh mục ưu thích</a></li>
                                                                 <li><a href="{{route('shop.index')}}">Sản phẩm</a></li>
                                                                 <li><a href="{{route('show.cart')}}">Giỏ hàng</a></li>
                                                                 <li><a href="{{route('checkout.cart')}}">Thanh toán</a></li>
                                                             </ul>
                                                         </li>
                                                         <li class="mega_item">
-                                                            <a class="mega_title" href="#"> 2</a>
                                                             <ul>
-                                                                <li><a href="my-account.html">Tài khoản</a></li>
-                                                                <li><a href="login.html">Đăng nhập</a></li>
-                                                                <li><a href="register.html">Đăng ký</a></li>
+                                                                <li><a href="{{route('login')}}">Đăng nhập</a></li>
+                                                                <li><a href="{{route('register')}}">Đăng ký</a></li>
                                                             </ul>
                                                         </li>
                                                         <li class="mega_item">
-                                                            <a class="mega_title" href="#"> 3</a>
                                                             <ul>
 
-                                                                <li><a href="contact.html">Liên hệ </a></li>
-                                                                <li><a href="404.html">Báo lỗi</a></li>
+                                                                <li><a href="{{route('contact.us')}}">Liên hệ </a></li>
                                                             </ul>
                                                         </li>
                                                     </ul>
@@ -154,8 +148,8 @@
                                 <div class="header_right_info d-flex">
                                     <div class="search_box">
                                         <div class="search_inner">
-                                            <form action="#">
-                                                <input type="text" placeholder="Tìm sản phẩm">
+                                            <form action="{{route('search.index')}}">
+                                                <input type="text" name="search" placeholder="Tìm sản phẩm">
                                                 <button type="submit"><i class="ion-ios-search"></i></button>
                                             </form>
                                         </div>
@@ -395,8 +389,8 @@
     <script src="{{asset('FrontEnd/assets/js/plugins.js')}}"></script>
     <script src="{{asset('FrontEnd/assets/js/main.js')}}"></script>
     <script src="{{asset('FrontEnd/assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 
 
@@ -407,28 +401,46 @@
 
     @if(session()->get('cartNull'))
     <script>
-        swal("Chú ý", "Giỏ hàng của ban đang trống, vui lòng vào cửa hàng ", "warning");
+        swal({
+            title: "Chú ý",
+            text: '{{session()->get('cartNull')}}',
+            icon: "warning",
+
+        });
+    </script>
+    @endif
+
+    @if(session()->get('changepassword'))
+    <script>
+        swal({
+            title: "Thông báo",
+            text: '{{session()->get('changepassword')}}',
+            icon: "success",
+
+        });
     </script>
     @endif
     <script type="text/javascript">
         //Remove item product from icon cart
         $("#change-item-cart").on("click", ".zmdi-delete", function (e) {
             e.preventDefault();
+            let url = window.location.href;
+            let route = url.split("cart", 1);
             let id = $(this).data("id");
             $.ajax({
                 method: "GET",
-                url: "remove-from-cart/",
+                url:  "http://127.0.0.1:8000/frontend/remove-from-cart/",
                 data: {
-                    _token: '{{ csrf_token() }}',
                     id: id
                 },
                 success: function (repsonse) {
                     $("#cart-icon").load(" #cart-icon");
                     $("#change-item-cart").load(" #change-item-cart");
+                    $("#cart_table").load(" #cart_table");
                     $(".checkout-form").load(" .checkout-form");
 
                     alertify.set('notifier', 'position', 'bottom-right');
-                    alertify.success('You have successfully removed!');
+                    alertify.success('Đã xóa sản phẩm!');
                 }
             });
         });

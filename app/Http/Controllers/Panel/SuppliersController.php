@@ -50,7 +50,7 @@ class SuppliersController extends Controller
             'active' => 1,
         ]);
 
-        return redirect(route('suppliers.index'));
+        return redirect(route('suppliers.index'))->with('success','Bạn đã thêm thành công');
 
     }
 
@@ -99,7 +99,7 @@ class SuppliersController extends Controller
             'active' => 1,
         ]);
 
-        return redirect(route('suppliers.index'));
+        return redirect(route('suppliers.index'))->with('success','Bạn đã sửa thành công');
 
     }
 
@@ -113,7 +113,7 @@ class SuppliersController extends Controller
     {
         Suppliers::findOrFail($id)->update(['active' => 0]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Bạn đã xóa thành công');
 
     }
 }

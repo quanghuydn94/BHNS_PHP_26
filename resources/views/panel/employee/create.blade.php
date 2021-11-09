@@ -67,7 +67,7 @@
             <label class="col-sm-2 col-form-label">Chức danh</label>
             <div class="col-sm-10">
                 <select name="rolename" type="text" class="form-control">
-                    <option value="employee" selected>employee</option>
+                    <option value="Nhân viên" selected>Nhân viên</option>
                     <option value="admin">admin</option>
                 </select>
             </div>

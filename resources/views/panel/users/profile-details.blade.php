@@ -121,7 +121,7 @@
                                 <div class="p-2 text-right">
                                     <a href="{{ route('users.index') }}" class="badge badge-primary"> Trở lại </a>
                                 </div>
-                                @elseif (Auth::user()->rolename == 'admin' || Auth::user()->rolename == 'employee')
+                                @elseif (Auth::user()->rolename == 'admin' || Auth::user()->rolename == 'Nhân viên')
                                 <div class="p-2 text-right">
                                     <a href="{{ route('panel.index') }}" class="badge badge-primary"> Trở lại </a>
                                 </div>

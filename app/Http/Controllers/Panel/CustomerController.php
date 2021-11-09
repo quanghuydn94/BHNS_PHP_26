@@ -52,30 +52,21 @@ class CustomerController extends Controller
 
             ],
             [
-                'required' => 'The :attribute field does not empty',
-                'unique' => 'The :attribute existed',
+                'required' => ' :attribute không được để trống',
+                'unique' => ' :attribute đã tồn tại',
             ]);
         if ($validate->fails()) {
             return redirect()->route('customers.create')->withErrors($validate);
         }
-        $user = User::create([
-            'name' => $request->customer_name,
-            'email' => $request->customer_email,
-            'phone' => $request->customer_phone,
-            'address' => $request->customer_address,
-            'rolename' => 'client',
 
-        ]);
-        $user = User::select('id')->where('email', $request->customer_email)->first();
         Customer::create([
             'customer_name' => $request->customer_name,
             'customer_phone' => $request->customer_phone,
             'customer_email' => $request->customer_email,
             'customer_address' => $request->customer_address,
-            'user_id' => (int) $user->id,
             'active' => 1,
         ]);
-        return redirect()->route('customers.index')->with('success', 'You have successfully added');
+        return redirect()->route('customers.index')->with('success', 'Đã thêm khách hàng thành công!');
     }
 
     /**
@@ -136,7 +127,7 @@ class CustomerController extends Controller
             'customer_email' => $request->customer_email,
             'customer_address' => $request->customer_address,
         ]);
-        return redirect()->route('customers.index')->with('success', 'You have successfully updated');
+        return redirect()->route('customers.index')->with('success', 'Đã sửa thông tin khách hàng thành công!');
 
     }
 
@@ -149,7 +140,7 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         Customer::find((int) $id)->update(['active' => 0]); //delete information customer, avoid foreign key error
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success', 'Đã xóa khách hàng thành công!');
     }
 
 }

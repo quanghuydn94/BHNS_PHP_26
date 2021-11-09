@@ -14,12 +14,10 @@ class CheckoutController extends Controller
 {
     public function payment(Request $request)
     {
-        // $customers = Customer::all();
 
         if (Auth()->user() != null) {
 
             $customer = Customer::where('user_id', (int)Auth()->user()->id)->first();
-            // dd($customer);
 
         } else {
 
@@ -41,15 +39,21 @@ class CheckoutController extends Controller
             ]);
         }
 
+        $totalPrice = 0;
+        foreach (session()->get('cart') as $id => $cart) {
+            $totalPrice += $cart['price'] * $cart['quantity'];
+        }
+
         $order = Orders::create([
 
             'order_customer_name' => $customer->customer_name,
             'order_customer_phone' => $customer->customer_phone,
             'order_customer_email' => $customer->customer_email,
             'order_customer_address' => $customer->customer_address,
+            'order_total_price' => $totalPrice ,
             'customer_id' => (int) $customer->id,
             'active' => 1,
-            'order_status' => 'Pay by cash',
+            'order_status' => 'Tiếp nhận',
 
         ]);
         foreach (session()->get('cart') as $id => $cart) {
@@ -61,24 +65,69 @@ class CheckoutController extends Controller
                 'product_id' => (int) $productId,
                 'orders_id' => (int) $order->id,
                 'order_detail_quantity' => $cart['quantity'],
-                'order_detail_price' => $cart['price'] * $cart['quantity'] * 1.05,
+                'order_detail_price' => $cart['price'] * $cart['quantity'],
                 'active' => 1,
             ]);
 
         }
 
-        // session()->forget('cart');
-        return redirect()->back()->with('orders', ' success');
+        session()->forget('cart');
+        return redirect()->route('shop.index')->with('orders', 'Đơn hàng của bạn đã được đặt');
     }
 
     public function payOnline()
     {
-        $carts = session()->get('cart');
-        return view('frontend.checkout.payOnline', compact('carts'));
+        if (Auth()->user() != null) {
+
+            return view('frontend.checkout.payOnline');
+
+        } else {
+             return redirect()->back()->with('payOnline', 'Đăng nhập để thực hiện thanh toán');
+        }
     }
 
     public function viewCreditCard()
     {
         return view('frontend.checkout.creditCard');
+    }
+
+    public function payCreditCard(Request $request)
+    {
+        $customer = Customer::where('user_id', (int) Auth()->user()->id)->first();
+
+        $totalPrice = 0;
+        foreach (session()->get('cart') as $id => $cart) {
+            $totalPrice += $cart['price'] * $cart['quantity'];
+        }
+
+        $order = Orders::create([
+
+            'order_customer_name' => $customer->customer_name,
+            'order_customer_phone' => $customer->customer_phone,
+            'order_customer_email' => $customer->customer_email,
+            'order_customer_address' => $customer->customer_address,
+            'order_note' => 'Thanh toán online',
+            'order_total_price' => $totalPrice ,
+            'customer_id' => (int) $customer->id,
+            'active' => 1,
+            'order_status' => 'Tiếp nhận',
+
+        ]);
+        foreach (session()->get('cart') as $id => $cart) {
+
+            $product = Products::find($id);
+            $productId = $product->id;
+
+            OrderDetails::create([
+                'product_id' => (int) $productId,
+                'orders_id' => (int) $order->id,
+                'order_detail_quantity' => $cart['quantity'],
+                'order_detail_price' => $cart['price'] * $cart['quantity'],
+                'active' => 1,
+            ]);
+
+        }
+        session()->forget('cart');
+        return redirect()->route('shop.index')->with('orders', 'Đơn hàng của bạn đã được đặt');
     }
 }

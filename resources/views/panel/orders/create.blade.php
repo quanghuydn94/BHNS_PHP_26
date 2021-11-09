@@ -7,19 +7,14 @@
 <title>{{ config('app.name', 'Laravel') }}</title>
 
 <!-- CSS -->
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="{{asset('jquery-ui-1.13.0/jquery-ui.min.css')}}">
-<link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+ <!-- Default theme -->
+ <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
 
 @endsection
 @section('content')
-@if ($errors->any())
-<div class="alert alert-warning">
-    @foreach ($errors->all() as $error)
-    {{ $error }}<br />
-    @endforeach
-</div>
-@endif
+
 
 <div class="card-header py-3">
     <p class="m-0 font-weight-bold text-primary">
@@ -35,8 +30,8 @@
             <!--Form Orders  -->
             <div class="mb-3 row">
                 <div class="col-10 ">
-                    <div class="table-responsive">
-                        <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                    <div class="table">
+                        <table class="table table-bordered table-product" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>STT</th>
@@ -63,11 +58,11 @@
                                 <tr>
                                     <td>{{ $pro->id }}</td>
                                     <td>{{ $pro->product_name }}</td>
-                                    <td>{{ $pro->product_price }}</td>
+                                    <td>{{ number_format($pro->product_price) }}</td>
                                     @if (auth()->user()->rolename == 'admin')
                                     <td>
-                                        <a href="" data-url="{{route('addToCart',['id'=>$pro->id])}}"
-                                            class="add btn-sm btn-primary">Thêm</a>
+                                        <a href="javascript:" data-url="{{route('addToCart', $pro->id)}}"
+                                            class="add_order btn-sm btn-primary">Thêm</a>
                                     </td>
                                     @endif
                                 </tr>
@@ -85,45 +80,40 @@
 </div>
 
 @section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+ <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 <!-- Script -->
 <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <!-- Page level custom scripts -->
 <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
+
+
+
 
 <!-- Script code  -->
 <script type="text/javascript">
     // CSRF Token,  Autocomplete
-    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    // $(document).ready(function () {
-    //     $("#customer_phone").autocomplete({
-    //         source: function (request, response) {
-    //             // Fetch data
-    //             $.ajax({
-    //                 url: "{{route('getCustomers')}}",
-    //                 type: 'post',
-    //                 dataType: "json",
-    //                 data: {
-    //                     _token: CSRF_TOKEN,
-    //                     search: request.term
-    //                 },
-    //                 success: function (data) {
-    //                     // console.log(data);
-    //                     response(data);
-    //                 }
-    //             });
-    //         },
-    //         select: function (event, ui) {
-    //             // Set selection
-    //             $('#customer_phone').val(ui.item.phone); // display the selected text
-    //             $('#customer_name').val(ui.item.label); // save selected name to input
-    //             $('#customer_email').val(ui.item.email); // save selected email to input
-    //             return false;
-    //         }
-    //     });
-    // });
+    // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $(".add_order").on('click', function (e) {
+         e.preventDefault();
+         let urlCart = $(this).data('url');
+          console.log(urlCart);
+         $.ajax({
+             type: "GET",
+             url: urlCart,
+             dataType: "json",
+             success: function (data) {
+                console.log(data);
+                 alertify.set('notifier', 'position', 'top-center');
+                 alertify.success('Đã thêm sản phẩm!');
+             }
+         });
+     });
 
 
     // <script type="text/javascript">
@@ -148,27 +138,9 @@
     //                     );
     //                 });
 
-    function addCart(event) {
-        event.preventDefault();
-        let urlCart = $(this).data('url');
-        $.ajax({
-            type: "GET",
-            url: urlCart,
-            dataType: 'json',
-            success: function (data) {
-                if (data.code === 200) {
-                    alert('Add product successful');
-                }
-            },
-            error: function () {
 
-            }
-        });
-        $('.add').attr("background-color", "gray");
-    }
-    $(function () {
-        $('.add').on('click', addCart);
-    });
+
+
 </script>
 @endsection
 @endsection

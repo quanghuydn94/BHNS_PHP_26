@@ -15,10 +15,10 @@ class CreateCreateEmployeeTablesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('employee_name')->nullable();
-            $table->string('employee_identity', 15)->nullable();
-            $table->string('employee_phone', 12)->nullable();
-            $table->string('employee_address')->nullable();
+            $table->string('employee_name');
+            $table->string('employee_identity', 15);
+            $table->string('employee_phone', 12);
+            $table->string('employee_address');
             $table->boolean('active');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

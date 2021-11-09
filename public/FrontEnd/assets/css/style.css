@@ -2586,6 +2586,11 @@ footer.footer_three {
 	color: #4cbb6c;
 	margin-right: 10px;
 }
+
+.image  {
+    text-align: center !important;
+}
+
 .comments_note.clearfix i {
 	color: #ffc315;
 }
@@ -3029,7 +3034,16 @@ footer.footer_three {
 }
 .owl-carousel .testimonial__image img {
 	display: inline-block;
+    border-radius: 50%;
+    padding: 1%;
+    height: 100px;
+    width: 100px;
 }
+
+.border-bottom {
+    border-bottom: 1px solid #d7eff7;
+}
+
 .about_testimonial_area {
 	background-repeat: no-repeat;
 	background-position: center center;

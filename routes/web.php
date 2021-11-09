@@ -1,8 +1,14 @@
 <?php
 
 use App\Http\Controllers\Auth\NewPasswordController;
+
+//Namespace FrontEnd
 use App\Http\Controllers\FrontEnd\CheckoutController;
 use App\Http\Controllers\FrontEnd\ProductController as FrontEndProductController;
+use App\Http\Controllers\FrontEnd\CommentController as FrontEndCommentController;
+use App\Http\Controllers\FrontEnd\ContactController;
+
+//Namespace Panel Admin
 use App\Http\Controllers\Panel\AccountBlockedController;
 use App\Http\Controllers\Panel\ConsignmentDeleteController;
 use App\Http\Controllers\Panel\CustomerController;
@@ -16,6 +22,7 @@ use App\Http\Controllers\Panel\SinglePageController;
 use App\Http\Controllers\Panel\SuppliersController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\WareHousesController;
+use App\Http\Controllers\Panel\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,33 +42,20 @@ Route::get('/', function () {
 // Authentication Login and logout
 Route::get('/', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
-    ->name('login');
+    ->name('login.admin');
 
 Route::post('/', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'store'])
     ->middleware('guest');
 
-Route::post('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])
+Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout.admin');
-// Route::get('/panel/change-password/{id}', function ($id) {
-//     $user = \App\Models\User::find((int)$id);
-//     return response()->view('auth.changePassword',['user'=>$user]);
-// })->name('employees.change-password');
 
-Route::resource('change-password', NewPasswordController::class);
+Route::post('change-password', [NewPasswordController::class,'store'])->name('change-password.store');
 // Group panel: users, employee, customers, products, suppliers, categories
 Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     // page home when you access admin management page
     Route::get('/', [SinglePageController::class, 'index'])->name('panel.index');
-
-    // Routes Suppliers
-    // Route::get('suppliers/create', function () {
-    //     return view('panel.suppliers.create');
-    // })->name('panel.suppliers.create');
-
-    // Route::get('suppliers/index', function () {
-    //     return view('panel.suppliers.index');
-    // })->name('panel.suppliers.index');
 
     //Routes Users
     Route::get('profile', function () {
@@ -120,6 +114,8 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
 
     Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
 
+    Route::get('/orders/edit-cart/{id}', [OrderController::class, 'editCart'])->name('order.editCart');
+
     Route::post('/orders/edit/{id}', [OrderController::class, 'update'])->name('order.update');
 
     Route::get('/orders/show/{id}', [OrderController::class, 'show'])->name('order.show');
@@ -130,6 +126,9 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
 
     Route::post('orders/table-delete/{id}', [OrderController::class, 'getBack'])->name('order.getBack');
 
+    //Comments
+    Route::get('comment', [CommentController::class , 'index'])->name('comment.index');
+    Route::post('comment/delete/{id}', [CommentController::class , 'delete'])->name('comment.delete');
 });
 
 //Routes FrontEnd
@@ -152,10 +151,15 @@ Route::group(['prefix' => 'frontend'], function () {
         ->name('logout');
     Route::get('my-account', [\App\Http\Controllers\FrontEnd\MyAccountController::class, 'get'])->name('my-account');
     Route::post('my-account', [\App\Http\Controllers\FrontEnd\MyAccountController::class, 'post']);
+    Route::get('my-account/view', [\App\Http\Controllers\FrontEnd\MyAccountController::class , 'haveOrdered'])->name('my-account.historySales');
 
 
-    Route::get('/organic', [FrontEndProductController::class, 'index'])->name('frontend.index');
+    Route::get('/index', [FrontEndProductController::class, 'index'])->name('frontend.index');
     Route::get('/shop', [FrontEndProductController::class, 'shop'])->name('shop.index');
+    Route::get('/search', [FrontEndProductController::class, 'getSearch'])->name('search.index');
+    Route::get('shop/{product_type_name}/{id}', [FrontEndProductController::class, 'show_danhmuc'])->name('show_danhmuc.index');
+
+
     Route::get('/product-detail/{id}', [FrontEndProductController::class, 'detailsProduct'])->name('details.product');
 
     Route::get('/cart/show', [FrontEndProductController::class, 'showCart'])->name('show.cart');
@@ -167,5 +171,10 @@ Route::group(['prefix' => 'frontend'], function () {
     Route::post('/check-out', [CheckoutController::class, 'payment'])->name('paybycash.cart');
     Route::get('/check-out-online', [CheckoutController::class, 'payOnline'])->name('payonline.cart');
     Route::get('/credit-card', [CheckoutController::class, 'viewCreditCard'])->name('creditcard.cart');
+    Route::get('/pay-credit-card', [CheckoutController::class, 'payCreditCard'])->name('payCreditCard.cart');
+    Route::get('about-us', [ContactController::class , 'aboutUs'])->name('about.us');
+    Route::get('contact', [ContactController::class, 'contact'])->name('contact.us');
+    Route::post('comment', [FrontEndCommentController::class, 'comment'])->name('comment');
+
 
 });

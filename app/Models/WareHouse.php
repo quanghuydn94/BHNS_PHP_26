@@ -12,6 +12,7 @@ class WareHouse extends Model
     use HasFactory;
     protected $table = 'warehouses';
     protected $fillable = [
+        'id',
         'consignment_symbol',
         'consignment_name',
         'consignment_expiry',

@@ -38,8 +38,8 @@
 	.new_product.home_2.pt-30 {
 	  padding-top: 5px;
 	}
-	
-    
+
+
     /*home page three css hrer*/
     .main_menu_inner.inner__three {
       padding: 0;
@@ -56,13 +56,13 @@
     .pos_special_products {
         padding: 30px 20px 60px;
     }
-    
+
      /*home page four css hrer*/
     .footer_area_wrapper {
       padding: 0 30px;
     }
-    
-    
+
+
     /*shop page css here*/
     .breadcrumb_container.bread_shop {
       padding: 30px 0;
@@ -73,17 +73,17 @@
     .search_filters .ui-widget.ui-widget-content {
       width: 223px;
     }
-    
-    
+
+
     /*blog page css here*/
-    
+
     .organic_food_wrapper.blog_page {
         padding: 0 60px;
     }
     .breadcrumb_container.blog_page {
         padding: 0 60px;
     }
-    
+
     /*blog details*/
     .organic_food_wrapper.blog_details {
         padding: 0 60px;
@@ -109,7 +109,7 @@
 	.single_choose_us {
 	  padding-right: 40px;
 	}
-	
+
 
 }
 
@@ -171,7 +171,7 @@
 	    padding: 0 35px;
 	    line-height: 45px;
     }
-    
+
     .product-add-to-cart > a {
 	    padding: 0 100px;
     }
@@ -188,7 +188,7 @@
       margin-right: 0;
       padding-right: 40px;
     }
-    
+
 	/*home page two css here*/
     .header_top_bar, .header_middle  {
 	    padding: 0 20px;
@@ -245,8 +245,8 @@
     }
     .categories_menu > ul > li > a span {
 	  margin-left: 20px;
-	} 
-    
+	}
+
     /*shop page css here*/
     .breadcrumb_container.bread_shop {
       padding: 20px 0 30px;
@@ -267,12 +267,12 @@
     .tab_product_bottom_wrapper {
         padding-bottom: 20px;
     }
-    
+
     /*product page css here*/
     .products_tab_button ul li a.nav-link {
         padding: 0;
     }
-    
+
     /*blog page css here*/
     .breadcrumb_container.blog_page {
         padding: 0 20px;
@@ -351,8 +351,8 @@
     .table-content.table-responsive table tbody tr td .quickview_plus_minus.quick_cart {
         margin-left: 25px;
     }
-    
-    
+
+
     /*checkout page css here*/
     .Returning_cart_body label {
         padding-left: 28px;
@@ -364,7 +364,7 @@
     .order-table.table-responsive table thead tr th.product-name, .order-table.table-responsive table tbody tr td.product-name, .order-table.table-responsive table tfoot tr th {
         width: 80%;
     }
-    
+
     /*modal css here*/
     .modal-dialog.modal-dialog-centered {
         min-width: 750px;
@@ -375,10 +375,10 @@
     .cart_description {
         margin-top: 30px;
     }
-    
+
     /*contact page css here*/
-    
-    
+
+
     /*wishlist css here*/
     .cart_main_area {
         padding: 80px 20px;
@@ -391,9 +391,9 @@
 	.post__content h3 {
 	  font-size: 16px;
 	}
-	
-	
-	
+
+
+
 }
 
 
@@ -517,7 +517,7 @@
 	header.header_bottm.bottom_two.sticky {
 	  display: none;
 	}
-    
+
      /*home page three css hrer*/
 	.slider_area.slider_area_three .single_slide {
   		height: 500px;
@@ -554,7 +554,7 @@
     .pos_product_desc p {
         padding: 15px 0 0;
     }
-    
+
     .header_bottm.bottom_three.sticky-header.sticky {
 	  display: none;
 	}
@@ -623,11 +623,11 @@
     .single_shipping_box_four.one,.single_shipping_box_four {
       margin: 0;
     }
-     
+
    .single_shipping_box_four,.single_shipping_box_four.one  {
       margin-bottom: 30px;
     }
-    
+
     .footer_area_wrapper {
       padding: 0px;
     }
@@ -671,10 +671,10 @@
     .categories_menu {
 	  display: none;
 	}
-    
-    
+
+
     /*shop page css here*/
-    
+
     .breadcrumb_container.bread_shop {
       padding: 5px 0 20px;
     }
@@ -733,7 +733,7 @@
 	  padding-left: 0;
 	}
     /*blog page css here*/
-    
+
     .header_right_info.blog_inpo {
         margin-right: 60px;
     }
@@ -899,12 +899,12 @@
         font-size: 12px;
     }
     .cart-subtotal,.shipping,.Free_Shipping {
-        margin-bottom: 10px; 
+        margin-bottom: 10px;
     }
     .footer.footer_cart.pt-80 {
         padding-top: 0;
     }
-    
+
     /*checkout page css here*/
     .Checkout_page_section {
         padding: 0 30px;
@@ -926,8 +926,8 @@
     .breadcrumb_container.details_breadcrumd.cart_page {
         padding: 37px;
     }
-    
-    
+
+
     /*contact page css here*/
     .contact_area {
 	  padding: 70px 0;
@@ -935,7 +935,7 @@
     .page_login_section {
 	  padding: 80px 0;
 	}
-    
+
     /*register page css here*/
     .register_login_section {
         padding: 35px 20px 0;
@@ -943,18 +943,18 @@
     .footer_food_wrapper.footer_register {
         padding: 0 20px;
     }
-    
-    
+
+
     /*wishlist page css here*/
-    
+
    .table-content.table-responsive.table-wishlist table thead tr .img-thumbnail {
         min-width: 135px;
     }
     .table-content.table-responsive.table-wishlist table thead tr .product-name {
         min-width: 155px;
     }
-    
-    
+
+
     .table-content.table-responsive.table-wishlist table thead tr .product-remove.one,.table-content.table-responsive.table-wishlist table thead tr .product-price.four {
         min-width: 115px;
     }
@@ -992,10 +992,10 @@
 	.table-content.table-responsive table tbody tr td {
 	  min-width: 200px;
 	}
-	
-	
 
-    
+
+
+
 
 }
 
@@ -1133,14 +1133,14 @@
     .shipping_content h6,.shipping_content p {
 	    font-size: 13px;
     }
-  
+
     .shipping_content.three {
 	    margin-left: 30px;
     }
     .single_shipping_box,.single_shipping_box.two {
 	    margin-bottom: 20px;
     }
- 
+
     .shop_product_head {
 	    -webkit-box-orient: vertical;
 	    -webkit-box-direction: normal;
@@ -1164,7 +1164,7 @@
     .shop-product_list.owl-carousel .owl-stage-outer{
         padding-bottom: 30px;
     }
-    
+
     .main_menu_inner .menu {
         display: none;
     }
@@ -1186,7 +1186,7 @@
     }
     .brand_list_carousel {
 	    margin-top: 15px;
-    }     
+    }
     .footer {
 	    padding-top: 50px;
     }
@@ -1257,7 +1257,7 @@
     .header_top_right > ul.header_top_right_inner {
         min-width: 100%;
         text-align: center;
-        
+
     }
     .header_middle_inner.middel_two {
 	    -ms-flex-wrap: wrap;
@@ -1285,7 +1285,7 @@
         min-width: 100%;
         text-align: center;
     }
-  
+
    .mini__cart.minicart_two {
         text-align: left;
     }
@@ -1318,7 +1318,7 @@
     }
     .mean-container .mean-nav {
         margin-top: 0;
-    }  
+    }
 	.header_bottm.bottom_two .mean-container .mean-nav {
 	  margin-top: 0;
 	}
@@ -1351,7 +1351,7 @@
 	  padding-top: 0;
 	}
 	/*home page three css here*/
-	
+
 	.top_bar_three .phone {
 	  margin-bottom: 0;
 	}
@@ -1494,7 +1494,7 @@
     .header_bottm.bottom_four {
       background: none;
     }
-	
+
 	.header_four .phone.phone_four {
 		margin-bottom: 0;
 	}
@@ -1575,7 +1575,7 @@
     .dropdown.dropdown-shop select {
       width: 196px;
     }
-    
+
     .tab_menu.shop_menu {
       margin-bottom: 15px;
     }
@@ -1640,9 +1640,9 @@
     .product_variants_item.variants_product select {
         margin: 0;
     }
-    
-    
-    
+
+
+
     /*blog apge css here*/
     .breadcrumb_container {
         text-align: center;
@@ -1781,7 +1781,7 @@
     .social-share {
         margin-top: 20px;
     }
-    
+
     .products_tab_button {
         margin-bottom: 20px;
     }
@@ -1977,7 +1977,7 @@
     .cart-plus-minus.cart_page input {
         width: 81px;
     }
-     
+
     /*checkout page css here*/
     .Checkout_page_section {
         padding: 0 10px;
@@ -2031,8 +2031,8 @@
         padding: 10px 30px;
         font-size: 12px;
     }
-    
-    
+
+
     /*contact page css here*/
     .contact_area {
 	  padding: 70px 0 30px;
@@ -2040,7 +2040,7 @@
     .contact_map.mb-40 {
         margin-bottom: 60px;
     }
-    
+
     .contact_map a iframe {
         height: 290px;
     }
@@ -2057,8 +2057,8 @@
     .contact_info_wrapper {
         padding-top: 65px;
     }
-    
-    
+
+
     /*login page css here*/
 	  .page_login_section {
 	  padding: 80px 0;
@@ -2076,7 +2076,7 @@
     }
 
     /*wishlist page css here*/
-    
+
     .table-content.table-responsive.table-wishlist table thead tr .img-thumbnail {
         min-width: 120px;
     }
@@ -2120,7 +2120,7 @@
 	}
     .organic-table-area table tbody tr td {
 	  min-width: 150px;
-	}	
+	}
 	.table_primary_block.pt-100 {
 	  padding: 60px 0;
 	}
@@ -2155,9 +2155,9 @@
 	footer.footer_about,.blog_food footer.pt-90,footer.pt-90.blog,footer.footer.pt-80.cart,footer.footer.pt-80.checkout,footer.footer.pt-90.contact,footer.footer.pt-90.my-account {
 	  padding-top: 70px;
 	}
-	
-	
-	
+
+
+
 }
 
 
@@ -2191,11 +2191,11 @@
 	.search-error.product-search > form {
 	  width: 290px;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }
 
 
@@ -2281,7 +2281,7 @@
     .mean-container .mean-nav {
 	margin-top: 0;
    }
-	
+
    .logo.logo_two {
         margin-top: 25px;
     }
@@ -2311,7 +2311,7 @@
 	  font-size: 14px;
 	}
 
-    
+
     /*home page three*/
     .mini__cart.minicart_two.cart_three {
          width: inherit;
@@ -2322,7 +2322,7 @@
 	.ground_static.home_3 .countdown_area {
 	  text-align: left;
 	}
-	
+
     .content-number {
       height: 60px;
       line-height: 60px;
@@ -2349,7 +2349,7 @@
 	  line-height: 21px;
 	  padding: 10px 0 30px;
 	}
-	
+
 	.content-title {
       font-size: 10px;
     }
@@ -2371,9 +2371,9 @@
       padding-top: 50px;
     }
     .new_product.new_product_three {
-      margin-top: 50px; 
+      margin-top: 50px;
     }
-  
+
     /*home page four*/
    .mobile-menu.mobile_four a.meanmenu-reveal {
 	  right: 45px;
@@ -2394,8 +2394,8 @@
     .mini_cart_box.cart_box_four {
 	  left: -215px;
 	}
-    
-    
+
+
     /*shop page css here*/
     .tab_menu_inner {
       margin-right: 10px;
@@ -2406,8 +2406,8 @@
     .mini_cart_box.cart_box_shop {
         right: -80px;
     }
-    
-    
+
+
     /*product page css here*/
     #product_description_short p {
         padding: 17px 0;
@@ -2420,8 +2420,8 @@
     .mini_cart_box.cart_box_product {
         right: -84px;
     }
-    
-    
+
+
     /*blog page css here*/
     .blog__details {
         padding: 20px 15px;
@@ -2434,7 +2434,7 @@
         right: -70px;
     }
 
-    
+
     /*blog details page css here*/
     .mini_cart_box.details-sidebar {
         right: -70px;
@@ -2443,7 +2443,7 @@
         padding: 8px 16px;
         font-size: 14px;
     }
-    
+
     /*about page css here*/
     .mini_cart_box.cart_box_about {
         right: -70px;
@@ -2461,9 +2461,9 @@
     .about_section_title p {
         word-spacing: 0px;
     }
-    
+
     /*cart page css here*/
-    
+
    .cart_totals.text-right {
         margin-top: 10px;
     }
@@ -2474,7 +2474,7 @@
         right: 0px;
         top: -13px;
     }
-     
+
     /*contact page css here*/
     .contact_map a iframe {
         height: 300px;
@@ -2482,7 +2482,7 @@
     .contact-textarea textarea {
         height: 125px;
     }
-    
+
     /*madal css here*/
     .products_tab_button.modals ul li {
         width: 63px;
@@ -2524,10 +2524,10 @@
 	.search-error.product-search > form {
 	  width: 350px;
 	}
-	
-	
-	
-    
-    
+
+
+
+
+
 }
 

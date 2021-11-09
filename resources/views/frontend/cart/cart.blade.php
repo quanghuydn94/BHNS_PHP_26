@@ -160,19 +160,18 @@
     $(".remove-from-cart").click(function (e) {
         e.preventDefault();
         var ele = $(this);
-        var closable = alertify.alert().setting('closable');
+        // var closable = alertify.alert().setting('closable');
         //grab the dialog instance using its parameter-less constructor then set multiple settings at once.
         if (alertify.alert()
             .setting({
-                'label': 'Yes',
-                'message': 'Do you want to remove this product?',
+                'label': 'Đúng',
+                'message': 'Bạn muốn xóa sản phẩm này?',
                 'onok': function () {
-                    // alertify.success('Great');
                     $.ajax({
                         url:'{{route('remove.from.cart')}}',
                         method: "GET",
                         data: {
-                            _token: '{{ csrf_token() }}',
+                            // _token: '{{ csrf_token() }}',
                             id: ele.parents("tr").attr("data-id")
                         },
                         success: function (response) {
@@ -180,7 +179,7 @@
                             $("#change-item-cart").load(" #change-item-cart");
                             $("#cart_table").load(" #cart_table");
                             alertify.set('notifier', 'position', 'top-center');
-                            alertify.success('You have successfully removed!');
+                            alertify.success('Đã xóa sản phẩm!');
                         }
                     });
                 }

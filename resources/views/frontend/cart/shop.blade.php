@@ -12,7 +12,7 @@
 
  <!-- Nav Page start-->
 
- <div class="container mb-3">
+ <div class="container mb-2">
      <div class="breadcrumb_container">
          <div class="row">
              <div class="col-12">
@@ -40,23 +40,27 @@
                          <div class="widget_title">
                              <h3>Danh mục </h3>
                          </div>
+                         @foreach ($categorys as $category)
                          <ul class="shop_toggle">
-                             <li class="has-sub"><a href="#">Rau tươi </a>
+
+                             <li class="has-sub"><a
+                                     href="{{url('/shop/danhmuc')}}/{{$category->group_name}}">{{ $category->group_name}}
+                                 </a>
                                  <ul class="categorie_sub">
-                                     <li><a href="#">Dưa leo</a></li>
-                                     <li><a href="#">Cà chùa</a></li>
-                                     <li><a href="#">Khoai tây</a></li>
-                                     <li><a href="#">Hành</a></li>
+                                     @foreach($category->getProductType as $getProductType)
+                                     <li>
+                                         <a href="{{ route('show_danhmuc.index',
+                                            ['product_type_name' => $getProductType->product_type_name,
+                                             'id' => $getProductType->id]) }}">
+                                             {{ $getProductType->product_type_name}}
+                                         </a>
+                                     </li>
+                                     @endforeach
                                  </ul>
-                             </li>
-                             <li class="has-sub"><a href="#">Trái cây </a>
-                                 <ul class="categorie_sub">
-                                     <li><a href="#">Chuối</a></li>
-                                     <li><a href="#">Cam</a></li>
-                                     <li><a href="#">Sầu riêng</a></li>
-                                 </ul>
+
                              </li>
                          </ul>
+                         @endforeach
                      </div>
                  </div>
                  <div class="search_filters_wrapper">
@@ -65,8 +69,14 @@
                              <h3>Lọc theo giá</h3>
                          </div>
                          <div class="search_filters widget">
-                             <div id="slider-range"></div>
-                             <input type="text" name="text" id="amount" />
+                             <form action="">
+                                 <div id="slider-range"></div>
+                                 <input type="text" name="text" readonly id="amount" />
+                                 <input type="hidden" name="start_price" id="start_price" />
+                                 <input type="hidden" name="end_price" id="end_price" /><br>
+                                 <input type="submit" name="filter_price" value="Lọc giá"
+                                     class="btn btn-sm btn-default">
+                             </form>
                          </div>
                      </div>
                  </div>
@@ -91,7 +101,7 @@
                                  </ul>
                              </div>
                              <div class="tab_menu_right">
-                                 <p></p>
+                                 <p>Hiển thị {{count($products)}} sản phẩm.</p>
                              </div>
                          </div>
                      </div>
@@ -99,13 +109,21 @@
                          <div class="Relevance">
                              <span>Phân loại:</span>
                              <div class="dropdown dropdown-shop">
-                                 <select name="drop" id="dropdown">
-                                     <option value="1">Relevance</option>
-                                     <option value="2">Name, A to Z</option>
-                                     <option value="2">Name, Z to A</option>
-                                     <option value="2">Price, low to high</option>
-                                     <option value="2">Price, high to low</option>
-                                 </select>
+                                 <form>
+                                     @csrf
+                                     <select name="sort" id="sort">
+                                         <option value="{{Request::url()}}?sort_by=none">--Săp xếp theo--
+                                         </option>
+                                         <option value="{{Request::url()}}?sort_by=price_ASC">Giá tăng dần
+                                         </option>
+                                         <option value="{{Request::url()}}?sort_by=price_DESC">Giá giảm dần
+                                         </option>
+                                         <option value="{{Request::url()}}?sort_by=kytu_ASC">Lọc theo tên A đến Z
+                                         </option>
+                                         <option value="{{Request::url()}}?sort_by=kytu_DESC">Lọc theo tên Z đến A
+                                         </option>
+                                     </select>
+                                 </form>
                              </div>
                          </div>
                      </div>
@@ -121,10 +139,10 @@
                                      <div class="single_product__inner">
                                          <span class="new_badge">Mới</span>
                                          <span class="discount_price">-5%</span>
-                                         <div class="product_img">
-                                             <a href="#">
-                                                 <img src="{{url('img/products',$pro->product_image)}} " height="170px"
-                                                     width="auto" alt="">
+                                         <div class="product_img image">
+                                             <a href="{{route('details.product',$pro->id)}}">
+                                                 <img src="{{url('img/products',$pro->product_image)}} " height="100px"
+                                                     alt="">
                                              </a>
                                          </div>
                                          <div class="product__content text-center">
@@ -166,7 +184,8 @@
                  <div class="row align-items-center">
                      <div class="col-lg-4 col-md-6 col-sm-6">
                          <div class="total_item_shop">
-                             Hiện thị 12 sản phẩm
+                             <p>Hiển thị {{count($products)}} sản phẩm.</p>
+
                          </div>
                      </div>
                      <div class="col-lg-6 offset-lg-2 col-md-6 col-sm-6">
@@ -300,41 +319,47 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
  <script src="{{asset('FrontEnd/assets/js/panigation.js')}}"></script>
 
+ <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+ <script>
+     @if(session()->get('orders'))
 
+     swal({
+         title: "Thành công",
+         text: '{{session()->get('orders')}}',
+         icon: "success",
+     });
+     @endif
+ </script>
  <script>
      //Add to cart index shop
      $(".add__cart").on('click', function (e) {
          e.preventDefault();
          let id = $(this).data("id");
          let quantity = $(this).parents(".single__product").find('input.quantity').val();
-         //  console.log(quantity);
          $.ajax({
              type: "GET",
-             url: "add-to-cart/" + id,
+             url: "http://127.0.0.1:8000/frontend/add-to-cart/" + id,
              data: {
                  id: id,
                  quantity: quantity
              },
              success: function (repsonse) {
                  $("#cart-icon").load(" #cart-icon");
-                 // $("#change-item-cart").html(repsonse);
                  $("#change-item-cart").load(" #change-item-cart");
                  alertify.set('notifier', 'position', 'bottom-right');
-                 alertify.success('You have successfully added!');
+                 alertify.success('Đã thêm sản phẩm!');
              }
          });
      });
 
      //Add to cart modal
-
-
      $(".btn_add_cart").on('click', function (e) {
          e.preventDefault();
          let id = $(this).data("id");
          let quantity = $(this).parents(".quickview_plus_minus_inner").find('input.quantity').val();
          $.ajax({
              method: "GET",
-             url: "add-to-cart/" + id,
+             url: "http://127.0.0.1:8000/frontend/add-to-cart/" + id,
              data: {
                  id: id,
                  quantity: quantity
@@ -343,27 +368,20 @@
                  $("#cart-icon").load(" #cart-icon");
                  $("#change-item-cart").load(" #change-item-cart");
                  alertify.set('notifier', 'position', 'bottom-right');
-                 alertify.success('You have successfully added!');
+                 alertify.success('Đã thêm sản phẩm!');
              }
          });
 
      });
 
+     $("#sort").on('change', function (e) {
+         e.preventDefault();
+         let url = $(this).val();
+         if (url) {
+             window.location = url;
+         }
+         return false;
 
-
-
-
-     //  $(".mini_cart_checkout").on('click', "a", function (e) {
-     //      e.preventDefault();
-     //      $.ajax({
-     //          method: "get",
-     //          url: "check-out",
-     //          success: function (response) {
-     //              if (response.message == "error") {
-     //                  alert('Do not have any products');
-     //              }
-     //          }
-     //      });
-     //  });
+     });
  </script>
  @endsection

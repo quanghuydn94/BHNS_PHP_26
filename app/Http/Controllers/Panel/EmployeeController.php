@@ -20,12 +20,12 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->rolename == 'admin' || Auth::user()->rolename == 'employee' ) {
+        if (Auth::user()->rolename == 'admin' || Auth::user()->rolename == 'Nhân viên' ) {
             $employees = Employee::all();
             return response()->view('panel.employee.index', ['employees' => $employees]);
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin đăng nhập không đúng.');
         }
     }
 
@@ -36,7 +36,6 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        // $users = User::all();
         return response()->view('panel.employee.create');
     }
 
@@ -55,18 +54,16 @@ class EmployeeController extends Controller
                 'phone' => 'required|max:15|unique:employees,employee_phone',
                 'address' => 'required|string',
                 'email' => 'required|string|email|unique:users',
-                // 'password' => 'required|string|confirmed|min:8',
-                // 'password_confirmation' => 'required|string',
                 'identity' => 'required|string|unique:employees,employee_identity',
                 'rolename' => 'required|string',
                 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [ // errors message
-                'required' => ':attribute do not leave blank',
-                'max' => ':attribute should be not more than :max',
-                'confirmed' => ':attribute does not match',
-                'email' => 'The :attribute must be a valid email address',
-                'unique' => ':attribute existed',
+                'required' => ':attribute không được để trống',
+                'max' => ':attribute không được dài hơn :max',
+                'confirmed' => ':attribute không đúng',
+                'email' => ' :attribute không hợp lệ',
+                'unique' => ':attribute đã tồn tại',
             ]
         );
 
@@ -93,8 +90,7 @@ class EmployeeController extends Controller
 
         ]);
 
-        $id = User::where('email', $request->email)->select('id')->first(); // get id of user account and then add to column user_id of table Employee
-        $user_id = $id;
+        $user_id = User::where('email', $request->email)->select('id')->first(); // get id of user account and then add to column user_id of table Employee
 
         $employee = new Employee;
         $employee->employee_name = $request->name;
@@ -104,7 +100,7 @@ class EmployeeController extends Controller
         $employee->user_id = (int) $user_id->id;
         $employee->active = 1; //this coloum to hide/show information of this  employee when active = 0/1
         $employee->save();
-        return redirect()->route('employees.index')->with('success', 'your registered successful!');
+        return redirect()->route('employees.index')->with('success', 'Đã thêm nhân viên thành công!');
 
     }
 
@@ -152,13 +148,6 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'name' => 'required|string',
-            'phone' => 'required|string',
-            'address' => 'required|string',
-            'identity' => 'required|string',
-        ];
-        $request->validate($rules);
         Employee::find((int) $id)->update([
             'employee_name' => $request->name,
             'employee_phone' => $request->phone,
@@ -180,7 +169,7 @@ class EmployeeController extends Controller
             'avatar' => $filename,
         ]);
 
-        return redirect()->route('employees.index')->with('success', 'your updated successful!');
+        return redirect()->route('employees.index')->with('success', 'Đã sửa thông tin nhân viên thành công!');
 
     }
 
@@ -193,7 +182,7 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         $employee = Employee::find($id);
-        $employee->update(['active' => 0]); // ser column active = 0, to hide information of employee you want to delete, avoid   foreign key error
-        return redirect()->back();
+        $employee->update(['active' => 0]); // set column active = 0, to hide information of employee you want to delete, avoid   foreign key error
+        return redirect()->back()->with('success', 'Đã xóa nhân viên thành công!');
     }
 }

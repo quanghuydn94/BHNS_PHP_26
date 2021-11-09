@@ -104,7 +104,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Vai trò</p>
-                                            <h6 class="text-muted f-w-400">Client</h6>
+                                            <h6 class="text-muted f-w-400">Khách hàng</h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Ngày đăng ký</p>

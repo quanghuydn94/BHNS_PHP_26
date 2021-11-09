@@ -1,4 +1,4 @@
-var myCenter=new google.maps.LatLng(40.7065983,-74.0107104);
+var myCenter = new google.maps.LatLng(16.075774700502155, 108.14866476836941);
     function initialize()
     {
         var mapProp = {
@@ -12,7 +12,7 @@ var myCenter=new google.maps.LatLng(40.7065983,-74.0107104);
             position:myCenter,
             map: map,
         });
-	
+
 		var styles =  [
 			{
 				"stylers": [
@@ -70,24 +70,23 @@ var myCenter=new google.maps.LatLng(40.7065983,-74.0107104);
 			}
 		];
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         map.setOptions({styles: styles});
         marker.setMap(map);
     }
 google.maps.event.addDomListener(window, 'load', initialize);
 
-	

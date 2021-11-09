@@ -14,7 +14,7 @@ class EmployeeAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->rolename == 'employee') {
+        if ($request->user()->rolename == 'Nhân viên') {
             return $next($request);
         }
 

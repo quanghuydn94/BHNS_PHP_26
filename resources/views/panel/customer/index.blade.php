@@ -12,14 +12,6 @@
      <div class="h4 mb-0 text-gray-600 p-3">
          <a href="{{route('customers.create')}}" class="btn btn-outline-primary">Khách hàng mới</a>
      </div>
-     @if (session()->get('success'))
-     <div class="alert alert-success alert-dismissible fade show" role="alert">
-         <span>{{session()->get('success')}}</span>
-         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-         </button>
-     </div>
-     @endif
 
      <div class="card-body">
          <div class="table-responsive">
@@ -57,15 +49,15 @@
                          <td>
                              <a href="{{ route('customers.edit', $cus->id) }}"><button
                                      class="btn btn-primary">Sửa</button></a>
-                             <a href="{{route('customers.show',$cus->id)}}"><button
-                                     class="btn btn-primary">Chi tiết</button></a>
+                             <a href="{{route('customers.show',$cus->id)}}"><button class="btn btn-primary">Chi
+                                     tiết</button></a>
                              @if (Auth::user()->rolename == 'admin')
 
                              <form method="POST" action="{{ route('customers.destroy', ['customer' => $cus->id]) }}"
                                  class="d-inline-block">
                                  @csrf
                                  @method('delete')
-                                 <button class="btn btn-primary">Xóa</button>
+                                 <button class="btn btn-danger">Xóa</button>
                              </form>
                              @endif
                          </td>
@@ -85,4 +77,18 @@
 
  <!-- Page level custom scripts -->
  <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+ <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+ <script>
+     @if(session()->get('success'))
+
+     swal({
+         title: "Thành công",
+         text: '{{session()->get('success')}}',
+         icon: "success",
+
+     });
+
+
+     @endif
+ </script>
  @endsection

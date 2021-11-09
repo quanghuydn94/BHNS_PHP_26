@@ -46,9 +46,9 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
         $credentials = $this->only('email', 'password');
-        $credentials['active'] = 1;  // additional to access admin page
 
-
+        // Additional to access admin page
+        $credentials['active'] = 1;
 
             if (!Auth::attempt($credentials, $this->boolean('remember'))) {
                 RateLimiter::hit($this->throttleKey());

@@ -26,7 +26,6 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>STT</th>
                                 <th>Ký hiệu</th>
                                 <th>Tên</th>
                                 <th>Thời hạn</th>
@@ -42,7 +41,6 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{$data->id}}</td>
                                 <td>{{$data->consignment_symbol}}</td>
                                 <td>{{$data->consignment_name}}</td>
                                 <td>{{$data->consignment_expiry}}</td>

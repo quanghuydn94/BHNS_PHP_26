@@ -15,10 +15,11 @@ class Orders extends Model
         'order_customer_phone',
         'order_customer_email',
         'order_customer_address',
+        'order_total_price',
         'customer_id',
         'active',
         'order_status',
-        'oder_note',];
+        'order_note',];
     public $timestamps = true;
 
     public function getOrderDetail()

@@ -33,7 +33,7 @@ class UserController extends Controller
             return response()->view('panel.users.index', compact('list'));
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin của bạn không chính xác!');
         }
     }
 
@@ -44,12 +44,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->rolename == 'admin') {
-            return response()->view('panel.users.create');
-        } else {
-            Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
-        }
+
     }
 
     /**
@@ -59,42 +54,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->rolename == 'admin') {
-            $rules = [
-                'name' => 'required|string',
-                'phone' => 'required|string',
-                'address' => 'required|string',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|string',
-                'avatar' => 'required|string',
-                'rolename' => 'required|string',
-            ];
-            $request->validate($rules);
 
-            User::create([
-                'name' => $request->name,
-                'phone' => $request->phone,
-                'address' => $request->address,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'avatar' => $request->avatar,
-                'rolename' => $request->rolename,
-            ]);
-            $user = User::select('id')->where('email', $request->email)->first();
-
-            Employee::create([
-                'nhanvien_ten' => $request->name,
-                'nhanvien_sdt' => $request->phone,
-                'nhanvien_diachi' => $request->address,
-                'nhanvien_cmnd' => $request->rolename,
-                'user_id' => (int) $user->id,
-            ]);
-
-            return redirect(route('users.index'));
-        } else {
-            Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
-        }
     }
 
     /**
@@ -112,7 +72,7 @@ class UserController extends Controller
             return response()->view('panel.users.showUser', ['user' => $user]);
         } else {
             Auth::logout();
-            return redirect('/')->withErrors('These credential does not match our records.');
+            return redirect('/')->withErrors('Thông tin của bạn không chính xác!');
         }
     }
 
@@ -125,9 +85,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //     $data = User::findOrFail($id);
 
-        //     return view('panel.users.edit', compact('data'));
     }
 
     /**
@@ -139,20 +97,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $rules = [
-        //     'name' => 'required|string',
-        //     'phone' => 'required|string',
-        //     'address' => 'required|string',
-        //     'email' => 'required|email',
-        //     'password' => 'nullable|string',
-        //     'avatar' => 'required|string',
-        // ];
-        // $request->validate($rules);
 
-        // $data = User::findOrFail($id);
-        // $data->update($request->all());
-
-        // return redirect(route('users.index'));
     }
 
     /**
@@ -168,7 +113,7 @@ class UserController extends Controller
             $data = User::find($id);
             $data->update(['active' => 0]);
 
-            return redirect()->back();
+            return redirect()->back()->with('success','Bạn đã xóa thành công');
         } else {
             Auth::logout();
             return redirect('/')->withErrors('Thông tin không khớp với dữ liệu');

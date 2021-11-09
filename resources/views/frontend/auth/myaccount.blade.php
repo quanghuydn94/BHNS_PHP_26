@@ -36,14 +36,12 @@
                     <!-- Tab panes -->
                     <div class="tab-content dashboard-content">
                         <div class="tab-pane fade" id="orders">
-                            <h3>Đơn hàng</h3>
+                            <h3>Đơn hàng đã mua</h3>
                             <div class="organic-table-area table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Đơn hàng</th>
                                             <th>Ngày</th>
-                                            <th>Trạng thái</th>
                                             <th>Tổng tiền (Vnd)</th>
                                             <th>Lịch sử mua</th>
                                         </tr>
@@ -52,14 +50,12 @@
                                         @php
                                         $stt = 1
                                         @endphp
-                                        @foreach ($dataOrders as $data )
+                                        @foreach ($orders as $data )
 
                                         <tr>
-                                            <td>{{$stt++}}</td>
                                             <td>{{$data->created_at}}</td>
-                                            <td>{{$data->order_status}}</td>
-                                            <td>{{number_format($data->order_detail_price)}}</td>
-                                            <td><a href="#" data-toggle="modal" data-target="#my_modal{{$data->id}}"
+                                            <td>{{number_format($data->order_total_price)}}</td>
+                                            <td><a href="" data-toggle="modal" data-target="#my_modal{{$data->id}}"
                                                     class="view">view</a></td>
                                         </tr>
                                         @endforeach
@@ -72,12 +68,10 @@
                         <div class="tab-pane fade show active" id="account-details">
                             <h3>Chi tiết tài khoản</h3>
                             <div class="login">
-                                @if (session('message'))
-                                {{ session('message') }}
-                                @endif
-                                @foreach ($errors->all() as $error)
+
+                                {{-- @foreach ($errors->all() as $error)
                                 {{ $error }}
-                                @endforeach
+                                @endforeach --}}
                                 <div class="login-form-container">
                                     <div class="account-login-form">
                                         <form method="POST">
@@ -95,6 +89,14 @@
                                             <label>Ngày đăng ký</label>
                                             <input type="text" name="date" value="{{ auth()->user()->created_at }}"
                                                 readonly>
+                                            @if (session('message'))
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <span>{{ session('message') }}</span>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            @endif
                                             <div class="border p-3">
                                                 <h6>Đổi mật khẩu <span class="text-danger">*</span></h6>
                                                 <label>Mật khẩu hiên tại</label>
@@ -124,10 +126,11 @@
 
 <!-- Modal orders history  -->
 
-@foreach ($dataOrders as $data )
+@foreach ($orders as $data )
 
 
 <div class="modal fade mt-5" id="my_modal{{$data->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -148,6 +151,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($dataOrders as $data )
                                     <tr>
                                         <td>{{$data->created_at}}</td>
                                         <td>{{$data->product_name}}</td>
@@ -155,6 +159,7 @@
                                         <td>{{number_format($data->order_detail_price)}}</td>
                                         <td>{{$data->product_description}}</td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

@@ -8,14 +8,7 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách đơn hàng</h6>
     </div>
-    @if (session()->get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <span>{{session()->get('success')}}</span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
+
     <div class="card-body">
         <a class="btn btn-outline-primary mb-3" href="{{ route('order.create') }}">Thêm đơn hàng</a>
         @if (auth()->user()->rolename == 'admin')
@@ -26,31 +19,34 @@
                 <thead>
                     <tr>
                         <th>Ngày</th>
-                        <th>Tên khách hàng</th>
-                        <th>Địa chỉ</th>
-                        <th>SĐT</th>
+                        <th>Khách hàng</th>
+                        <th>Tổng tiền (Vnd)</th>
+                        <th>Trạng thái</th>
                         <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>Ngày</th>
-                        <th>Tên khách hàng</th>
-                        <th>Địa chỉ</th>
-                        <th>SĐT</th>
+                        <th>Khách hàng</th>
+                        <th>Tổng tiền (Vnd)</th>
+                        <th>Trạng thái</th>
                         <th>Công cụ</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @foreach ($list as $item)
-                    @if ($item->active == 1 && $item->order_customer_phone !== null)
+                    @if ($item->active == 1 )
 
                     <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->order_customer_name }}</td>
-                        <td>{{ $item->order_customer_address }}</td>
-                        <td>{{ $item->order_customer_phone }}</td>
-
+                        <td width="10%" >{{ $item->created_at }}</td>
+                        <td>
+                            {{ $item->order_customer_name }} <br>
+                            {{ $item->order_customer_address }} <br>
+                            {{ $item->order_customer_phone }}
+                        </td>
+                        <td >{{ number_format($item->order_total_price) }}</td>
+                        <td >{{ $item->order_status }}</td>
                         <td>
                             <a href="{{ route('order.edit', ['id' => $item->id]) }}"><button
                                     class="btn btn-primary">Sửa</button></a>
@@ -62,7 +58,7 @@
                                 class="d-inline-block">
                                 @csrf
                                 @method('post')
-                                <button class="btn btn-primary">Xóa</button>
+                                <button class="btn btn-danger">Xóa</button>
                             </form>
 
                             @endif
@@ -83,4 +79,18 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script>
+    @if(session()->get('success'))
+
+   swal({title: "Thành công",
+                text: '{{session()->get('success')}}',
+                icon: "success",
+
+        });
+
+
+    @endif
+</script>
 @endsection

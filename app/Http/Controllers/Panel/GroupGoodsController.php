@@ -59,7 +59,7 @@ class GroupGoodsController extends Controller
             'active'=>1,
         ]);
 
-        return redirect(route('groupgoods.index'));
+        return redirect(route('groupgoods.index'))->with('success','Bạn đã thêm thành công');
 
     }
 
@@ -100,13 +100,6 @@ class GroupGoodsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $rules = [
-        //     'group_name' => 'required|string',
-        //     'group_image' => 'required|image',
-        //     'group_description' => 'required|string',
-        // ];
-        // $request->validate($rules);
-
         $groupgoods = GroupGoods::find((int)$id);
         if ($request->hasFile('group_image')) { //upload file image, set extension
             $file = $request->file('group_image');
@@ -122,7 +115,7 @@ class GroupGoodsController extends Controller
             'group_description' => $request->group_description,
         ]);
 
-        return redirect(route('groupgoods.index'));
+        return redirect(route('groupgoods.index'))->with('success','Bạn đã thay đổi thành công');
 
     }
 
@@ -137,7 +130,7 @@ class GroupGoodsController extends Controller
         $groupgood = GroupGoods::findOrFail($id);
         $groupgood->update(['active'=>0]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Bạn đã xóa thành công');
 
     }
 }

@@ -1,8 +1,8 @@
 @extends('layouts.frontend')
 @section('content')
 <!--breadcrumb area start-->
+<div class="container">
     <div class="breadcrumb_container">
-        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <nav>

@@ -19,7 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string('customer_phone');
             $table->string('customer_address');
             $table->string('customer_email');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('active');
             $table->timestamps();

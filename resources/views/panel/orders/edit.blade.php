@@ -1,4 +1,10 @@
 @extends('layouts.panel')
+@section('styles')
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+ <!-- Default theme -->
+ <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+@endsection
 @section('content')
 @if ($errors->any())
 <div class="alert alert-warning">
@@ -48,7 +54,13 @@
             </div>
             <label class="col-sm-1 col-form-label">Trạng thái</label>
             <div class="col-sm-4">
-                <input name="order_status" type="text" class="form-control" value="{{$order->order_status}}">
+                <select name="order_status" class="form-control">
+                    <option value="0">{{$order->order_status}}</option>
+                    <option value="Tiếp nhận">Tiếp nhận</option>
+                    <option value="Đang giao">Đang giao</option>
+                    <option value="Đã giao">Đã giao</option>
+                    <option value="Hủy">Hủy</option>
+                </select>
             </div>
         </div>
         <div class="mb-3 row text-center">
@@ -61,6 +73,7 @@
                             <th>Ký hiệu</th>
                             <th>Số lượng (Kg)</th>
                             <th>Giá (VND)</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,9 +81,15 @@
                         <tr>
                             <td> {{$item->product_name}}</td>
                             <td>{{$item->product_symbol}}</td>
-                            <td><input type="text" name="order_detail_quantity"
+                            <td><input type="number" name="order_detail_quantity" min="1"  class="w-25 quatity"
                                     value="{{$item->order_detail_quantity}}"></td>
                             <td>{{number_format($item->order_detail_price)}}</td>
+                            <td>
+                                <a href="javascript:" data-id="{{$item->id}}"
+                                    data-url="{{route('order.editCart',$item->id)}}"
+                                    class="btn-sm btn-primary cart_update">Sửa</a>
+                            </td>
+
                         </tr>
                         @endforeach
                     </tbody>
@@ -81,4 +100,32 @@
         <button class="btn btn-primary">Sửa</button>
     </form>
 </div>
+@endsection
+@section('scripts')
+ <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<script>
+    function cartUpdate(event) {
+        event.preventDefault();
+        let urlUpdateCart = $(this).data('url');
+        let id = $(this).data('id');
+        let quatity = $(this).parents('tr').find('input.quatity').val();
+        $.ajax({
+            type: "GET",
+            url: urlUpdateCart,
+            data: {
+                id: id,
+                quatity: quatity,
+            },
+            success: function (data) {
+                    $('.table').load(' .table');
+                    alertify.set('notifier', 'position', 'top-center');
+                    alertify.success('Thay đổi thành công');
+            }
+        });
+    }
+    $(function () {
+        $(document).on('click', '.cart_update', cartUpdate);
+    });
+</script>
 @endsection

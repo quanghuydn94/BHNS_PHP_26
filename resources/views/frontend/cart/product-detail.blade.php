@@ -82,8 +82,8 @@
                         </div>
                         <div class="comments_advices">
                             <ul>
-                                <li><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>
-                                        Đọc bình luận (<span>1</span>)</a></li>
+                                <li><a href="#product_tab"><i class="fa fa-comment-o" aria-hidden="true"></i>
+                                        Đọc bình luận (<span>{{count($comments)}}</span>)</a></li>
 
                             </ul>
                         </div>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="product_information">
                         <div id="product_description_short">
-                            <p>{{$product->product_description}}</p>
+                            <p>Sản phẩm được lựa chọn kỹ, cực kỳ chất lượng, đảm bảo an toàn thực phẩm.</p>
                         </div>
                         <div class="product_variants">
                             <div class="quickview_plus_minus">
@@ -153,71 +153,33 @@
 
 <!-- product page tab -->
 
-<div class="product_page_tab ptb-100">
+<div class="product_page_tab ptb-100" id="product_tab">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="product_tab_button">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li>
-                            <a class=" tav_past active" id="home-tab" data-toggle="tab" href="#Description" role="tab"
+                            <a class=" tav_past  " id="home-tab" data-toggle="tab" href="#Description" role="tab"
                                 aria-controls="Description" aria-selected="true">Mô tả</a>
                         </li>
                         <li>
-                            <a class=" tav_past" id="profile-tab" data-toggle="tab" href="#details" role="tab"
-                                aria-controls="details" aria-selected="false">Thông tin</a>
-                        </li>
-                        <li>
-                            <a class=" tav_past" id="contact-tab" data-toggle="tab" href="#Reviews" role="tab"
+                            <a class=" tav_past active" id="contact-tab" data-toggle="tab" href="#Reviews" role="tab"
                                 aria-controls="Reviews" aria-selected="false">Đánh giá</a>
                         </li>
                     </ul>
                 </div>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="Description" role="tabpanel">
+                    <div class="tab-pane fade  " id="Description" role="tabpanel">
                         <div class="product-description">
-                            <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine
-                                designs delivering stylish separates and statement dresses which have since evolved into
-                                a full ready-to-wear collection in which every item is a vital part of a woman's
-                                wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable
-                                signature style. All the beautiful pieces are made in Italy and manufactured with the
-                                greatest attention. Now Fashion extends to a range of accessories including shoes, hats,
-                                belts and more!</p>
+                            <p>{{$product->product_description}}.  </p>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="details" role="tabpanel">
-                        <div class="product-details">
-                            <div class="product-manufacturer">
-                                <a href="#"><img src="assets/img/cart/11.jpg" alt=""></a>
-                            </div>
-                            <div class="product-reference">
-                                <label class="label">Reference </label>
-                                <span>demo_10</span>
-                            </div>
-                            <div class="product-quantities">
-                                <label class="label">In stock</label>
-                                <span>321 Items</span>
-                            </div>
-                            <div class="product-out-of-stock">
-                                <section class="product-features">
-                                    <h3>Data sheet</h3>
-                                    <dl class="data-sheet">
-                                        <dt class="name">Compositions</dt>
-                                        <dd class="value">Viscose</dd>
-                                        <dt class="name">Styles</dt>
-                                        <dd class="value">Dressy</dd>
-                                        <dt class="name">Properties</dt>
-                                        <dd class="value">Short Dress</dd>
-                                    </dl>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="Reviews" role="tabpanel">
+                    <div class="tab-pane fade show active  " id="Reviews" role="tabpanel">
                         <div class="product_comments_block_tab">
                             <div class="comment_clearfix">
                                 <div class="comment_author">
-                                    <span>Grade </span>
+                                    <span>Hạng</span>
                                     <div class="star_content clearfix">
                                         <ul>
                                             <li><i class="fa fa-star"></i></li>
@@ -229,18 +191,32 @@
                                     </div>
 
                                 </div>
-                                <div class="comment_author_infos">
-                                    <strong>posthemes </strong>
-                                    <br>
-                                    <em>05/08/2018</em>
+                                <div class="row">
+                                    <div class="comment_details col-md-6" >
+                                    <h3>Bình luận</h3>
+                                    <div class="border border-muted rounded p-2">
+                                        @foreach ($comments as $com )
+                                        <div class="border-bottom   mb-2">
+
+                                            <strong class=" bg-primary text-white p-1 rounded">{{$com->comment_username}}</strong>
+                                            <p>{{$com->comment_content}}</p>
+                                        </div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="comment_details">
-                                    <h4>Demo</h4>
-                                    <p>themes</p>
+                                <div class="review col-md-6">
+                                    <p><strong >Bình luận tại đây</strong></p>
+                                    <form action="{{route('comment')}}" method="post" class="form-group ">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                                        <input type="text" name="name" class="form-control mb-3" placeholder="Tên khách hàng">
+                                        <input type="text" name="email" class="form-control mb-3" placeholder="Email">
+                                        <textarea type="text" name="comment" class="form-control mb-3" placeholder="Bình luận"></textarea>
+                                        <button type="submit" class="btn btn-primary rounded">Bình luận</button>
+                                    </form>
                                 </div>
-                                <div class="review">
-                                    <p><a href="#">Write your review !</a></p>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -308,9 +284,7 @@
 <!--Features product end-->
 
 <!-- modal area start -->
-{{-- @php
-dd($relatedProduct);
-@endphp --}}
+
 @foreach ($relatedProduct as $pro )
 
 
@@ -429,6 +403,19 @@ dd($relatedProduct);
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script>
+    @if(session()->get('comment'))
+
+   swal({title: "Thành công",
+                text: '{{session()->get('comment')}}',
+                icon: "success",
+
+        });
+
+
+    @endif
+</script>
 
 <script>
 
@@ -454,7 +441,7 @@ dd($relatedProduct);
                 // $("#change-item-cart").html(repsonse);
                 $("#change-item-cart").load(" #change-item-cart");
                 alertify.set('notifier', 'position', 'bottom-right');
-                alertify.success('You have successfully added!');
+                alertify.success('Đã thêm sản phẩm!');
             }
         });
     });
@@ -479,7 +466,7 @@ dd($relatedProduct);
                 $("#cart-icon").load(" #cart-icon");
                 $("#change-item-cart").load(" #change-item-cart");
                 alertify.set('notifier', 'position', 'bottom-right');
-                alertify.success('You have successfully added!');
+                alertify.success('Đã thêm sản phẩm!');
             }
         });
     });
@@ -489,7 +476,7 @@ dd($relatedProduct);
     $(".add_cart_relate").on('click', function (e) {
         e.preventDefault();
         let url = window.location.href;
-        let route = url.split("product-detail", 1)
+        let route = url.split("product-detail", 1);
         let id = $(this).data("id");
         let quantity = $(this).parents(".quickview_plus_minus_inner").find('input.quantity_product').val();
         console.log(quantity);
@@ -504,10 +491,34 @@ dd($relatedProduct);
                 $("#cart-icon").load(" #cart-icon");
                 $("#change-item-cart").load(" #change-item-cart");
                 alertify.set('notifier', 'position', 'bottom-right');
-                alertify.success('You have successfully added!');
+                alertify.success('Đã thêm sản phẩm!');
             }
         });
 
+    });
+
+    // Add smooth scrolling to all links
+    $(".comments_advices a").on('click', function(event) {
+
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+        // Prevent default anchor click behavior
+        event.preventDefault();
+
+        // Store hash
+        var hash = this.hash;
+        console.log(hash);
+
+        // Using jQuery's animate() method to add smooth page scroll
+        // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+        $('html, .breadcrumb_container').animate({
+            scrollTop: $(hash).offset().top
+        }, 800, function(){
+
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+        });
+        } // End if
     });
 </script>
 

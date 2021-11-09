@@ -13,13 +13,13 @@ class CreateImageproductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('imageproducts', function (Blueprint $table) {
-            $table->id();
-            $table->string('image_product1');
-            $table->string('image_product2');
-            $table->string('image_product3');
-            $table->timestamps();
-        });
+        // Schema::create('imageproducts', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('image_product1');
+        //     $table->string('image_product2');
+        //     $table->string('image_product3');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateImageproductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imageproducts');
+        // Schema::dropIfExists('imageproducts');
     }
 }

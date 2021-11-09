@@ -64,7 +64,7 @@ class ProductController extends Controller
             'active' => 1,
         ]);
 
-        return redirect(route('products.index'))->with('success','Bạn đã thêm thành cồng');
+        return redirect(route('products.index'))->with('success','Bạn đã thêm thành công');
     }
 
     /**
@@ -107,16 +107,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $rules = [
-        //     'product_name' => 'required|string',
-        //     'product_symbol' => 'required|string',
-        //     'product_price' => 'required|numeric',
-        //     'product_description' => 'required|string',
-        //     'product_type_id' => 'required',
-        // ];
-
-        // $request->validate($rules);
-
         $data = Products::find($id);
         if ($request->hasFile('product_image')) {
             $file = $request->file('product_image');
@@ -138,7 +128,7 @@ class ProductController extends Controller
             'active' => 1,
         ]);
 
-        return redirect(route('products.index'));
+        return redirect(route('products.index'))->with('success','Bạn đã thay đổi thành công');
     }
 
     /**
@@ -153,6 +143,6 @@ class ProductController extends Controller
         $data = Products::findOrFail($id);
         $data->update(['active' => 0]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Bạn đã xóa thành công');
     }
 }

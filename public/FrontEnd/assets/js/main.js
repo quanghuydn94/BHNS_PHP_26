@@ -1,10 +1,10 @@
 (function($) {
     "use strict";
-    
+
     /*----------------------------
        stickey menu
     ----------------------------*/
-    $(window).on('scroll',function() {    
+    $(window).on('scroll',function() {
            var scroll = $(window).scrollTop();
            if (scroll < 165) {
             $(".sticky-header").removeClass("sticky");
@@ -21,7 +21,7 @@
         meanMenuContainer: ".mobile-menu",
         onePage: true,
     });
-    
+
     /* slider activation */
     $('.slider_list').owlCarousel({
 		loop: true,
@@ -51,7 +51,7 @@
             768:{
 				items:3,
 				nav:false
-			},	
+			},
 			992:{
 				items:4,
 				nav:false
@@ -66,7 +66,7 @@
 				nav:true,
 				loop:false
 			}
-			
+
 		  }
     });
     $('.shop-product_list').owlCarousel({
@@ -89,12 +89,12 @@
 			768:{
 				items:2,
 				nav:false
-			},	
+			},
 			992:{
 				items:3,
 				nav:false
 			},
-            
+
 			1300:{
 				items:4,
 				nav:true,
@@ -108,7 +108,7 @@
 
 		  }
 	});
-    
+
     $('.best_selling_product_list').owlCarousel({
         loop: true,
         nav: false,
@@ -140,7 +140,7 @@
 				loop:false
 			}
 		  }
-    });   
+    });
 
 	$('.category_product_active').owlCarousel({
         loop: true,
@@ -171,10 +171,10 @@
 				items:3,
 				nav:false
 			},
-			
+
 		  }
     });
-    
+
     $('.brand_list_carousel').owlCarousel({
         loop: true,
         nav: true,
@@ -199,12 +199,12 @@
 			991:{
 				items:4,
 				nav:false
-			},	
+			},
 			1200:{
 				items:5,
 				nav:false
 			},
-			
+
 		  }
     });
 	$('.features_product_three_active').owlCarousel({
@@ -227,7 +227,7 @@
 			768:{
 				items:3,
 				nav:false
-			},	
+			},
 			992:{
 				items:3,
 				nav:false
@@ -239,7 +239,7 @@
 			},
 		  }
     });
-	
+
 	$('.features_product_four_active').owlCarousel({
         loop: true,
         nav: true,
@@ -260,7 +260,7 @@
 			768:{
 				items:2,
 				nav:false
-			},	
+			},
 			992:{
 				items:3,
 				nav:false
@@ -270,8 +270,8 @@
 				nav:true,
 				loop:false
 			},
-           
-			
+
+
 		  }
     });
 	$('.pos_special_active').owlCarousel({
@@ -302,7 +302,7 @@
 			768:{
 				items:3,
 				nav:false
-			},	
+			},
 			992:{
 				items:4,
 				nav:false
@@ -312,11 +312,11 @@
 				nav:true,
 				loop:false
 			},
-           
-			
+
+
 		  }
     });
-	
+
 	$('.features_product_active_four').owlCarousel({
         loop: true,
         nav: true,
@@ -337,7 +337,7 @@
 			768:{
 				items:3,
 				nav:false
-			},	
+			},
 			992:{
 				items:4,
 				nav:false
@@ -347,11 +347,11 @@
 				nav:true,
 				loop:false
 			},
-           
-			
+
+
 		  }
     });
-	
+
 	$('.best_selling_product_three').owlCarousel({
         loop: true,
         nav: true,
@@ -368,15 +368,15 @@
 			480:{
 				items:1,
 				nav:false
-			},	
+			},
 			992:{
 				items:1,
 				nav:false
 			},
 
 		  }
-    }); 
-	
+    });
+
 	$('.related_product_active').owlCarousel({
         loop: true,
         nav: true,
@@ -397,15 +397,15 @@
 			768:{
 				items:3,
 				nav:false
-			},	
+			},
 			992:{
 				items:4,
 				nav:false
 			},
 
 		  }
-    }); 
-	
+    });
+
     $('.product_nav_active').owlCarousel({
         loop: true,
         nav: true,
@@ -414,7 +414,7 @@
         navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
         items: 3,
     });
-    
+
     $('.testimonial___wrapper').owlCarousel({
         loop: true,
         nav: true,
@@ -423,7 +423,7 @@
     });
     /*------ Wow activation ----*/
     new WOW().init();
-    
+
 
     /*--------------------------
      ScrollUp
@@ -434,27 +434,27 @@
         scrollSpeed: 900,
         animation: 'fade'
     });
-	
+
     /*header_account slideToggle*/
-    
+
     $(".account_inner > a").on("click", function() {
             $('.content-setting-dropdown').slideToggle('medium');
-    }); 
-	
+    });
+
 	/*countdown activation*/
-		
+
 	 $('[data-countdown]').each(function() {
 		var $this = $(this), finalDate = $(this).data('countdown');
 		$this.countdown(finalDate, function(event) {
 		$this.html(event.strftime('<div class="countdown_area"><div class="single_coutdown"><div class="content-number">%D</div><div class="content-title">DAYS</div></div><div class="single_coutdown"><div class="content-number">%H</div><div class="content-title">HOURS</div></div><div class="single_coutdown"><div class="content-number">%M</div><div class="content-title">MINUTES</div></div><div class="single_coutdown"><div class="content-number">%S</div><div class="content-title">SECONDS</div></div></div>'));
 	});
-	});	
-	
+	});
+
     /*----------------------------
     	Cart Plus Minus Button
     ------------------------------ */
 	var CartPlusMinus = $('.cart-plus-minus');
-	
+
     CartPlusMinus.prepend('<div class="dec qtybutton">-</div>');
     CartPlusMinus.append('<div class="inc qtybutton">+</div>');
     $('.qtybutton').on('click', function() {
@@ -478,18 +478,21 @@
     $( "#slider-range" ).slider({
       range: true,
       min: 0,
-      max: 500,
-      values: [ 75, 300 ],
+      max: 300000,
+      values: [0, 100000],
+      step: 5000,
       slide: function( event, ui ) {
-        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+          $("#amount").val(ui.values[0] + "đ - " + ui.values[1] + "đ");
+          $("#start_price").val(ui.values[0]);
+          $("#end_price").val(ui.values[1]);
       }
     });
-    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-      " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+    $("#amount").val($("#slider-range").slider("values", 0) + "đ" +
+        " - " + $("#slider-range").slider("values", 1) + "đ");
     /*------------------------
         video popup here
      -----------------------*/
-    
+
     $('.video__trigger').magnificPopup({
       type: 'iframe',
       mainClass: 'mfp-fade',
@@ -499,7 +502,7 @@
           enabled: true,
       }
     });
-    
+
     /*------------------------------
       Category menu Activation
     ------------------------------*/
@@ -527,7 +530,7 @@
           }
          });
          $('#cat_toggle > ul > li.has-sub > a,.shop_toggle li.has-sub > a').append('<span class="holder"></span>');
-    
+
 
 
 })(jQuery);

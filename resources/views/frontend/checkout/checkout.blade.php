@@ -9,7 +9,7 @@
                     <h3>
                         <i class="fa fa-file-o" aria-hidden="true"></i>
                         Trở thành thành viên?
-                        <a class="Returning text-success" href="#">Nhấp vào đây để đăng ký</a>
+                        <a class="Returning text-success" href="{{route('register')}}">Nhấp vào đây để đăng ký</a>
 
                     </h3>
                 </div>
@@ -46,31 +46,11 @@
                                 <label>Số điện thoại <span>*</span></label>
                                 <input placeholder="Phone Number" type="text" name="phone">
                             </div>
-                            <div class="col-12 mb-30">
-                                <input id="b_c_account" type="checkbox" data-target="createp_account" />
-                                <label class="righ_0" for="b_c_account" data-toggle="collapse"
-                                    data-target="#collapseOne" aria-controls="collapseOne">Tạo tài khoản</label>
-
-                                <div id="collapseOne" class="collapse" data-parent="#accordion">
-                                    <div class="card-body1">
-                                        <p>Create an account by entering the information below. If you are a returning
-                                            customer please login at the top of the page.</p>
-                                        <label for="b_a_password">Account password <span>*</span></label>
-                                        <input id="b_a_password" type="password" name="password">
-                                    </div>
-                                    <div class="card-body1">
-
-                                        <label for="b_a_password">Confirm password <span>*</span></label>
-                                        <input id="b_a_password" type="password" name="password_confirmation">
-                                    </div>
-                                </div>
-
-                            </div>
                             <div class="col-12">
                                 <div class="order-notes">
                                     <label for="order_note">Ghi chú</label>
                                     <textarea id="order_note" name="customer_name"
-                                        placeholder="Ghi chú thông tin cần thiết về đơn hàng của bạn, quan trọng cho việc giao hàng"></textarea>
+                                        placeholder="Ghi chú thông tin cần thiết về đơn hàng của bạn, quan trọng cho việc giao hàng."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -121,12 +101,15 @@
                                 <form action="{{route('paybycash.cart')}}" method="POST">
                                     @csrf
                                     <div class="order-button1 mr-2">
-                                        <button type="submit">Thanh toán (Tiền mặt)</button>
+                                        <button type="submit">Đặt hàng</button>
                                     </div>
                                 </form>
-                                <div class="order-button2">
-                                    <a  href="{{route('payonline.cart')}}" class="text-white">Thanh toán Online </a>
-                                </div>
+                                <form action="{{route('payonline.cart')}}" method="get">
+                                    @csrf
+                                    <div class="order-button1  ">
+                                        <button  type="submit" class="bg-primary">Thanh toán Online </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -139,17 +122,14 @@
 @endsection
 @section('scripts')
 <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
-@if(session()->get('orders'))
-<script>
+ <script>
+     @if(session()->get('payOnline'))
 
-   swal({title: "Thành công",
-                text: "Đơn hàng của bạn đã được đặt",
-                icon: "success",
-                button: "Quay lại"}).then(function() {
-            window.location = "{{route('shop.index')}}";
-        });
-
-
-</script>
-@endif
+     swal({
+         title: "Chú ý",
+         text: '{{session()->get('payOnline')}}',
+         icon: "warning",
+     });
+     @endif
+ </script>
 @endsection

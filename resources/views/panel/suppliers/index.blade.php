@@ -20,9 +20,7 @@
                         <th>Tên</th>
                         <th>Địa chỉ</th>
                         <th>SĐT</th>
-                        @if (auth()->user()->rolename == 'admin')
                         <th>Công cụ</th>
-                        @endif
                     </tr>
                 </thead>
                 <tfoot>
@@ -31,9 +29,7 @@
                         <th>Tên</th>
                         <th>Địa chỉ</th>
                         <th>SĐT</th>
-                        @if (auth()->user()->rolename == 'admin')
                         <th>Công cụ</th>
-                        @endif
                     </tr>
                 </tfoot>
                 <tbody>
@@ -41,27 +37,25 @@
                     @if ($item->active == 1)
 
                     <tr >
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->supplier_name }}</td>
-                        <td >{{ $item->supplier_address }}</td>
+                        <td width="5%">{{ $item->id }}</td>
+                        <td width="20%">{{ $item->supplier_name }}</td>
+                        <td width="30%">{{ $item->supplier_address }}</td>
                         <td>{{ $item->supplier_phone }}</td>
-                        @if (auth()->user()->rolename == 'admin')
-                        <td class="d-flex justify-content-between">
-                            <a href="{{ route('suppliers.edit', $item->id) }}"><button
-                                    class="badge badge-primary">Sửa</button></a>
+                        <td class="d-flex justify-content-center">
                             <a href="{{route('suppliers.show',$item->id)}} "><button
-                                class="badge badge-primary">Chi tiết</button></a>
-
+                                class="btn btn-primary mr-1">Chi tiết</button></a>
                             @if (auth()->user()->rolename == 'admin')
+                            <a href="{{ route('suppliers.edit', $item->id) }}"><button
+                                    class="btn btn-primary mr-1">Sửa</button></a>
+
                             <form method="POST" action="{{ route('suppliers.destroy',$item->id) }}"
                                 class="d-inline-block">
                                 @csrf
                                 @method('delete')
-                                <button  class="badge badge-primary">Xóa</button>
+                                <button  class="btn btn-danger">Xóa</button>
                             </form>
                             @endif
                         </td>
-                        @endif
                     </tr>
                     @endif
                     @endforeach
@@ -79,4 +73,17 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+<script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+<script>
+    @if(session()->get('success'))
+
+   swal({title: "Thành công",
+                text: '{{session()->get('success')}}',
+                icon: "success",
+
+        });
+
+
+    @endif
+</script>
 @endsection

@@ -32,7 +32,7 @@
                 @php
                     $total = 0
                 @endphp
-                @foreach ($carts as $cart )
+                @foreach (session()->get('cart') as $cart )
                     @php
                         $total += $cart['price']
                     @endphp

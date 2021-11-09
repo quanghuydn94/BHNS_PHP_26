@@ -5,24 +5,244 @@ namespace App\Http\Controllers\FrontEnd;
 use App\Http\Controllers\Controller;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use App\Models\comments;
+use App\Models\GroupGoods;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Products::limit(10)->get();
-        return view('frontend.cart.index', compact('products'));
+        $products = Products::orderby('id','desc')->get();
+        $product = $products->first();
+        $vegetables1 = Products::where('product_type_id', '=', 9)->limit(4)->get();
+        $vegetables2 = Products::orderby('id','desc')->where('product_type_id', '=', 9)->limit(4)->get();
+        $rices1 = Products::where('product_type_id', '=', 3)->limit(4)->get();
+        $rices2 = Products::orderby('id','desc')->where('product_type_id', '=', 7)->limit(4)->get();
+        $flowers1 = Products::where('product_type_id', '=', 2)->limit(4)->get();
+        $flowers2 = Products::orderby('id','desc')->where('product_type_id', '=', 6)->limit(4)->get();
+        return view('frontend.index',
+                compact(
+                    'products',
+                    'product',
+                    'vegetables1',
+                    'vegetables2',
+                    'rices1',
+                    'rices2',
+                    'flowers1',
+                    'flowers2',
+                ));
     }
 
+    //Show shop
     public function shop()
     {
-        $products = Products::all();
-        return view('frontend.cart.shop', compact('products'));
+        $categorys = GroupGoods::whereIn('id', [1,2,3])->get();
+
+        $products = Products::latest('id', 'DESC')->get();
+
+
+        // Sap xep san pham
+
+        $min_price = Products::min('product_price');
+        $max_price = Products::max('product_price');
+
+        if(isset($_GET['sort_by'])){
+           $sort_by = $_GET['sort_by'];
+
+            if($sort_by == 'price_ASC')
+            {
+                $products = Products::orderBy('product_price', 'asc')->get();
+
+
+            }
+
+            elseif ($sort_by == 'price_DESC')
+            {
+                $products = Products::orderBy('product_price', 'desc')->get();
+
+
+            }
+
+            elseif ($sort_by == 'kytu_ASC')
+            {
+                $products = Products::orderBy('product_name', 'asc')->get();
+
+             }
+
+            elseif ($sort_by == 'kytu_DESC')
+            {
+                $products = Products::orderBy('product_name', 'desc')->get();
+
+            }
+        }
+
+        // Loc san pham
+
+        elseif(isset($_GET['start_price']) && $_GET['end_price'])
+        {
+            $min_price = $_GET['start_price'];
+            $max_price = $_GET['end_price'];
+            $products = Products::whereBetween('product_price', [$min_price, $max_price])
+            ->orderBy('product_price','asc')->get();
+        }
+        else
+        {
+            $products = Products::latest('id')->get();
+        }
+
+        return view('frontend.cart.shop',
+        compact(
+            'categorys',
+            'products',
+            // 'totalProducts',
+            'min_price',
+            'max_price'
+        ));
+    }
+
+    //Search products
+    public function getSearch(Request $request)
+    {
+         //list category
+         $categorys = GroupGoods::whereIn('id', [1,2,3])->get();
+
+         //Search product
+         $products = Products::where('product_name', 'like', '%'.$request->search.'%')
+                                 ->orWhere('product_price', $request->search)->latest('id')->get();
+
+        //Tong san pham
+        $totalProducts = Products::all()->where('id')->count();
+
+        // Sap xep san pham
+
+        $min_price = Products::min('product_price');
+        $max_price = Products::max('product_price');
+
+        if(isset($_GET['sort_by'])){
+           $sort_by = $_GET['sort_by'];
+
+            if($sort_by == 'price_ASC')
+            {
+                $products = Products::orderBy('product_price', 'asc')->get();
+            }
+
+            elseif ($sort_by == 'price_DESC')
+            {
+                $products = Products::orderBy('product_price', 'desc')->get();
+            }
+
+            elseif ($sort_by == 'kytu_ASC')
+            {
+                $products = Products::orderBy('product_name', 'asc')->get();
+             }
+
+            elseif ($sort_by == 'kytu_DESC')
+            {
+                $products = Products::orderBy('product_name', 'desc')->get();
+            }
+        }
+
+        // Loc san pham
+
+        elseif(isset($_GET['start_price']) && $_GET['end_price'])
+        {
+            $min_price = $_GET['start_price'];
+            $max_price = $_GET['end_price'];
+            $products = Products::whereBetween('product_price', [$min_price, $max_price])
+            ->orderBy('product_price','asc')->get();
+        }
+        else
+        {
+            $products = Products::where('product_name', 'like', '%'.$request->search.'%')
+                                 ->orWhere('product_price', $request->search)->latest('id')->get();
+        }
+
+        return view('frontend.cart.shop',
+        compact(
+            'categorys',
+            'products',
+            'totalProducts',
+            'min_price',
+            'max_price'
+        ));
+
+    }
+
+    //Danh muc
+    public function show_danhmuc($product_type_name, $id)
+    {
+        $categorys = GroupGoods::whereIn('id', [1,2,3])->get();
+
+        $products = Products::where('product_type_id', $id)->get();
+
+
+        //Tong san pham
+        $totalProducts = Products::all()->where('id')->count();
+
+        // Sap xep san pham
+
+        $min_price = Products::min('product_price');
+        $max_price = Products::max('product_price');
+
+        if(isset($_GET['sort_by'])){
+           $sort_by = $_GET['sort_by'];
+
+            if($sort_by == 'price_ASC')
+            {
+                $products = Products::orderBy('product_price', 'asc')->get();
+
+            }
+
+            elseif ($sort_by == 'price_DESC')
+            {
+                $products = Products::orderBy('product_price', 'desc')->get();
+
+            }
+
+            elseif ($sort_by == 'kytu_ASC')
+            {
+                $products = Products::orderBy('product_name', 'asc')->get();
+
+             }
+
+            elseif ($sort_by == 'kytu_DESC')
+            {
+                $products = Products::orderBy('product_name', 'desc')->get();
+            }
+        }
+
+        // Loc san pham
+
+        elseif(isset($_GET['start_price']) && $_GET['end_price'])
+
+        {
+            $min_price = $_GET['start_price'];
+            $max_price = $_GET['end_price'];
+            $products = Products::whereBetween('product_price', [$min_price, $max_price])
+            ->orderBy('product_price','asc')->get();
+
+        }
+
+        else
+        {
+            $products = Products::where('product_type_id', $id)->get();
+
+        }
+
+        return view('frontend.cart.shop',
+        compact(
+            'categorys',
+            'products',
+            'totalProducts',
+            'min_price',
+            'max_price'
+        ));
     }
 
     public function detailsProduct($id)
     {
         $product = Products::find($id);
+        $comments = comments::orderby('id','desc')->where('product_id', (int)$product->id)->get();
         $type_id =$product->product_type_id;
         $relatedProduct = Products::join('product_types', 'product_types.id', '=', 'products.product_type_id')
             ->where('product_types.id', '=', $type_id )
@@ -32,8 +252,7 @@ class ProductController extends Controller
                     'products.product_price',
                     'products.product_description')
             ->get();
-        // dd($relatedProduct);
-        return view('frontend.cart.product-detail', compact('product', 'relatedProduct'));
+        return view('frontend.cart.product-detail', compact('product','comments', 'relatedProduct'));
     }
 
 
@@ -57,38 +276,9 @@ class ProductController extends Controller
         }
 
         session()->put('cart', $cart);
-    //     // return view('frontend.cart.miniCart', compact('cart'));
-    //     return response()->json(['message' => 'success']);
-        // return redirect()->route('shop.index')->with('success', 'Product added to cart successfully!');
 
     }
 
-    // public function addCart2(Request $request, $id)
-    // {
-    //     $product = Products::findOrFail($id);
-
-    //     $cart = session()->get('cart1', []);
-
-    //     if (isset($cart[$id])) {
-    //         $cart[$id]['quantity']++;
-    //     } else {
-    //         $cart[$id] = [
-    //             "name" => $product->product_name,
-    //             "quantity" => $request->quantity,
-    //             "price" => $product->product_price,
-    //             "image" => $product->product_image,
-    //             "des" => $product->product_description,
-    //         ];
-    //     }
-
-    //     session()->put('cart1', $cart);
-    //     dd(session()->get('cart1'));
-    //     // return response()->json(['message' => 'success']);
-    //     return view('frontend.cart.miniCart', compact('cart'));
-    //     // return response()->json(['message' => 'success']);
-    //     // return redirect()->route('shop.index')->with('success', 'Product added to cart successfully!');
-
-    // }
 
     public function showCart()
     {
@@ -105,19 +295,7 @@ class ProductController extends Controller
         }
     }
 
-    // public function update(Request $request)
-    // {
-    //     if ($request->id && $request->quantity) {
-    //         $carts = session()->get( 'cart');
-    //         $carts[$request->id]['quanntity'] = $request->quantity;
-    //         session()->put('cart', $carts);
-    //         $carts = session()->get( 'cart');
-    //         $products = Products::all();
-    //         $cartComponent = view('frontend.cart.cart', compact('carts', 'products'));
-    //         return response()->json([
-    //             'cart_component' => $cartComponent, 'code' => 200], status:200);
-    //     }
-    // }
+
 
     public function remove(Request $request)
     {
@@ -128,18 +306,17 @@ class ProductController extends Controller
                 session()->put('cart', $cart);
             }
         }
-        // return view('frontend.cart.miniCart', compact('cart'));
     }
 
     public function checkout()
     {
         if(session()->get('cart') != null) {
-            $carts = session()->get(key:'cart');
+            $carts = session()->get('cart');
             return view('frontend.checkout.checkout', compact('carts'));
         }
         else {
 
-            return redirect()->back()->with('cartNull', 'Cart empty!') ;
+            return redirect()->back()->with('cartNull', 'Giỏ hàng rỗng, vui lòng chọn sản phẩm!') ;
 
         }
     }

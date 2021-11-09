@@ -54,10 +54,10 @@
          $(".pagination").append(
              $("<li>").addClass("page-item").addClass("previous-page").append($("<a>").addClass("page-num").attr({
                  href: "javascript:void(0)"
-             }).text("Prev")),
+             }).text("Trước")),
              $("<li>").addClass("page-item").addClass("next-page").append($("<a>").addClass("page-num").attr({
                  href: "javascript:void(0)"
-             }).text("Next"))
+             }).text("Sau"))
          );
 
          $(".product-content").show();

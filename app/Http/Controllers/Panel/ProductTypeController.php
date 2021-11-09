@@ -101,13 +101,6 @@ class ProductTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'product_type_name' => 'required|string',
-            'product_type_description' => 'required|string',
-            'group_goods_id' => 'required',
-        ];
-        $request->validate($rules);
-
         $data = ProductType::findOrFail($id);
 
         $data->update([
@@ -116,7 +109,7 @@ class ProductTypeController extends Controller
             'group_goods_id' => (int)$request->group_goods_id,
         ]);
 
-        return redirect(route('product-type.index'));
+        return redirect(route('product-type.index'))->with('success', 'Bạn đã thêm thành công');
 
     }
 
@@ -129,9 +122,9 @@ class ProductTypeController extends Controller
     public function destroy($id)
     {
         $data = ProductType::findOrFail($id);
-        $data->delete();
+        $data->update(['active'=>0]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Bạn đã thêm thành công');
 
     }
 }
