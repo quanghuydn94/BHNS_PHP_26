@@ -53,14 +53,14 @@ class SinglePageController extends Controller
 
             $listday = Date::getListDayInMonth();
 
-            //Thống kê trạng thái đơn hàng
-            //Tiếp nhận
+            //Statistical
+
             $statusDefault = Orders::where('order_status', 'Tiếp nhận')->select('id')->count();
-            //Tiếp nhận
+
             $statusSuccess = Orders::where('order_status', 'Đã giao')->select('id')->count();
-            //Tiếp nhận
+
             $statusProcess = Orders::where('order_status', 'Đang giao')->select('id')->count();
-            //Tiếp nhận
+
             $statusCancel = Orders::where('order_status', 'Hủy')->select('id')->count();
 
             $status_order = [
@@ -78,24 +78,24 @@ class SinglePageController extends Controller
                 ],
             ];
 
-            // Doanh thu theo thang ứng với trạng thái đã giao
+            // Monthly revenue corresponding to status: Đã giao
             $revenueOrderMonth = Orders::where('order_status', 'Đã giao')
                 ->whereMonth('created_at', date('m'))
                 ->select('order_total_price', DB::raw('DATE(created_at) day'))
                 ->groupBy('order_total_price', 'day')->get()->toArray();
 
-            // Doanh thu theo thang ứng với trạng thái tiếp nhận
+            // Monthly revenue corresponding to status: Tiếp nhận
             $revenueOrderMonthDefault = Orders::where('order_status', 'Tiếp nhận')
                 ->whereMonth('created_at', date('m'))
                 ->select('order_total_price', DB::raw('DATE(created_at) day'))
                 ->groupBy('order_total_price', 'day')->get()->toArray();
 
-            // Doanh thu theo thang ứng với trạng thái Đang giao
+            // Monthly revenue corresponding to status: Đang giao
             $revenueOrderMonthProcess = Orders::where('order_status', 'Đang giao')
                 ->whereMonth('created_at', date('m'))
                 ->select('order_total_price', DB::raw('DATE(created_at) day'))
                 ->groupBy('order_total_price', 'day')->get()->toArray();
-            // Doanh thu theo thang ứng với trạng thái Hủy
+            // Monthly revenue corresponding to status: Hủy
             $revenueOrderMonthCancel = Orders::where('order_status', 'Hủy')
                 ->whereMonth('created_at', date('m'))
                 ->select('order_total_price', DB::raw('DATE(created_at) day'))
@@ -107,7 +107,7 @@ class SinglePageController extends Controller
             $arrayRevenueOrderMonthCancel = [];
 
             foreach ($listday as $day) {
-                //Đã giao
+                // Status: Đã giao
                 $total = 0;
                 foreach ($revenueOrderMonth as $key => $revenue) {
                     if ($revenue['day'] == $day) {
@@ -116,7 +116,7 @@ class SinglePageController extends Controller
                 }
                 $arrayRevenueOrderMonth[] = (int) $total;
 
-                //tiếp nhận
+                //Status: Tiếp nhận
                 $total = 0;
                 foreach ($revenueOrderMonthDefault as $key => $revenue) {
                     if ($revenue['day'] == $day) {
@@ -125,7 +125,7 @@ class SinglePageController extends Controller
                 }
                 $arrayRevenueOrderMonthDefault[] = (int) $total;
 
-                //đang giao
+                //Status: Đang giao
                 $total = 0;
                 foreach ($revenueOrderMonthProcess as $key => $revenue) {
                     if ($revenue['day'] == $day) {
@@ -134,7 +134,7 @@ class SinglePageController extends Controller
                 }
                 $arrayRevenueOrderMonthProcess[] = (int) $total;
 
-                //hủy
+                //Status: Hủy
                 $total = 0;
                 foreach ($revenueOrderMonthCancel as $key => $revenue) {
                     if ($revenue['day'] == $day) {
@@ -144,7 +144,7 @@ class SinglePageController extends Controller
                 $arrayRevenueOrderMonthCancel[] = (int) $total;
             }
 
-            //Danh sach don hang moi nhat
+            //List new orders
             $orders = Orders::orderByDesc('id')->simplepaginate(7);
 
             $viewData = [
@@ -179,9 +179,27 @@ class SinglePageController extends Controller
                     'arrayRevenueOrderMonthProcess',
                     'arrayRevenueOrderMonthCancel'
                 ));
-        } else { // if rolename is not admin or employee then logout and show message errors
+        } else { // If rolename is not admin or employee then logout and show message errors
             Auth::logout();
             return redirect('/')->withErrors('Thông tin đăng nhập không đúng.');
         }
+    }
+
+    // Filter follow day
+    public function filter_by_date(Request $request)
+    {
+        $data   =   $request->all();
+        $from_date  =   $data['created_at'];
+        $to_date    =   $data['created_at'];
+        $get    =   Orders::whereBetween('created_at', [$from_date, $to_date])->orderBy('created_at','ASC')->get();
+
+        foreach($get as $val)
+        {
+            $chart_data[]   =   array(
+                'period'    =>   $val->created_at,
+                'order_price'     =>   $val->order_total_price
+            );
+        }
+        echo $data  =   json_encode($chart_data);
     }
 }

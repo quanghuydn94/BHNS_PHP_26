@@ -24,6 +24,7 @@ use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\WareHousesController;
 use App\Http\Controllers\Panel\CommentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Panel\CustomerDeletedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,10 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
     //Routes customers
     Route::resource('customers', CustomerController::class);
 
+    //Routes  deleted customers
+    Route::get('customer-delete', [CustomerDeletedController::class, 'listCustomer'])->name('customer.deleted');
+    Route::post('customer-restore/{id}', [CustomerDeletedController::class , 'restoreCustomer'])->name('customer.restore');
+
     //Routes Group Goods
     Route::resource('groupgoods', GroupGoodsController::class);
 
@@ -84,11 +89,8 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
 
     //Routes products
     Route::resource('products', ProductController::class);
-
     Route::get('/product/product-deleted', [ProductsDeletedController::class, 'index'])->name('product.listDeleted');
-
     Route::get('/product/product-deleted-detail/{id}', [ProductsDeletedController::class, 'show'])->name('product.detailDeleted');
-
     Route::post('/product/product-deleted-restore/{id}', [ProductsDeletedController::class, 'restore'])->name('product.restoreProduct');
 
     //Routes Warehouse
@@ -99,31 +101,18 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
 
     //Routes Orders
     Route::get('/orders/index', [OrderController::class, 'index'])->name('order.index');
-
     Route::get('/orders/create', [OrderController::class, 'create'])->name('order.create');
-
     Route::post('/orders/getCustomer', [OrderController::class, 'getCustomer'])->name('getCustomers');
-
     Route::get('orders/create/add-cart/{id}', [OrderController::class, 'addToCart'])->name('addToCart');
-
     Route::get('orders/create/show-cart', [OrderController::class, 'showCart'])->name('showCart');
-
     Route::get('orders/create/update-cart', [OrderController::class, 'updateCart'])->name('updateCart');
-
     Route::post('/orders/create', [OrderController::class, 'store'])->name('order.store');
-
     Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
-
     Route::get('/orders/edit-cart/{id}', [OrderController::class, 'editCart'])->name('order.editCart');
-
     Route::post('/orders/edit/{id}', [OrderController::class, 'update'])->name('order.update');
-
     Route::get('/orders/show/{id}', [OrderController::class, 'show'])->name('order.show');
-
     Route::post('/orders/delete/{id}', [OrderController::class, 'destroy'])->name('order.delete');
-
     Route::get('/orders/table-delete', [OrderController::class, 'tableOrderDelete'])->name('order.tableDelete');
-
     Route::post('orders/table-delete/{id}', [OrderController::class, 'getBack'])->name('order.getBack');
 
     //Comments
@@ -132,7 +121,7 @@ Route::group(['prefix' => 'panel', 'middleware' => 'auth'], function () {
 });
 
 //Routes FrontEnd
-Route::group(['prefix' => 'frontend'], function () {
+Route::group(['prefix' => 'organic'], function () {
     Route::get('/register', [App\Http\Controllers\FrontEnd\Auth\RegisteredUserController::class, 'create'])
         ->middleware('guest')
         ->name('register');
@@ -151,21 +140,16 @@ Route::group(['prefix' => 'frontend'], function () {
         ->name('logout');
     Route::get('my-account', [\App\Http\Controllers\FrontEnd\MyAccountController::class, 'get'])->name('my-account');
     Route::post('my-account', [\App\Http\Controllers\FrontEnd\MyAccountController::class, 'post']);
-    Route::get('my-account/view', [\App\Http\Controllers\FrontEnd\MyAccountController::class , 'haveOrdered'])->name('my-account.historySales');
 
 
-    Route::get('/index', [FrontEndProductController::class, 'index'])->name('frontend.index');
+    Route::get('/index', [FrontEndProductController::class, 'index'])->name('organic.index');
     Route::get('/shop', [FrontEndProductController::class, 'shop'])->name('shop.index');
     Route::get('/search', [FrontEndProductController::class, 'getSearch'])->name('search.index');
-    Route::get('shop/{product_type_name}/{id}', [FrontEndProductController::class, 'show_danhmuc'])->name('show_danhmuc.index');
-
-
+    Route::get('shop/{product_type_name}/{id}', [FrontEndProductController::class, 'showCategory'])->name('showCategory.index');
     Route::get('/product-detail/{id}', [FrontEndProductController::class, 'detailsProduct'])->name('details.product');
-
     Route::get('/cart/show', [FrontEndProductController::class, 'showCart'])->name('show.cart');
     Route::get('/add-to-cart/{id}', [FrontEndProductController::class, 'addToCart1'])->name('add.to.cart');
-
-    Route::get('/update-cart', [FrontEndProductController::class, 'update'])->name('update.cart');
+    Route::get('/cart/update-cart', [FrontEndProductController::class, 'update'])->name('update.cart');
     Route::get('/remove-from-cart', [FrontEndProductController::class, 'remove'])->name('remove.from.cart');
     Route::get('/check-out', [FrontEndProductController::class, 'checkout'])->name('checkout.cart');
     Route::post('/check-out', [CheckoutController::class, 'payment'])->name('paybycash.cart');
@@ -175,6 +159,4 @@ Route::group(['prefix' => 'frontend'], function () {
     Route::get('about-us', [ContactController::class , 'aboutUs'])->name('about.us');
     Route::get('contact', [ContactController::class, 'contact'])->name('contact.us');
     Route::post('comment', [FrontEndCommentController::class, 'comment'])->name('comment');
-
-
 });

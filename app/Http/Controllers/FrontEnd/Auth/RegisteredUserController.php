@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Validator;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('frontend.auth.register');
+        return view('organic.auth.register');
     }
 
     /**
@@ -32,14 +33,27 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // Validate information of customer
+        $validate = Validator::make($request->all(),
+            [
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:12', 'unique:users,phone','unique:customers,customer_phone'],
             'address' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users','unique:customers,customer_email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+            ],
+            [
+                'required' => ' Không được để trống',
+                'unique' => ' :attribute đã tồn tại',
+                'email' => ' :attribute không hợp lệ',
+                'confirmed' => ' Mật khẩu nhập lại không đúng',
+            ]);
+        // Notify failed
+        if ($validate->fails()) {
+            return redirect()->route('register')->withErrors($validate);
+        }
 
+        // Create new account
         $user = User::create([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -61,6 +75,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('shop.index'));
+        return redirect(route('shop.index'))->with('success','Đăng ký thành công, mời bạn mua hàng');
     }
 }

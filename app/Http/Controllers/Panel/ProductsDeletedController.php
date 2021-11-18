@@ -8,6 +8,7 @@ use App\Models\Products;
 
 class ProductsDeletedController extends Controller
 {
+    // Show list deleted products
     public function index()
     {
         if (Auth::user()->rolename == 'admin') {
@@ -22,6 +23,7 @@ class ProductsDeletedController extends Controller
 
     }
 
+    // Show detail products
     public function show($id)
     {
         if (Auth::user()->rolename == 'admin') {
@@ -35,6 +37,7 @@ class ProductsDeletedController extends Controller
         }
     }
 
+    // Get back information of the products
     public function restore($id)
     {
         if (Auth::user()->rolename == 'admin') {

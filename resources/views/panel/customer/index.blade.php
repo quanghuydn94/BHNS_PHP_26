@@ -9,8 +9,11 @@
      <div class="card-header py-3">
          <h6 class="m-0 font-weight-bold text-primary">Danh sách khách hàng</h6>
      </div>
-     <div class="h4 mb-0 text-gray-600 p-3">
+     <div class=" mb-0 text-gray-600 pt-3">
          <a href="{{route('customers.create')}}" class="btn btn-outline-primary">Khách hàng mới</a>
+         @if (auth()->user()->rolename == 'admin')
+        <a href="{{route('customer.deleted')}}" class="badge badge-danger ">Khách hàng đã xóa</a>
+        @endif
      </div>
 
      <div class="card-body">

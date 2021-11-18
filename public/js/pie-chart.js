@@ -33,7 +33,7 @@ Highcharts.chart('container2', {
     series: [{
         name: 'Brands',
         colorByPoint: true,
-         data: dataOrder,
+        data: dataOrder,
         // [{
         //     name: 'Hoàn thành',
         //     y: 61.41,

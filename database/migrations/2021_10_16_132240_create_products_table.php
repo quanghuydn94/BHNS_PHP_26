@@ -17,15 +17,12 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('product_symbol');
             $table->string('product_name');
-            $table->string('product_image');
+            $table->string('product_image1');
+            $table->string('product_image2');
+            $table->string('product_image3');
             $table->longText('product_description');
             $table->string('product_price');
             $table->boolean('active');
-            // $table->unsignedBigInteger('image_product_id');
-            // $table->foreign('image_product_id')
-            //     ->references('id')
-            //     ->on('imageproducts')
-            //     ->onDelete('cascade');
             $table->unsignedBigInteger('product_type_id');
             $table->foreign('product_type_id')
                 ->references('id')

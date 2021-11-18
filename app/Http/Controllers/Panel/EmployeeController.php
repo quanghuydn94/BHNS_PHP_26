@@ -58,7 +58,7 @@ class EmployeeController extends Controller
                 'rolename' => 'required|string',
                 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
-            [ // errors message
+            [ // Errors message
                 'required' => ':attribute không được để trống',
                 'max' => ':attribute không được dài hơn :max',
                 'confirmed' => ':attribute không đúng',
@@ -67,12 +67,14 @@ class EmployeeController extends Controller
             ]
         );
 
+        // Throw error when your enter is incorrect the fields
         if ($validate->fails()) {
-            return redirect()->route('employees.create')->withErrors($validate); // throw error when your enter is incorrect the fields
+            return redirect()->route('employees.create')->withErrors($validate);
 
         }
 
-        if ($request->hasFile('avatar')) { //upload file image, set extension
+        // Upload file image, set extension
+        if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
@@ -83,14 +85,15 @@ class EmployeeController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
-            'password' => Hash::make(123456789), //password default
+            'password' => Hash::make(123456789), //password default: 123456789
             'avatar' => $filename,
             'address' => $request->address,
             'rolename' => $request->rolename,
 
         ]);
 
-        $user_id = User::where('email', $request->email)->select('id')->first(); // get id of user account and then add to column user_id of table Employee
+        // Get id of user account and then add to column user_id of table Employee
+        $user_id = User::where('email', $request->email)->select('id')->first();
 
         $employee = new Employee;
         $employee->employee_name = $request->name;
@@ -113,7 +116,9 @@ class EmployeeController extends Controller
     public function show($id)
     {
         $employee = Employee::find($id);
-        $user = User::where('id', '=', $employee->user_id)->first(); // get value of two table: employees and users by get user_id from employees table
+
+        // Get value of two table: employees and users by get user_id from employees table
+        $user = User::where('id', '=', $employee->user_id)->first();
         return response()->view('panel.employee.show',
             [
                 'employee' => $employee,
@@ -129,7 +134,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        $employee = Employee::find((int) $id); // get value of employee you chosen by Id
+        $employee = Employee::find((int) $id);
+
+        // Get value of employee you chosen by Id
         $userId = (int) $employee->user_id;
         $user = User::find($userId);
         return response()->view('panel.employee.edit',
@@ -158,10 +165,14 @@ class EmployeeController extends Controller
         $userId = (int) (Employee::find((int) $id)->user_id);
         $user = User::find($userId);
         if (!$request->has('avatar')) {
-            $filename = $user->avatar; // if the input avatar does not have value of image and you dont want to change avatar, assign value for this input from users data table
+            // If the input avatar does not have value of image
+            // And you dont want to change avatar, assign value for this input from users data table
+            $filename = $user->avatar;
         } else {
             $file = $request->avatar;
-            $extension = $file->getClientOriginalExtension(); //if you want to change this avatar, choose file in here.
+
+            // If you want to change this avatar, choose file in here.
+            $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('img/users', $filename);
         }
@@ -182,7 +193,9 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         $employee = Employee::find($id);
-        $employee->update(['active' => 0]); // set column active = 0, to hide information of employee you want to delete, avoid   foreign key error
+        // Set column active = 0, to hide information of employee you want to delete,
+        // avoid   foreign key error
+        $employee->update(['active' => 0]);
         return redirect()->back()->with('success', 'Đã xóa nhân viên thành công!');
     }
 }

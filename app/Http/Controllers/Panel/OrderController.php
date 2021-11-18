@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
+    // Show list orders
     public function index()
     {
         $list = Orders::orderby('created_at','asc')->get();
@@ -28,7 +29,7 @@ class OrderController extends Controller
         return response()->view('panel.orders.create', compact('products'));
     }
 
-
+    // Get information of the customer to autocomplete field
     public function getCustomer(Request $request)
     {
 
@@ -58,6 +59,7 @@ class OrderController extends Controller
         return response()->json($response);
     }
 
+    // Add product to cart
     public function addToCart( $id)
     {
 
@@ -70,7 +72,7 @@ class OrderController extends Controller
                 'name' => $product->product_name,
                 'price' => $product->product_price,
                 'quantity' => 1,
-                'image' => $product->product_image,
+                'image' => $product->product_image1,
             ];
         }
         session()->put('cart', $cart);
@@ -81,11 +83,13 @@ class OrderController extends Controller
 
     }
 
+    // Show Your card
     public function showCart()
     {
         return response()->view('panel.orders.showOrders');
     }
 
+    // Change quantity of product
     public function updateCart(Request $request)
     {
         if ($request->id && $request->quatity) {
@@ -97,8 +101,10 @@ class OrderController extends Controller
         }
     }
 
+    // Save information of order you have chosen
     public function store(Request $request)
     {
+        // Validate the fields from Form input
         $validate = Validator::make($request->all(),
             [
             'customer_name' => 'required|string',
@@ -114,7 +120,7 @@ class OrderController extends Controller
         if ($validate->fails()) {
             return redirect()->route('showCart')->withErrors($validate);
         }
-
+        // Get information of the customer if it have
         $customers = Customer::all();
         $customer = $customers->where('customer_phone', $request->customer_phone)->first();
 
@@ -133,11 +139,12 @@ class OrderController extends Controller
         } else {
             $customerId = $customer->id;
         }
+        // Total price of order
         $totalPrice = 0;
         foreach (session()->get('cart') as $id => $cart) {
             $totalPrice += $cart['price'] * $cart['quantity'];
         }
-
+        // Create new order
         $order = Orders::create([
 
             'order_customer_name' => $customer->customer_name,
@@ -150,6 +157,7 @@ class OrderController extends Controller
             'order_status' => $request->order_status ,
 
         ]);
+        // Create new order details
         foreach (session()->get('cart') as $id => $cart) {
 
             $product = Products::find($id);
@@ -162,7 +170,7 @@ class OrderController extends Controller
                 'order_detail_price' => $cart['price'] * $cart['quantity'],
                 'active' => 1,
             ]);
-
+            // When customer buy any products from the store, change quantity of product in the Warehouse
             $consignment = WareHouse::where('product_id', (int) $id)
                         ->select(
                             'id',
@@ -182,6 +190,7 @@ class OrderController extends Controller
         return redirect()->route('order.index')->with('success', 'Bạn đã thêm thành công');
     }
 
+    // Show order details
     public function show($id)
     {
         $order = Orders::find((int) $id)->getCustomer;
@@ -193,10 +202,10 @@ class OrderController extends Controller
         return response()->view('panel.orders.showDetail', compact('order', 'dataOrders'));
     }
 
+    // Show information into edit page
     public function edit($id)
     {
         $order = Orders::find($id);
-
         $dataOrders = OrderDetails::join('products', 'products.id', '=', 'orderdetails.product_id')
             ->where('orderdetails.orders_id', '=', (int) $id)
             ->select(
@@ -208,12 +217,11 @@ class OrderController extends Controller
                 )
             ->get();
         return response()->view('panel.orders.edit', compact('order', 'dataOrders'));
-
     }
 
+    // Change quantity of the product you want
     public function editCart(Request $request)
     {
-
         if($request->id && $request->quatity) {
                 $detail = OrderDetails::find((int)$request->id);
                 $detail->update([
@@ -223,6 +231,7 @@ class OrderController extends Controller
             }
     }
 
+    // Change information of the order you want
     public function update(Request $request, $id)
     {
         $orderDetails = OrderDetails::where('orders_id',(int)$id)->get();
@@ -243,18 +252,22 @@ class OrderController extends Controller
 
         return redirect()->route('order.index')->with('success', 'Đã thay đổi thành công');
     }
+
+    // Delete orders
     public function destroy($id)
     {
         Orders::where('id', (int) $id)->update(['active' => 0]);
         return redirect()->route('order.index')->with('success', 'Đã xóa thành công');
     }
 
+    // SHow list deleted orders
      public function tableOrderDelete()
     {
         $list = Orders::all();
-        return response()->view('panel.orders.orderDelete', compact('list'));
+        return response()->view('panel.itemDelete.orderDeleted.orderDelete', compact('list'));
     }
 
+    // Restore information of the orders
     public function getBack($id)
     {
         Orders::where('id', (int) $id)->update(['active' => 1]);

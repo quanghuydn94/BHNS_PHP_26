@@ -9,22 +9,22 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('FrontEndassets/img/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('organic/assets/img/favicon.png')}}">
 
     <!-- all css here -->
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/animate.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/jquery-ui.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/chosen.min.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/ionicons.min.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/material-design-iconic-font.min.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/meanmenu.min.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/bundle.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/responsive.css')}}">
-    <script src="{{asset('FrontEnd/assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('organic/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/jquery-ui.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/chosen.min.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/material-design-iconic-font.min.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/meanmenu.min.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/bundle.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('organic/assets/css/responsive.css')}}">
+    <script src="{{asset('organic/assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 
     <!-- Css Alert -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
@@ -50,20 +50,19 @@
                         <div class="col-12">
                             <div class="header_wrapper_inner">
                                 <div class="logo col-xs-12">
-                                    <a href="{{route('frontend.index')}}">
-                                        <img src="assets/img/logo/logo.png" alt="">
+                                    <a href="{{route('organic.index')}}">
+                                        <img src="{{url('organic/assets/img/logo/logo.png')}}" alt="">
                                     </a>
                                 </div>
                                 <div class="main_menu_inner">
                                     <div class="menu">
                                         <nav>
                                             <ul>
-                                                <li class="active"><a href="{{route('frontend.index')}}">Trang chủ </a>
+                                                <li class="active"><a href="{{route('organic.index')}}">Trang chủ </a>
 
                                                 </li>
                                                 <li><a href="{{route('about.us')}}">Chúng tôi </a> </li>
                                                 <li><a href="{{route('shop.index')}}">Cửa hàng</a> </li>
-                                                <li><a href="blog.html">Blog </a>
                                                 </li>
                                                 <li class="mega_parent"><a href="#">Danh mục <i
                                                             class="fa fa-angle-down"></i></a>
@@ -72,75 +71,82 @@
                                                             <ul>
                                                                 <li><a href="{{route('shop.index')}}">Sản phẩm</a></li>
                                                                 <li><a href="{{route('show.cart')}}">Giỏ hàng</a></li>
-                                                                <li><a href="{{route('checkout.cart')}}">Thanh toán</a></li>
+                                                                <li><a href="{{route('checkout.cart')}}">Thanh toán</a>
+                                                                </li>
                                                             </ul>
                                                         </li>
                                                         <li class="mega_item">
+                                                            @if(Auth::user() == null)
                                                             <ul>
                                                                 <li><a href="{{route('login')}}">Đăng nhập</a></li>
                                                                 <li><a href="{{route('register')}}">Đăng ký</a></li>
                                                             </ul>
+                                                            @else
+                                                            <ul>
+                                                                <li><a href="{{route('my-account')}}">Tài khoản của
+                                                                        tôi</a></li>
+                                                            </ul>
+                                                            @endif
                                                         </li>
                                                         <li class="mega_item">
                                                             <ul>
-
                                                                 <li><a href="{{route('contact.us')}}">Liên hệ </a></li>
                                                             </ul>
                                                         </li>
                                                     </ul>
                                                 </li>
                                                 @if(Auth::user() == null)
-                                                <li class="mega_parent"><a class="text-primary" href="{{route('login')}}">Đăng Nhập</a>
+                                                <li class="mega_parent"><a class="text-primary"
+                                                        href="{{route('login')}}">Đăng Nhập</a>
                                                 </li>
                                                 @endif
                                             </ul>
                                         </nav>
                                     </div>
-
                                     <div class="mobile-menu d-lg-none">
                                         <nav>
-                                            <ul>
-                                                <li class="active"><a href="{{route('frontend.index')}}">Trang chủ </a>
-
+                                           <ul>
+                                                <li class="active"><a href="{{route('organic.index')}}">Trang chủ </a>
                                                 </li>
-                                                <li><a href="about.html">Chúng tôi </a> </li>
+                                                <li><a href="{{route('about.us')}}">Chúng tôi </a> </li>
                                                 <li><a href="{{route('shop.index')}}">Cửa hàng</a> </li>
-                                                <li><a href="blog.html">Blog </a>
                                                 </li>
                                                 <li class="mega_parent"><a href="#">Danh mục <i
                                                             class="fa fa-angle-down"></i></a>
                                                     <ul class="mega_menu">
                                                         <li class="mega_item">
-                                                            <a class="mega_title" href="#">1</a>
                                                             <ul>
-                                                                <li><a href="wishlist.html">Danh mục ưu thích</a></li>
                                                                 <li><a href="{{route('shop.index')}}">Sản phẩm</a></li>
                                                                 <li><a href="{{route('show.cart')}}">Giỏ hàng</a></li>
-                                                                <li><a href="{{route('checkout.cart')}}">Thanh toán</a></li>
+                                                                <li><a href="{{route('checkout.cart')}}">Thanh toán</a>
+                                                                </li>
                                                             </ul>
                                                         </li>
                                                         <li class="mega_item">
-                                                            <a class="mega_title" href="#"> 2</a>
+                                                            @if(Auth::user() == null)
                                                             <ul>
-                                                                <li><a href="my-account.html">Tài khoản</a></li>
-                                                                <li><a href="login.html">Đăng nhập</a></li>
-                                                                <li><a href="register.html">Đăng ký</a></li>
+                                                                <li><a href="{{route('login')}}">Đăng nhập</a></li>
+                                                                <li><a href="{{route('register')}}">Đăng ký</a></li>
                                                             </ul>
+                                                            @else
+                                                            <ul>
+                                                                <li><a href="{{route('my-account')}}">Tài khoản của
+                                                                        tôi</a></li>
+                                                            </ul>
+                                                            @endif
                                                         </li>
                                                         <li class="mega_item">
-                                                            <a class="mega_title" href="#"> 3</a>
                                                             <ul>
-
-                                                                <li><a href="contact.html">Liên hệ </a></li>
-                                                                <li><a href="404.html">Báo lỗi</a></li>
+                                                                <li><a href="{{route('contact.us')}}">Liên hệ </a></li>
                                                             </ul>
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <li class="mega_parent"><a class="text-primary" href="{{route('login')}}">Đăng ký</a>
-
+                                                @if(Auth::user() == null)
+                                                <li class="mega_parent"><a class="text-primary"
+                                                        href="{{route('login')}}">Đăng Nhập</a>
                                                 </li>
-
+                                                @endif
                                             </ul>
                                         </nav>
                                     </div>
@@ -226,7 +232,6 @@
                                                     <a href="{{route('checkout.cart')}}">Thanh Toán</a>
                                                 </div>
                                             </div>
-
                                             <!--Mini Cart Box End -->
                                         </div>
                                     </div>
@@ -273,7 +278,7 @@
                         <div class="single_footer widget">
                             <div class="single_footer_widget_inner">
                                 <div class="footer_logo">
-                                    <a href="#"><img src="assets/img/logo/logo_footer.png" alt=""></a>
+                                    <a href="#"><img src="{{asset('organic/assets/img/logo/logo_footer.png')}}" alt=""></a>
                                 </div>
                                 <div class="footer_content">
                                     <p>Địa chỉ: 123 Tôn Đức Thắng, Hòa Minh, Tp. Đà Nẵng </p>
@@ -306,7 +311,7 @@
 
                                             <li><a href="{{route('shop.index')}}"> Sản phẩm mới</a></li>
                                             <li><a href="{{route('shop.index')}}"> Sản phẩm bán chạy</a></li>
-                                            <li><a href=" "> Liên hệ chúng tôi</a></li>
+                                            <li><a href="{{route('contact.us')}}"> Liên hệ chúng tôi</a></li>
 
                                         </ul>
                                     </div>
@@ -315,31 +320,34 @@
                             <!--Single footer end-->
                             <!--Single footer start-->
                             <div class="single_footer widget">
+                                @if (Auth::user() == null)
                                 <div class="single_footer_widget_inner">
                                     <div class="footer_title">
                                         <h2>Đăng nhập</h2>
                                     </div>
                                     <div class="footer_menu">
                                         <ul>
-                                            <li><a href="#"> Đăng nhập</a></li>
-                                            <li><a href=" "> Đăng ký</a></li>
+                                            <li><a href="{{route('login')}}"> Đăng nhập</a></li>
+                                            <li><a href="{{route('register')}}"> Đăng ký</a></li>
                                         </ul>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                             <!--Single Footer end-->
                             <!--Single footer start-->
                             <div class="single_footer widget">
                                 <div class="single_footer_widget_inner">
+                                    @if(Auth::user() != null)
                                     <div class="footer_title">
                                         <h2> Tài khoản của bạn </h2>
                                     </div>
                                     <div class="footer_menu">
                                         <ul>
-                                            <li><a href="#">Thông tin cá nhân</a></li>
-                                            <li><a href="#"> Đơn hàng</a></li>
+                                            <li><a href="{{route('my-account')}}">Thông tin cá nhân</a></li>
                                         </ul>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <!--Single Footer end-->
@@ -347,18 +355,17 @@
                     </div>
                 </div>
             </div>
-
-            <div class="copyright">
-                <div class="container">
+            <div class="container">
+                <div class="copyright">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-xs-12">
                             <div class="copyright_text">
-                                <p>Copyright 2021 <a href="#">Organicfood</a>. All Rights Reserved</p>
+                                <p>Bản quyền 2021.  <a href="#">Organicfood</a><strong> Đã đăng ký Bản quyền </strong>.</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-xs-12">
                             <div class="footer_mastercard text-right">
-                                <a href="#"><img src="assets/img/brand/payment.png" alt=""></a>
+                                <a href="#"><img src="{{asset('organic/assets/img/brand/payment.png')}}" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -366,36 +373,27 @@
             </div>
 
         </footer>
-
         <!-- footer end -->
-
-
-
     </div>
 
-
-
     <!-- all js here -->
-    <script src="{{asset('FrontEnd/assets/js/vendor/jquery-1.12.0.min.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/popper.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/jquery-ui.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/isotope.pkgd.min.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/imagesloaded.pkgd.min.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/jquery.counterup.min.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/waypoints.min.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/ajax-mail.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/plugins.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/main.js')}}"></script>
-    <script src="{{asset('FrontEnd/assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+    <script src="{{asset('organic/assets/js/vendor/jquery-1.12.0.min.js')}}"></script>
+    <script src="{{asset('organic/assets/js/popper.js')}}"></script>
+    <script src="{{asset('organic/assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('organic/assets/js/jquery-ui.js')}}"></script>
+    <script src="{{asset('organic/assets/js/isotope.pkgd.min.js')}}"></script>
+    <script src="{{asset('organic/assets/js/imagesloaded.pkgd.min.js')}}"></script>
+    <script src="{{asset('organic/assets/js/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('organic/assets/js/waypoints.min.js')}}"></script>
+    <script src="{{asset('organic/assets/js/ajax-mail.js')}}"></script>
+    <script src="{{asset('organic/assets/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('organic/assets/js/plugins.js')}}"></script>
+    <script src="{{asset('organic/assets/js/main.js')}}"></script>
+    <script src="{{asset('organic/assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-
-
     @yield('scripts')
-
 
     <script src="https://unpkg.com/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
 
@@ -405,7 +403,6 @@
             title: "Chú ý",
             text: '{{session()->get('cartNull')}}',
             icon: "warning",
-
         });
     </script>
     @endif
@@ -416,36 +413,9 @@
             title: "Thông báo",
             text: '{{session()->get('changepassword')}}',
             icon: "success",
-
         });
     </script>
     @endif
-    <script type="text/javascript">
-        //Remove item product from icon cart
-        $("#change-item-cart").on("click", ".zmdi-delete", function (e) {
-            e.preventDefault();
-            let url = window.location.href;
-            let route = url.split("cart", 1);
-            let id = $(this).data("id");
-            $.ajax({
-                method: "GET",
-                url:  "http://127.0.0.1:8000/frontend/remove-from-cart/",
-                data: {
-                    id: id
-                },
-                success: function (repsonse) {
-                    $("#cart-icon").load(" #cart-icon");
-                    $("#change-item-cart").load(" #change-item-cart");
-                    $("#cart_table").load(" #cart_table");
-                    $(".checkout-form").load(" .checkout-form");
-
-                    alertify.set('notifier', 'position', 'bottom-right');
-                    alertify.success('Đã xóa sản phẩm!');
-                }
-            });
-        });
-    </script>
-
+    <script src="{{asset('organic/assets/js/cart.js')}}"></script>
 </body>
-
 </html>

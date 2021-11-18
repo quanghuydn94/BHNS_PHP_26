@@ -18,7 +18,6 @@ class GroupGoodsController extends Controller
         $groupGoods = GroupGoods::all();
 
         return response()->view('panel.groupGoods.index', compact('groupGoods'));
-
     }
 
     /**
@@ -29,7 +28,6 @@ class GroupGoodsController extends Controller
     public function create()
     {
         return response()->view('panel.groupGoods.create');
-
     }
 
     /**
@@ -46,7 +44,8 @@ class GroupGoodsController extends Controller
             'group_description' => 'required|string',
         ];
         $request->validate($rules);
-        if ($request->hasFile('group_image')) { //upload file image, set extension
+        // Upload file image, set extension
+        if ($request->hasFile('group_image')) {
             $file = $request->file('group_image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
@@ -74,7 +73,6 @@ class GroupGoodsController extends Controller
         $groupgood = GroupGoods::findOrFail($id);
 
         return response()->view('panel.groupGoods.showdetail', compact('groupgood'));
-
     }
 
     /**
@@ -88,7 +86,6 @@ class GroupGoodsController extends Controller
         $groupgood = GroupGoods::findOrFail($id);
 
         return response()->view('panel.groupGoods.edit', compact('groupgood'));
-
     }
 
     /**
@@ -101,7 +98,8 @@ class GroupGoodsController extends Controller
     public function update(Request $request, $id)
     {
         $groupgoods = GroupGoods::find((int)$id);
-        if ($request->hasFile('group_image')) { //upload file image, set extension
+        // Upload file image, set extension
+        if ($request->hasFile('group_image')) {
             $file = $request->file('group_image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
@@ -116,7 +114,6 @@ class GroupGoodsController extends Controller
         ]);
 
         return redirect(route('groupgoods.index'))->with('success','Bạn đã thay đổi thành công');
-
     }
 
     /**

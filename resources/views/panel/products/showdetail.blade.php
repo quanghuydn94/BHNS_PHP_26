@@ -18,7 +18,7 @@
     <div class='container-fluid'>
         <div class="card mx-auto col-md-3 col-12 mt-5 pt-4">
             <div class="d-flex sale ">
-            </div> <img class='mx-auto img-thumbnail' src="{{url('img/products', $data->product_image) }}" width="200px"
+            </div> <img class='mx-auto img-thumbnail' src="{{url('img/products', $data->product_image1) }}" width="200px"
                 height="300px" />
             <div class="card-body text-center mx-auto">
                 <div class="card-title">

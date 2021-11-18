@@ -19,9 +19,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-
+        // Get all customer into index page, display
         $customers = Customer::all();
-        return response()->view('panel.customer.index', ['customers' => $customers]); // get all customer into index page, display
+        return response()->view('panel.customer.index', ['customers' => $customers]);
 
     }
 
@@ -78,7 +78,8 @@ class CustomerController extends Controller
     public function show($id)
     {
 
-        $customer = Customer::find((int)$id); // display details information of customer
+        // Display details information of customer
+        $customer = Customer::find((int)$id);
 
         $dataOrders = OrderDetails::join('orders', 'orders.id','=','orderdetails.orders_id')
             ->join('products', 'products.id', '=', 'orderdetails.product_id')
@@ -139,7 +140,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        Customer::find((int) $id)->update(['active' => 0]); //delete information customer, avoid foreign key error
+        // Delete information customer, avoid foreign key error
+        Customer::find((int) $id)->update(['active' => 0]);
         return redirect()->route('customers.index')->with('success', 'Đã xóa khách hàng thành công!');
     }
 

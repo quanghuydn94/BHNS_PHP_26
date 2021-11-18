@@ -12,15 +12,16 @@ use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
+    // Order product
     public function payment(Request $request)
     {
-
+        // If customer signed up, get information follow account
         if (Auth()->user() != null) {
 
             $customer = Customer::where('user_id', (int)Auth()->user()->id)->first();
 
         } else {
-
+        // Or not, create new customer information
             $rule = [
                 'name' => 'required|string',
                 'phone' => 'required|string|unique:users,phone',
@@ -39,11 +40,12 @@ class CheckoutController extends Controller
             ]);
         }
 
+        // Get total price of the order
         $totalPrice = 0;
         foreach (session()->get('cart') as $id => $cart) {
             $totalPrice += $cart['price'] * $cart['quantity'];
         }
-
+        // Create new order
         $order = Orders::create([
 
             'order_customer_name' => $customer->customer_name,
@@ -56,6 +58,8 @@ class CheckoutController extends Controller
             'order_status' => 'Tiếp nhận',
 
         ]);
+
+        // Create new product details
         foreach (session()->get('cart') as $id => $cart) {
 
             $product = Products::find($id);
@@ -75,31 +79,37 @@ class CheckoutController extends Controller
         return redirect()->route('shop.index')->with('orders', 'Đơn hàng của bạn đã được đặt');
     }
 
+    // Payment online
     public function payOnline()
     {
         if (Auth()->user() != null) {
 
-            return view('frontend.checkout.payOnline');
+            return view('organic.checkout.payOnline');
 
         } else {
              return redirect()->back()->with('payOnline', 'Đăng nhập để thực hiện thanh toán');
         }
     }
 
+    // Diplay credit card page
     public function viewCreditCard()
     {
-        return view('frontend.checkout.creditCard');
+        return view('organic.checkout.creditCard');
     }
 
+    // Payment by credit card
     public function payCreditCard(Request $request)
     {
+        // Get information of customer
         $customer = Customer::where('user_id', (int) Auth()->user()->id)->first();
 
+        // Get total price of the order
         $totalPrice = 0;
         foreach (session()->get('cart') as $id => $cart) {
             $totalPrice += $cart['price'] * $cart['quantity'];
         }
 
+        // Create new order follow information of customer
         $order = Orders::create([
 
             'order_customer_name' => $customer->customer_name,
@@ -113,6 +123,8 @@ class CheckoutController extends Controller
             'order_status' => 'Tiếp nhận',
 
         ]);
+
+        // Save product details  of the order into DB
         foreach (session()->get('cart') as $id => $cart) {
 
             $product = Products::find($id);

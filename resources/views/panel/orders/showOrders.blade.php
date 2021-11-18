@@ -60,7 +60,7 @@
                                         value="{{$cart['quantity']}}">
                                 </td>
                                 <td> {{number_format($cart['price']*$cart['quantity'])}}</td>
-                                <td><a href="javascript:" data-id="{{$id}}" class="btn-sm btn-primary cart_update">Update</a></td>
+                                <td><a href="javascript:" data-id="{{$id}}" class="btn-sm btn-primary cart_update">Đổi</a></td>
                             </tr>
                             @endforeach
                             @endif

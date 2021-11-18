@@ -42,28 +42,41 @@ class ProductController extends Controller
             'product_name' => 'required|string',
             'product_symbol' => 'required|string',
             'product_price' => 'required|numeric',
-            'product_image' => 'required|image',
+            'product_image1' => 'required|image',
+            'product_image2' => 'required|image',
+            'product_image3' => 'required|image',
             'product_description' => 'required|string',
             'product_type_id' => 'required',
         ];
         $request->validate($rules);
-        if ($request->hasFile('product_image')) {
-            $file = $request->file('product_image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('img/products', $filename);
+        if ($request->hasFile('product_image1')
+            && $request->hasFile('product_image2')
+            && $request->hasFile('product_image3'))
+        {   // Image 1
+            $file1 = $request->file('product_image1');
+            $filename1 = $file1->getClientOriginalName();
+            $file1->move('img/products', $filename1);
+            // Image 2
+            $file2 = $request->file('product_image2');
+            $filename2 = $file2->getClientOriginalName();
+            $file2->move('img/products', $filename2);
+            // Image 3
+            $file3 = $request->file('product_image3');
+            $filename3 = $file3->getClientOriginalName();
+            $file3->move('img/products', $filename3);
         }
 
-        Products::create([
+         Products::create([
             'product_name' => $request->product_name,
             'product_symbol' => $request->product_symbol,
             'product_price' => $request->product_price,
-            'product_image' => $filename,
+            'product_image1' => $filename1,
+            'product_image2' => $filename2,
+            'product_image3' => $filename3,
             'product_description' => $request->product_description,
             'product_type_id' => $request->product_type_id,
             'active' => 1,
         ]);
-
         return redirect(route('products.index'))->with('success','Bạn đã thêm thành công');
     }
 
@@ -108,21 +121,44 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $data = Products::find($id);
-        if ($request->hasFile('product_image')) {
-            $file = $request->file('product_image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('img/products', $filename);
+        // Image 1
+        if ($request->hasFile('product_image1'))
+        {
+            $file1 = $request->file('product_image1');
+            $filename1 = $file1->getClientOriginalName();
+            $file1->move('img/products', $filename1);
+        } else {
+            $filename1 = $data->product_image1;
 
         }
+        // Image 2
+        if( $request->hasFile('product_image2'))
+        {
+            $file2 = $request->file('product_image2');
+            $filename2 = $file2->getClientOriginalName();
+            $file2->move('img/products', $filename2);
+        }else {
+            $filename2 = $data->product_image2;
+
+        }
+        // Image 3
+        if( $request->hasFile('product_image3'))
+        {
+            $file3 = $request->file('product_image3');
+            $filename3 = $file3->getClientOriginalName();
+            $file3->move('img/products', $filename3);
+        }
         else {
-            $filename = $data->product_image;
+
+            $filename3 = $data->product_image3;
         }
         $data->update([
             'product_name' => $request->product_name,
             'product_symbol' => $request->product_symbol,
             'product_price' => $request->product_price,
-            'product_image' => $filename,
+            'product_image1' => $filename1,
+            'product_image2' => $filename2,
+            'product_image3' => $filename3,
             'product_description' => $request->product_description,
             'product_type_id' => $request->product_type_id,
             'active' => 1,

@@ -42,8 +42,8 @@
                         <td width="10%" >{{ $item->created_at }}</td>
                         <td>
                             {{ $item->order_customer_name }} <br>
-                            {{ $item->order_customer_address }} <br>
-                            {{ $item->order_customer_phone }}
+                           Địa chỉ: {{ $item->order_customer_address }} <br>
+                           SĐT: {{ $item->order_customer_phone }}
                         </td>
                         <td >{{ number_format($item->order_total_price) }}</td>
                         <td >{{ $item->order_status }}</td>

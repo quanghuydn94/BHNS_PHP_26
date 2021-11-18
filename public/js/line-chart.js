@@ -1,7 +1,20 @@
-let listday =   $("#container").attr("data-list-day");
+let listday = $("#container").attr("data-list-day");
 listday = JSON.parse(listday);
 
-Highcharts.chart('container', {
+let listMoneyMonth = $("#container").attr("data-money");
+listMoneyMonth = JSON.parse(listMoneyMonth);
+
+let listMoneyMonthDefault = $("#container").attr("data-money-default");
+listMoneyMonthDefault = JSON.parse(listMoneyMonthDefault);
+
+let listMoneyMonthProcess = $("#container").attr("data-money-process");
+listMoneyMonthProcess = JSON.parse(listMoneyMonthProcess);
+
+let listMoneyMonthCancel = $("#container").attr("data-money-cancel");
+listMoneyMonthCancel = JSON.parse(listMoneyMonthCancel);
+
+
+var chart = new Highcharts.chart('container', {
     chart: {
         type: 'spline'
     },
@@ -20,7 +33,7 @@ Highcharts.chart('container', {
         },
         labels: {
             formatter: function () {
-                return this.value + 'vnđ';
+                return this.value + 'đ';
             }
         }
     },
@@ -38,16 +51,36 @@ Highcharts.chart('container', {
         }
     },
     series: [{
-        name: 'Tháng 9',
-        marker: {
-            symbol: ''
-        },
-        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 23, 24, 24, 25, 27, 28, 29, 23, 27, 25, 26, 21, 32, 31, 29, 21, 35, 32, 35, {
-            y: 26.5,
+            name: 'Đơn hàng đã giao',
             marker: {
-                symbol: 'url(https://www.highcharts.com/samples/graphics/sun.png)'
-            }
-        }, 23.3, 32, 33, 32]
+                symbol: ''
+            },
+            data: listMoneyMonth
 
-    }, ]
+        },
+        {
+            name: 'Đơn hàng Tiếp nhận',
+            marker: {
+                symbol: ''
+            },
+            data: listMoneyMonthDefault
+
+        },
+        {
+            name: 'Đơn hàng Đang giao',
+            marker: {
+                symbol: ''
+            },
+            data: listMoneyMonthProcess
+
+        },
+        {
+            name: 'Đơn hàng Hủy',
+            marker: {
+                symbol: ''
+            },
+            data: listMoneyMonthCancel
+
+        }
+    ]
 });
